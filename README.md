@@ -1,2 +1,3 @@
-# docsmarker
-Rocksmarker documentation
+# Docsmarker
+
+Rocksmarker documentation project repository
