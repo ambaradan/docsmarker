@@ -8,6 +8,6 @@ tags:
     - markdown
 ---
 
-# Marksman WIP
+# Diagnostic WIP
 
 ![Under Construction](../assets/img/under-construction.svg)
