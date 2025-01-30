@@ -10,23 +10,23 @@ tags:
 
 ## Introduction
 
-[Vale](https://vale.sh/) is an open source utility with the goal of improving voice, tone, and style consistency. It works as a command-line utility in most editors. Rocksmarker integrates `vale` by default. You can see this by running `:Mason` after the Rocksmarker installation:
+[Vale](https://vale.sh/) is an open source utility with the goal of improving voice, tone, and style consistency. It works as a command-line utility in most editors. Rocksmarker integrates Vale by default. You can see this by running `:Mason` after the Rocksmarker installation:
 
 ![Mason view](../assets/img/vale_integration.png)
 
 When you save a document in Rocksmarker, it will automatically show results where necessary if you are using Vale.
 
-## Rocksmarker without `vale`
+## Rocksmarker without Vale
 
-It is possible to run Rocksmarker without `vale`, but you will miss out on many great features that will improve your writing. If you do not care about `vale` and want to run Rocksmarker without it, you must create an empty `.vale.ini` file in your home directory:
+It is possible to run Rocksmarker without Vale, but you will miss out on many great features that will improve your writing. If you do not care about Vale and want to run Rocksmarker without it, you must create an empty `.vale.ini` file in your home directory:
 
 ```bash
 touch ~/.vale.ini
 ```
 
-Rocksmarker will now work without any further configuration of `vale`.
+Rocksmarker will now work without any further configuration of Vale.
 
-## Rocksmarker with `vale`
+## Rocksmarker with Vale
 
 In your home directory, create a `.vale.ini` with some content. An example configuration is:
 
@@ -129,7 +129,7 @@ Once you run that command, run `bash` to "read" the new `.bashrc` in:
 bash
 ```
 
-## Initializing `vale`
+## Initializing Vale with `vale sync`
 
 Before we use Rocksmarker with Vale, it needs initialization so that the our packages install, and Vale is aware of our `StylesPath`.
 
