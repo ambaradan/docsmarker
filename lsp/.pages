@@ -1,0 +1,5 @@
+---
+nav:
+    - ... | marksman*.md
+    - ... | vale*.md
+    - ... | markdownlint*.md
