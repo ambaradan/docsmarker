@@ -75,7 +75,7 @@ The function is available through the key ++space+"g"+"d"++.
 
 #### Auto completion of links
 
-The language server supports, in assisted writing, auto completion of links. The feature is very useful as it speeds up document writing and avoids problems arising from incorrectly written paths.
+The language server supports, in assisted writing, auto completion of links. The feature is very useful as it accelerates document writing and avoids problems arising from incorrectly written paths.
 
 !!! warning "Absolute or relative path"
 
@@ -114,7 +114,7 @@ It allows you to avoid typos or distraction errors that are usually difficult to
 
 #### Preview of links
 
-For links already in the document, it is possible to preview the contents of the file. This feature is particularly useful when reviewing dated documents where you may not always remember the contents of linked files.  
+For links already in the document, it is possible to preview the contents of the file. This feature is particularly useful when reviewing dated documents where you might not always remember the contents of linked files.  
 To activate the preview place the cursor on the desired link and type ++"K "++ (uppercase), to close it simply move the cursor.
 
 ![Link preview](../assets/img/marksman-link-preview.png)
@@ -139,7 +139,7 @@ A CodeAction represents a change or command that can be executed on the code, fo
 ![Marksman TOC create](../assets/img/marksman-create-toc.png)
 
 Selecting the code action creates the reference link table, which can then be edited and managed with the restructuring function described above (++space+"r "+"n "++).  
-Un esempio di quanto descritto è il TOC del README del repository del progetto Rocksmarker:
+An example of what is described is the TOC of the README of the Rocksmarker project repository:
 
 ![Marksman TOC code](../assets/img/marksman-toc-code.png)
 
@@ -154,4 +154,4 @@ If the TOC is already present the code action allows it to be updated automatica
 ## Conclusion
 
 Although not strictly necessary, this language server can become, in time, an excellent companion in writing documentation for Rocky Linux.  
-Its use saves time in building page structure and avoids trivial errors such as incorrect typing.
+Its use saves time in building page structure and avoids trivial errors such as wrong typing.
