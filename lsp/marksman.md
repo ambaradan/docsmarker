@@ -90,7 +90,7 @@ The language server supports, in assisted writing, auto completion of links. The
 #### Link with absolute path
 
 When typing a link after entering the text of the link in the square brackets upon typing the two round brackets a pop-up will open containing the names of the files in that work area which if selected will provide additional information about the title of the file.  
-Selezionando il file voluto con il tasto ENTER questo verrà automaticamente inserito nelle parentesi tonde.
+Selecting the desired file with the ENTER key will automatically place it in the round brackets.
 
 ![Absolute path](../assets/img/marksman-absolute-path.png)
 
