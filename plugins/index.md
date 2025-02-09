@@ -1,5 +1,5 @@
 ---
-title: Configuration
+title: Layout
 author: Franco Colussi
 contributors: Steve Spencer
 tags:
@@ -8,16 +8,17 @@ tags:
     - markdown
 ---
 
+
 # Configuration of Rocksmarker
 
 ## Introduction
 
-**rocks.nvim**, a newly developed, modular, and unobtrusive plugin manager, manages Rocksmarker's configuration.  
-The functionality of 'bundles', that rocks.nvim provides, groups multiple plugins and their associated configurations. There are configuration files provided according to their functionality.
+Rocksmarker's configuration is managed by **rocks.nvim**, a newly developed modular and unobtrusive plugin manager.  
+The ==bundles== functionality, provided by *rocks.nvim*, was used to group multiple plugins and their respective configurations, the configuration files also were created according to the functionality provided.
 
 ## Structure
 
-You can find configurations for all plugins and options for Neovim in the `lua` folder. The two files, *rocks.toml* and *init.lua* found in the main folder, are exceptions discussed later.
+The configurations of all plugins and options for Neovim are found in the `lua` folder, the two files *rocks.toml* and *init.lua* found in the main folder will be covered later.
 
 ```txt
 ├── init.lua
@@ -36,58 +37,60 @@ You can find configurations for all plugins and options for Neovim in the `lua` 
 
 ### Global configuration
 
-The files for Neovim's global configurations are:
+Files for Neovim's global configuration settings are present:
 
 `options.lua`
 
-: for general configurations such as indentation, main key for mappings, tab spaces, and other
+: For general configurations such as indentation, master key for mappings, tab spaces and more.
 
 `commands.lua`
 
-: has autocommands for automatic settings of various aspects of the editor
+: Contains autocommands for automatic settings of various aspects of the editor such as custom settings based on file type, creating missing paths when creating a new file, and other useful features.
 
 `mappings.lua`
 
-: for mapping keyboard shortcuts to the various commands provided by the editor and plugins
+: Used for mapping keyboard shortcuts of the various commands provided by the editor and plugins. The file contains the mappings of all plugins set in the configuration and can be used as a starting point for the memorization of the mappings.
 
 ### Plugin configurations
 
-The plugin configuration files are in the `lua/plugins` folder. These files, as mentioned earlier, contain the cumulative configurations of multiple plugins grouped by purpose. The following files are for the development of this configuration:
+The plugin configuration files are located in the `lua/plugins` folder, these files as mentioned earlier contain the cumulative configurations of multiple plugins grouped by purpose. The following files were created for the development of this configuration:
 
 `ui.lua`
 
-: configurations necessary for the correct display of the graphic interface
+: Configurations necessary for the correct display of the GUI.
 
 `utils.lua`
 
-: plugin configurations that provides the editor's own features, such as file manager, session manager, search and replace, and other utilities
+: Plugin configurations that provide the editor's own features such as file manager, session manager, search and replace, and other utilities.
 
 `lsp.lua`
 
-: configurations for the proper integration of language servers (LSPs), formatters, and linters
+: Configurations for proper integration of language servers (LSPs), formatters, and linters.
 
 `diagnostic.lua`
 
-: configurations for assisted writing such as error reporting, correct code formatting, and more
+: Configurations for assisted writing such as error reporting, correct code formatting, and more.
 
 `markdown.lua`
 
-: plugin configurations for writing *Markdown* code, enriched visualization, on-the-fly editing of markdown attributes, and more
+: Plugin configurations for writing *Markdown* code, enriched visualization, on-the-fly editing of markdown attributes, and more.
 
 !!! note "Separation of configurations"
 
-    Rocks.nvim, unlike the other plugin managers, separates the management of installations from the management of configurations, and as a result the files in the `lua/plugins` folder do not need the initial references on the source (GitHub repository) and you do not need to include the configurations in *lua* `{...}` tables.
+    Rocks.nvim unlike the other plugin managers separates the management of installations from the management of configurations and as a result the files in the `lua/plugins` folder do not need the initial references on the source (GitHub repository) and the configurations do not need to be included in *lua* `{...}` tables
 
 ### Configuration of rocks.nvim
 
-The two remaining files in the structure are for use by rocks.nvim for its initialization or installation and for managing plugin installations. The configuration of plugins for installation is independent of related configurations and is entirely done in one file. The functions of the two files are:
+The two remaining files in the structure are the files used by *rocks.nvim* for its initialization or installation and for managing plugin installations. The configuration of plugins to be installed is independent of related configurations and is entirely configured in one file `rocks.toml`. The functions of the two files are:
 
 `init.lua`
 
-: this file is the file that initializes all the configuration, checks for the availability of the required versions of lua and luarocks and the plugin itself and if not available initializes a new installation through a boostrap procedure
+: This file is the file that initializes all configuration, checks for the availability of the required versions of *lua* and *luarocks* and the plugin itself, and if not available initializes a new installation through a bootstrap procedure.
 
 `rocks.toml`
 
-: provides the configuration of the plugin itself and all additional plugins, these are automatically inserted into the file if installed via the `:Rocks install <plugin_name>` command but can also be manually configured and then installed with a `:Rocks sync`
+: Provides configuration of the plugin itself and all additional plugins, these are automatically placed in the file if installed using the `:Rocks install <plugin_name>` command but can also be manually configured and then installed with a `:Rocks sync`.
 
-This page is only an introduction to the configuration, for more in-depth descriptions see the dedicated pages.
+## Conclusions
+
+This introductory page provides an overview of the configuration organization. To go into detail about the various components, the relevant pages can be consulted.
