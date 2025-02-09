@@ -11,6 +11,8 @@ tags:
 <!--vale off-->
 # Marksman
 
+## Introduzione
+
 Marksman è un server linguistico che si integra con il vostro editor per aiutarvi a scrivere e mantenere i vostri documenti Markdown. Utilizzando il protocollo LSP, fornisce il completamento, la navigazione nella cartella di lavoro, la ricerca di riferimenti, il refactoring dei nomi, la diagnostica e altro ancora.
 
 ## Installazione
@@ -24,7 +26,7 @@ Marksman viene installato automaticamente durante la configurazione iniziale di 
 Per verificare la corretta installazione del server linguistico aprire un file markdown (*.md*) nell'editor e digitare il comando `:LspInfo`, si aprirà un buffer flottante contenente le informazioni descritte sotto, in caso sia mancante LspInfo non rileverà nessun client attaccato al buffer.
 
 ```txt
- Language client log: /home/ambaradan/.local/state/nvim/lsp.log
+ Language client log: /home/your_user/.local/state/nvim/lsp.log
  Detected filetype:   markdown
  
  1 client(s) attached to this buffer: 
@@ -32,30 +34,30 @@ Per verificare la corretta installazione del server linguistico aprire un file m
  Client: marksman (id: 1, bufnr: [1, 14])
   filetypes:       markdown, markdown.mdx
   autostart:       true
-  root directory:  /home/ambaradan/.config/rocksmarker
-  cmd:             /home/ambaradan/.local/share/nvim/mason/bin/marksman server
+  root directory:  /home/your_user/your_dir
+  cmd:             /home/your_user/.local/share/nvim/mason/bin/marksman server
 ```
 
 Il messaggio, come si può vedere, dice che nel buffer è stato rilevato un file di tipo markdown e che c'è un client attaccato (marksman).
 Sono descritte le caratteristiche dei tipi di file supportati e che il server viene avviato automaticamente al rilevamento di quei tipi di file, segue poi l'indicazione della directory di lavoro e il comando utilizzato per il supporto linguistico.  
 La direttiva `root directory` è molto importante in quanto indica la cartella che marksman usa per la diagnostica, la scrittura assistita di collegamenti e le altre funzionalità fornite dal server.
 
-Questo implica che un file contenuto all'interno della cartella di lavoro, in questo caso la cartella rocksmarker, se aperto dalla cartella stessa viene controllato e supportato da marksman a livello di progetto:
+Questo implica che un file contenuto all'interno della cartella di lavoro, in questo caso la cartella `your_dir`, se aperto dalla cartella stessa viene controllato e supportato da marksman a livello di progetto:
 
 ```bash
-cd .config/rocksmarker
+cd /path_to/your_dir
 nvim your_file.md
 ```
 
 Mentre se aperto da una posizione fuori dalla root directory viene trattato da marksman al livello di file con la mancanza delle funzionalità proprie del progetto (come anteprima e gestione dei collegamenti, ricerca delle referenze e altre funzionalità):
 
 ```bash
-nvim ~/.config/rocksmarker/your_file.md
+nvim ~/path_to/your_dir/your_file.md
 ```
 
 La corretta implementazione del server linguistico è verificabile inoltre nella barra di stato dove viene visualizzato, se attaccato, il nome del server corrispondente.
 
-![LSP info](./assets/img/lsp-info.png)
+![LSP info](../assets/img/lsp-info.png)
 
 ## Funzionalità di Marksman
 
@@ -91,21 +93,21 @@ Il server linguistico supporta, nella scrittura assistita, l'auto completamento 
 Durante la digitazione di un collegamento dopo aver inserito nella parentesi quadre il testo del collegamento alla digitazione delle due parentesi tonde si aprirà un pop-up contenente i nomi dei file presenti in quella area di lavoro che se selezionati forniranno un'ulteriore informazione sul titolo del file.  
 Selezionando il file voluto con il tasto ENTER questo verrà automaticamente inserito nelle parentesi tonde.
 
-![Absolute path](./assets/img/marksman-absolute-path.png)
+![Absolute path](../assets/img/marksman-absolute-path.png)
 
 #### Collegamento con percorso relativo
 
 Il collegamento ad un percorso relativo nella gestione assistita è invece attivato dalla digitazione del punto di partenza `./` che come per il percorso assoluto presenta una lista delle cartelle e dei file presenti nell'area di lavoro. In questo caso però il nome del file da collegare è preceduto dalla sua posizione rispetto alla cartella dove si trova il file e la sua selezione offre un'anteprima del documento che si va a collegare agevolando in questo modo il lavoro.  
 Questo tipo di collegamento ha inoltre il vantaggio di consentire nel collegamento la risalita dalla cartella dove si trova il file usando il percorso `../` permettendo così una gestione multi cartella del progetto.
 
-![Relative path](./assets/img/marksman-relative-path.png)
+![Relative path](../assets/img/marksman-relative-path.png)
 
 #### Verifica collegamenti
 
 Marksman integra nella gestione dei collegamenti anche un controllo della presenza del documento corrispondente. Questo è un ottimo aiuto nella gestione di progetti particolarmente ricchi di documenti come ad esempio la documentazione su Rocky Linux.
 Permette di evitare errori di battitura o di distrazione solitamente difficili da individuare.
 
-![Links check](./assets/img/marksman-check-link.png)
+![Links check](../assets/img/marksman-check-link.png)
 
 !!! tip ""
 
@@ -116,7 +118,7 @@ Permette di evitare errori di battitura o di distrazione solitamente difficili d
 Per i collegamenti già presenti nel documento è possibile visualizzare un'anteprima del contenuto del file. Questa funzionalità risulta particolarmente utile nella revisione di documenti datati dove non sempre si ricordano i contenuti dei file collegati.  
 Per attivare l'anteprima posizionare il cursore sul collegamento desiderato e digitare ++"K"++ (maiuscola), per chiuderla basta muovere il cursore.
 
-![Link preview](./assets/img/marksman-link-preview.png)
+![Link preview](../assets/img/marksman-link-preview.png)
 
 !!! note ""
 
@@ -135,12 +137,16 @@ Per la sua attivazione è fornita la chiave ++space+"r"+"n"++, la sua digitazion
 
 Una CodeAction rappresenta una modifica o un comando che può essere eseguito sul codice, ad esempio per risolvere un problema o per ristrutturarlo. Marksman dispone di una code action per la gestione dei TOC (tabella dei contenuti), per la sua creazione basta posizionare il cursore nella posizione desiderata e digitare la chiave ++space+"c"+"a"++ e comparirà il pop-up seguente:
 
-![Marksman TOC action](./assets/img/marksman-toc.png)
+![Marksman TOC create](../assets/img/marksman-create-toc.png)
 
 Selezionando la code action viene creata la tabella dei collegamenti di riferimento che successivamente può essere modificata e gestita con la funzione di ristrutturazione descritta sopra (++space+"r"+"n"++).  
 Un esempio di quanto descritto è il TOC del README del repository del progetto Rocksmarker:
 
-![Marksman TOC Code](./assets/img/marksman-toc-code.png)
+![Marksman TOC code](../assets/img/marksman-toc-code.png)
+
+Se il TOC è già presente la code action permette di aggiornarlo automaticamente sulla base delle modifiche apportate al documento:
+
+![Marksman TOC edit](../assets/img/marksman-toc.png)
 
 !!! info "Documentazione Rocky"
 
