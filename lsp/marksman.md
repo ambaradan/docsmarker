@@ -8,7 +8,6 @@ tags:
     - markdown
 ---
 
-<!--vale off-->
 # Marksman
 
 ## Introduction
