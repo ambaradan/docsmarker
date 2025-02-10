@@ -100,11 +100,39 @@ make CMAKE_BUILD_TYPE=RelWithDebInfo
 ```
 
 Il comando richiama *make* che si occupa dell'intero processo al quale viene passata la flag **CMAKE_BUILD_TYPE** che specifica il tipo di compilazione.  
-In particolare la compilazione *RelwithDebInfo* è molto simile alla modalità Release. Produce codice completamente ottimizzato, ma costruisce anche il database del programma e inserisce informazioni sulle linee di debug.
+In particolare la compilazione **RelwithDebInfo** produce codice completamente ottimizzato, ma costruisce anche il database del programma e inserisce informazioni sulle linee di debug utili per eventuali errori dell'editor.
+
+Terminata la compilazione è possibile verificare la corretta esecuzione della nuova costruzione anche senza installarla. Neovim non necessita di componenti esterni per funzionare e conseguentemente è sufficiente richiamare l'eseguibile appena compilato per provare a fondo la nuova versione dell'editor prima di sostituire la versione utilizzata.
+
+```bash
+./neovim/build/bin/nvim
+```
+
+La sua installazione, una volta verificato il corretto funzionamento, viene eseguita sempre da *make*. I file, come per l'installazione di Lua, vengono copiati in `/usr/local` e anche in questo caso il comando deve essere eseguito come utente *root* o con i permessi di amministratore.
 
 ```bash
 sudo make install
 ```
+
+!!! tip "Rimozione di Neovim"
+
+    Per la sua rimozione viene fornito un obiettivo CMake che rimuove tutti i file installati da ==make install==
+
+    ```bash
+    sudo cmake --build build/ --target uninstall
+    ```
+
+L'installazione rende disponibile nel sistema il nuovo comando ==nvim== per l'apertura dell'editor nel terminale che può essere usato anche per verificare la versione installata:
+
+```bash
+nvim --version
+NVIM v0.10.4
+Build type: RelWithDebInfo
+LuaJIT 2.1.1713484068
+Run "nvim -V1 -v" for more info
+```
+
+Ora che l'editor è pronto all'uso si può passare all'installazione della versione di Lua corrispondente a quella fornita da Neovim
 
 ## Installazione di Lua 5.1
 
@@ -284,5 +312,3 @@ Il secondo passo è la sincronizzazione di tutti i plugin configurati; la sincro
 ```
 
 Una volta terminata l'installazione dei plugin chiudere l'editor e riaprirlo per dare a Neovim la possibilità di caricare le nuove configurazioni, al secondo avvio anche i plugin *mason-lspconfig* e *mason-tool-installer* installati durante la sincronizzazione si occuperanno, in modo del tutto automatico, di installare tutti i server linguistici (LSP) necessari al corretto funzionamento dell'editor, terminata l'installazione dei server linguistici l'editor è pronto per essere utilizzato, buono sviluppo.
-
-Per una panoramica grafica dell'editor, visitare la pagina [screenshots](./screenshots.md)
