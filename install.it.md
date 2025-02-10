@@ -25,7 +25,13 @@ Fornire un editor il più completo possibile per la scrittura di documentazione 
 - Offrire una modalità zen per la modifica dei documenti
 - Fornire snippet personalizzati per la scrittura dei tag [mkdocs-material](https://squidfunk.github.io/mkdocs-material/) oltre che per i tag Markdown standard.
 
-## Prerequisiti per Neovim, Lua e Rocksmarker
+### Prerequisiti
+
+- Una distribuzione Linux installata e configurata in versione desktop. In questa guida è utilizzata Rocky Linux e di conseguenza dovrebbe funzionare correttamente su tutte le derivate RHEL (Red Hat Enterprise Linux). Per l'installazione su altre distribuzioni fare riferimento alle relative documentazioni.
+- Padronanza nell'esecuzione di comandi da riga di comando
+- Possibilità di eseguire alcuni comandi come utente root o con i permessi di amministratore.
+
+### Prerequisiti per Neovim, Lua e Rocksmarker
 
 Il progetto necessita di alcune dipendenze specifiche per la sua corretta esecuzione, in particolare è necessaria la versione Lua 5.1, non sono supportate le versioni fornite da Rocky Linux.  
 La versione 5.1 è necessaria per il corretto funzionamento di rocks.nvim che si occupa della gestione dei plugin garantendo inoltre la piena compatibilità con la versione utilizzata da Neovim.
@@ -51,21 +57,54 @@ Terminata l'installazione si può passare alla costruzione della struttura che p
 
 ## Installazione di Neovim
 
-Per una corretta esecuzione di Rocksmarker, si consiglia l'utilizzo della versione compilata di Neovim. Per ulteriori informazioni è possibile consultare le istruzioni contenute nella sezione [Avvio rapido](https://github.com/neovim/neovim/blob/master/BUILD.md) del sito di Neovim.
+Neovim è un editor di testo moderno, potente e altamente personalizzabile che offre un'esperienza familiare agli utenti di Vim.  
+Pur mantenendo la filosofia di Vim introduce al contempo miglioramenti e funzionalità con l'obiettivo di fornire una esperienza utente similare ma su una base di codice più moderna.  
+Tra i suoi miglioramenti troviamo:
 
-La compilazione da sorgente non presenta particolari problemi e, se si soddisfano i requisiti di cui sopra, si ottiene con la seguente sequenza di comandi:
+- **Stabilità migliorata**: La base di codice è stata rifattorizzata per migliorare la stabilità e le prestazioni.
+- **Sistema di plugin migliorato**: Neovim consente una gestione semplificata dei plugin rendendo più facile estenderne le sue funzionalità.
+- **Caratteristiche moderne**: Supporta funzioni come le operazioni asincrone e una migliore integrazione con altre applicazioni.
+
+!!! note "Versione compilata"
+
+    Per una corretta esecuzione di Rocksmarker è necessaria una versione ==0.10.0== o superiore di Neovim, per questo si consiglia l'utilizzo della versione compilata. La versione fornita da *EPEL* risulta datata (0.8.0) e non è compatibile con *rocks.nvim* e i plugin utilizzati.  
+    Per ulteriori informazioni è possibile consultare le istruzioni contenute nella sezione [Avvio rapido](https://github.com/neovim/neovim/blob/master/BUILD.md) del sito di Neovim.
+
+La compilazione di Neovim da sorgente non presenta particolari problemi e, se si soddisfano i requisiti di cui sopra risulta agevole da svolgere.
+
+### Scaricare i sorgenti
+
+Il progetto viene sviluppato su GitHub e per recuperare i sorgenti è necessario fare il clone del repository localmente. Portarsi quindi nel percorso scelto del proprio file system e scaricarli con:
 
 ```bash
 git clone https://github.com/neovim/neovim
+```
+
+Il comando crea una cartella `neovim` e scarica tutti i file al suo interno. Terminato il clone portarsi nella cartella appena creata e passare alla versione ==stabile== con i comandi:
+
+```bash
 cd neovim/
 git checkout stable
-make CMAKE_BUILD_TYPE=RelWithDebInfo
-sudo make install
 ```
 
 !!! note ""
 
-    L'uso del comando ==git checkout stable== per posizionare *git* nel ramo stabile prima della clonazione assicura l'uso della versione stabile (raccomandata). Se viene omesso, la compilazione verrà eseguita con il ramo di sviluppo (al momento la 0.11).
+    L'uso del comando ==git checkout stable== per posizionare *git* nel ramo stabile prima della compilazione assicura l'uso della versione stabile (raccomandata). Se viene omesso, la compilazione verrà eseguita con il ramo di sviluppo (al momento la 0.11).
+
+### Compilazione e installazione
+
+Per la sua compilazione è sufficiente eseguire un solo comando:
+
+```bash
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+```
+
+Il comando richiama *make* che si occupa dell'intero processo al quale viene passata la flag **CMAKE_BUILD_TYPE** che specifica il tipo di compilazione.  
+In particolare la compilazione *RelwithDebInfo* è molto simile alla modalità Release. Produce codice completamente ottimizzato, ma costruisce anche il database del programma e inserisce informazioni sulle linee di debug.
+
+```bash
+sudo make install
+```
 
 ## Installazione di Lua 5.1
 
