@@ -114,14 +114,6 @@ La sua installazione, una volta verificato il corretto funzionamento, viene eseg
 sudo make install
 ```
 
-!!! tip "Rimozione di Neovim"
-
-    Per la sua rimozione viene fornito un obiettivo CMake che rimuove tutti i file installati da ==make install==
-
-    ```bash
-    sudo cmake --build build/ --target uninstall
-    ```
-
 L'installazione rende disponibile nel sistema il nuovo comando ==nvim== per l'apertura dell'editor nel terminale che può essere usato anche per verificare la versione installata:
 
 ```bash
@@ -132,11 +124,21 @@ LuaJIT 2.1.1713484068
 Run "nvim -V1 -v" for more info
 ```
 
-Ora che l'editor è pronto all'uso si può passare all'installazione della versione di Lua corrispondente a quella fornita da Neovim
+!!! tip "Rimozione di Neovim"
+
+    Per la sua rimozione viene fornito un obiettivo CMake che rimuove tutti i file installati da ==make install==
+
+    ```bash
+    sudo cmake --build build/ --target uninstall
+    ```
+
+    È opportuno quindi conservare la cartella con i sorgenti per una eventuale rimozione.
+
+Ora che l'editor è pronto all'uso si può passare all'installazione della versione di Lua corrispondente a quella fornita da Neovim.
 
 ## Installazione di Lua 5.1
-
-Il gestore di plugin scelto per configurare i plugin aggiuntivi di Neovim (**rocks.nvim**), richiede l'installazione della versione *Lua 5.1* per funzionare correttamente e che la stessa sia la versione predefinita nel sistema. Richiede inoltre il collegamento dei file *headers* della versione 5.1 a quelli presenti nel sistema.  
+  
+Il gestore di plugin scelto per configurare i plugin aggiuntivi di Neovim (**rocks.nvim**), richiede l'installazione della versione *Lua 5.1* per funzionare correttamente e che la stessa sia la versione predefinita per quello spazio utente. Richiede inoltre il collegamento dei file *headers* della versione 5.1 a quelli presenti nel sistema.  
 
 !!! note "Coesistenza di più versioni"
 
@@ -194,8 +196,8 @@ sudo make install
 L'installazione copia i file della versione 5.1.5 nel percorso `/usr/local/` mantenendoli così separati da quelli della versione di sistema installati per impostazione predefinita in `/usr/`.  
 Vengono installati i seguenti file:
 
-- **lua** **luac** -> `/usr/local/bin/`
-- **lua.h** **luaconf.h** **lualib.h** **lauxlib.h** **lua.hpp** -> `/usr/local/include/`
+- **lua** - **luac** -> `/usr/local/bin/`
+- **lua.h** - **luaconf.h** - **lualib.h** - **lauxlib.h** - **lua.hpp** -> `/usr/local/include/`
 - **liblua.a** -> `/usr/local/lib/`
 
 !!! tip ""
@@ -224,7 +226,7 @@ Aprire il proprio `.bashrc` in un editor ed aggiungere la stringa seguente:
 alias lua=/usr/local/bin/lua
 ```
 
-Eseguire il *source* per rileggere il file con:
+Salvare il file ed eseguire il *source* per rileggere la configurazione con:
 
 ```bash
 . ~/.bashrc
@@ -241,27 +243,32 @@ Ora tutte le volte che verrà richiesto l'eseguibile sarà utilizzata la version
 
 ### Aggiungere i file di intestazione
 
-L'installazione della versione richiesta non è sufficiente perché la configurazione funzioni correttamente. Il gestore dei plugin rocks.nvim necessita dei file di intestazione per compilare la sua versione di luarocks.  
-È necessario quindi collegare la libreria richiesta, **lua.h**, presente in `/usr/local/include/` nel percorso di ricerca dei file **header** (`/usr/include/`).
+L'installazione della versione richiesta non è sufficiente perché la configurazione funzioni correttamente. Il gestore dei plugin *rocks.nvim* necessita dei file di intestazione per compilare la sua versione di *luarocks*.  
+È necessario quindi collegare la libreria richiesta, **lua.h**, presente in `/usr/local/include/` nel percorso di ricerca dei file di intestazione (`/usr/include/`).
 
 !!! warning ""
 
     La mancanza di questo file non permette alla script di inizializzazione di compilare *luarocks* che termina con un errore interrompendo l'intero processo.
 
-Per il suo collegamento si utilizza uno dei percorsi di ricerca standard di *Luarocks* `/usr/include/lua/<number_version>` collegato alla cartella con i file di intestazione della versione 5.1 in `/usr/local/include/`.  
-La sua realizzazione è effettuata attraverso i seguenti comandi:
+Per il suo collegamento si utilizza uno dei percorsi di ricerca standard di *luarocks* `/usr/include/lua/<number_version>` collegato alla cartella con i file di intestazione della versione 5.1 in `/usr/local/include/`.
+
+Per la sua realizzazione è necessario anche in questo caso operare come utente root o con i permessi di amministratore. Portarsi quindi nella cartella `include`:
 
 ```bash
 cd /usr/include/
-sudo mkdir lua && cd lua
-sudo ln -s /usr/local/include/ 5.1
 ```
 
-!!! note "Mancanza della cartella `lua`"
+Creare la cartella `lua` e posizionarsi al suo interno, la cartella `/usr/include/lua/` non è presente in un sistema Rocky Linux ed è necessario quindi crearla.
 
-    La cartella `/usr/include/lua/` non è presente in un sistema Rocky Linux ed è necessario quindi crearla.
+```bash
+sudo mkdir lua && cd lua
+```
 
-Con l'impostazione della versione Lua sono soddisfatte tutte le dipendenze necessarie alla corretta installazione della configurazione.
+Creare quindi il collegamento alla cartella `/usr/local/include/`.
+
+```bash
+sudo ln -s /usr/local/include/ 5.1
+```
 
 ## Scaricare la configurazione
 
