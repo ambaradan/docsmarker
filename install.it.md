@@ -264,10 +264,23 @@ Creare la cartella `lua` e posizionarsi al suo interno, la cartella `/usr/includ
 sudo mkdir lua && cd lua
 ```
 
-Creare quindi il collegamento alla cartella `/usr/local/include/`.
+Creare quindi il collegamento simbolico alla cartella `/usr/local/include/`.
 
 ```bash
 sudo ln -s /usr/local/include/ 5.1
+```
+
+Il comando collega la cartella dove sono stati copiati i file di intestazione durante l'installazione di Lua 5.1 ad una cartella denominata `5.1` creata dal comando stesso.  
+La denominazione della cartella è arbitraria ma scegliendo di usare il numero della versione consente un richiamo mnemonico al suo contenuto e cosa più importante soddisfa i requisiti per la ricerca dei percorsi di *luarocks*.
+
+```bash
+ls -l /usr/include/lua/5.1/
+total 52
+-rw-r--r--. 1 root root  5777 27 dic  2007 lauxlib.h
+-rw-r--r--. 1 root root 22299 11 feb  2008 luaconf.h
+-rw-r--r--. 1 root root 11688 13 gen  2012 lua.h
+-rw-r--r--. 1 root root   191 23 dic  2004 lua.hpp
+-rw-r--r--. 1 root root  1026 27 dic  2007 lualib.h
 ```
 
 ## Scaricare la configurazione
