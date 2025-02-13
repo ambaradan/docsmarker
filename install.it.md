@@ -273,6 +273,8 @@ sudo ln -s /usr/local/include/ 5.1
 Il comando collega la cartella dove sono stati copiati i file di intestazione durante l'installazione di Lua 5.1 ad una cartella denominata `5.1` creata dal comando stesso.  
 La denominazione della cartella è arbitraria ma scegliendo di usare il numero della versione consente un richiamo mnemonico al suo contenuto e cosa più importante soddisfa i requisiti per la ricerca dei percorsi di *luarocks*.
 
+Per la sua verifica basta elencare la cartella `5.1` e dovrebbero comparire i file contenuti in `/usr/local/include/`:
+
 ```bash
 ls -l /usr/include/lua/5.1/
 total 52
@@ -283,13 +285,15 @@ total 52
 -rw-r--r--. 1 root root  1026 27 dic  2007 lualib.h
 ```
 
+Con questo ultimo passo l'ambiente per l'installazione è completo, sono soddisfatti tutti i requisiti necessari e si può passare all'installazione dell'editor.
+
 ## Scaricare la configurazione
 
 La configurazione, sebbene ancora in fase di sviluppo, può essere usata quotidianamente per scrivere e modificare documentazione scritta in Markdown, quindi può essere installata come configurazione predefinita nel percorso `.config/nvim`.  
 Per gli utenti che hanno già una configurazione di Neovim presente sul sistema, esiste la possibilità di usare *rocksmarker* come editor secondario, consentendo così di continuare a usare la configurazione esistente per sviluppare i propri progetti.  
 Questo metodo vi permette anche di provare *rocksmarker*, in modo del tutto indipendente, per valutare se può essere uno strumento utile per il vostro lavoro quotidiano.
 
-### Editore principale
+### Editor principale
 
 Per installare la configurazione nella posizione predefinita di Neovim, clonare il repository GitHub nella cartella delle configurazioni `~/.config/` con il comando:
 
@@ -303,28 +307,43 @@ Una volta terminato, è sufficiente richiamare il comando standard di Neovim per
 nvim
 ```
 
-### Editore secondario
+### Editor secondario
 
 Per testare o utilizzare la configurazione come configurazione secondaria, utilizzare la variabile di Neovim *NVIM_APPNAME*; l'uso di questa variabile consente a Neovim di passare un nome arbitrario che viene utilizzato per la ricerca dei file di configurazione in `~/.config/` e per la successiva creazione della cartella dei file condivisi in `~/.local/share/` e della cache in `~/.cache/`.  
-Per poi impostare *segnapunti* come tipo di editor secondario:
+Per impostare *Rocksmarker* come tipo di editor secondario:
 
 ```bash
 git clone https://github.com/ambaradan/rocksmarker.git ~/.config/rocksmarker/
 ```
 
-Una volta completata l'operazione di clonazione, avviare Neovim con il seguente comando per iniziare l'installazione:
+Una volta completato il clone avviare Neovim con il seguente comando per iniziare l'installazione:
 
 ```bash
 NVIM_APPNAME=rocksmarker nvim
 ```
 
-> [!IMPORTANT]
-> Se si sceglie questo metodo, tutti i successivi avvii della configurazione devono essere effettuati con il comando descritto sopra, altrimenti Neovim si avvierà utilizzando la cartella predefinita `~/.config/nvim`. Per evitare di digitare ogni volta l'intero comando, si raccomanda la creazione di un *alias*.
+!!! warning "Avvii successivi"
+
+    Se si sceglie questo metodo, tutti i successivi avvii della configurazione devono essere effettuati con il comando descritto sopra, altrimenti Neovim si avvierà utilizzando la cartella predefinita `~/.config/nvim`. Per evitare di digitare ogni volta l'intero comando, si consiglia la creazione di un *alias*.
+
+    ```bash
+    alias rocksmarker="NVIM_APPNAME=rocksmarker nvim"
+    ```
 
 ## Installazione della configurazione
 
-All'avvio di Neovim, con uno dei due metodi sopra descritti, inizierà il processo di installazione gestito da uno script *bootstrap* che ha verificato la mancanza del plugin *rocks.nvim* e ha proceduto alla sua installazione.  
-Il primo passo dell'installazione consiste nella semplice installazione del gestore di plugin *rocks.nvim* al termine del quale, se tutto ha funzionato correttamente, vi verrà chiesto di premere INVIO per continuare.  
+All'avvio di Neovim, con uno dei due metodi sopra descritti, inizierà il processo di installazione gestito da uno script *bootstrap* che verificando la mancanza del plugin *rocks.nvim* procede alla sua installazione.  
+Il primo passo dell'installazione consiste nella semplice installazione del gestore di plugin *rocks.nvim* al termine del quale, se tutto ha funzionato correttamente, vi verrà chiesto di premere INVIO per continuare.
+
+```text
+Downloading luarocks...
+Configuring luarocks...                                                                                                            
+Installing luarocks...                                                                                                             
+Installing rocks.nvim...                                                                                                           
+rocks.nvim installed successfully!                                                                                                 
+Press ENTER or type command to continue 
+```
+
 Il secondo passo è la sincronizzazione di tutti i plugin configurati; la sincronizzazione installa i plugin nella cartella dei file condivisi nel percorso `.local/share/nvim/rocks/lib/luarocks/rocks-5.1/`.
 
 ```text
