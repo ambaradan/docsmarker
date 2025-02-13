@@ -332,10 +332,10 @@ NVIM_APPNAME=rocksmarker nvim
 
 ## Installazione della configurazione
 
-All'avvio di Neovim, con uno dei due metodi sopra descritti, inizierà il processo di installazione gestito da uno script *bootstrap* che verificando la mancanza del plugin *rocks.nvim* procede alla sua installazione.  
-Il primo passo dell'installazione consiste nella semplice installazione del gestore di plugin *rocks.nvim* al termine del quale, se tutto ha funzionato correttamente, vi verrà chiesto di premere INVIO per continuare.
+All'avvio di Neovim, con uno dei due metodi sopra descritti, inizierà il processo di installazione gestito da uno script *bootstrap* che verificata la mancanza del plugin *rocks.nvim* procederà alla sua installazione.  
+Il processo installa prima *luarocks* richiesta come dipendenza dal plugin e successivamente il plugin stesso, al termine del quale se tutto ha funzionato correttamente, vi verrà chiesto di premere INVIO per continuare.
 
-```text
+```text title="rocks.nvim bootstrap"
 Downloading luarocks...
 Configuring luarocks...                                                                                                            
 Installing luarocks...                                                                                                             
@@ -344,10 +344,35 @@ rocks.nvim installed successfully!
 Press ENTER or type command to continue 
 ```
 
-Il secondo passo è la sincronizzazione di tutti i plugin configurati; la sincronizzazione installa i plugin nella cartella dei file condivisi nel percorso `.local/share/nvim/rocks/lib/luarocks/rocks-5.1/`.
+Il secondo passo è la sincronizzazione di tutti i plugin configurati; la sincronizzazione installa i plugin nella cartella dei file condivisi nel percorso `.local/share/nvim/rocks/lib/luarocks/rocks-5.1/`.  
+Rispondendo con ++"Y"++ inizierà il processo di installazione di tutti i plugin configurati.
 
 ```text
-:Rocks sync
+rocks.nvim: The following plugins were not found:                                                                                    
+trouble.nvim, mason.nvim, mason-lspconfig.nvim, nvim-lspconfig, nvim-cmp,
+mason-tool-installer.nvim, luasnip, markdown.nvim, markview.nvim,
+markdown-table-mode.nvim, zen-mode.nvim, conform.nvim, nvim-cokeline,
+gitsigns.nvim, bamboo.nvim, telescope.nvim, persisted.nvim, toggleterm.nvim,
+neo-tree.nvim, neogit, nvim-spectre, indent-blankline.nvim, nvim-autopairs,
+nvim-highlight-colors, yanky.nvim, cmp-buffer, cmp-nvim-lsp, cmp-path,
+cmp_luasnip, diffview.nvim, friendly-snippets, rocks-treesitter.nvim,
+telescope-cmdline.nvim, telescope-file-browser.nvim, telescope-frecency.nvim,
+telescope-ui-select.nvim, tree-sitter-bash, rainbow-delimiters.nvim,
+tree-sitter-cli, rocks-config.nvim, tree-sitter-css, rocks-edit.nvim,
+tree-sitter-git_config, tree-sitter-git_rebase, tree-sitter-gitattributes,
+tree-sitter-gitcommit, tree-sitter-gitignore, tree-sitter-html, tree-sitter-ini,
+tree-sitter-json, tree-sitter-jsonc, tree-sitter-lua, tree-sitter-luadoc,
+tree-sitter-markdown, tree-sitter-markdown_inline, tree-sitter-toml,
+tree-sitter-vim, tree-sitter-vimdoc, tree-sitter-yaml, which-key.nvim,
+fidget.nvim, feline.nvim, nvim-lint, rocks-lazy.nvim, rocks-git.nvim,
+nvim-web-devicons.                  
+                                                                                                                                     
+Run 'Rocks sync'?                                                                                                                    
+[Y]es, (N)o:  
 ```
 
-Una volta terminata l'installazione dei plugin chiudere l'editor e riaprirlo per dare a Neovim la possibilità di caricare le nuove configurazioni, al secondo avvio anche i plugin *mason-lspconfig* e *mason-tool-installer* installati durante la sincronizzazione si occuperanno, in modo del tutto automatico, di installare tutti i server linguistici (LSP) necessari al corretto funzionamento dell'editor, terminata l'installazione dei server linguistici l'editor è pronto per essere utilizzato, buono sviluppo.
+Una volta terminata l'installazione dei plugin chiudere l'editor e riaprirlo per dare a Neovim la possibilità di caricare le nuove configurazioni, al secondo avvio inoltre vengono installati dai plugin *mason-lspconfig* e *mason-tool-installer*, in modo del tutto automatico, i server linguistici (LSP), i linter e i formattatori necessari al corretto funzionamento dell'editor, terminata l'installazione dei server linguistici l'editor è pronto per essere utilizzato.
+
+![First Start](./assets/img/rocksmarker-first-install.png)
+
+## Conclusioni
