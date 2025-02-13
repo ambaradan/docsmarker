@@ -23,7 +23,7 @@ Fornire un editor il più completo possibile per la scrittura di documentazione 
 - Impostazione automatica delle opzioni di Neovim per i file Markdown
 - Evidenziare i tag Markdown nel buffer
 - Offrire una modalità zen per la modifica dei documenti
-- Fornire snippet personalizzati per la scrittura dei tag [mkdocs-material](https://squidfunk.github.io/mkdocs-material/) oltre che per i tag Markdown standard.
+- Fornire snippet personalizzati per la scrittura dei tag **mkdocs-material** oltre che per i tag Markdown standard.
 
 ### Prerequisiti
 
@@ -33,8 +33,8 @@ Fornire un editor il più completo possibile per la scrittura di documentazione 
 
 ### Prerequisiti per Neovim, Lua e Rocksmarker
 
-Il progetto necessita di alcune dipendenze specifiche per la sua corretta esecuzione, in particolare è necessaria la versione Lua 5.1, non sono supportate le versioni fornite da Rocky Linux.  
-La versione 5.1 è necessaria per il corretto funzionamento di rocks.nvim che si occupa della gestione dei plugin garantendo inoltre la piena compatibilità con la versione utilizzata da Neovim.
+Il progetto necessita di alcune dipendenze specifiche per la sua corretta esecuzione, in particolare è necessaria la versione ==Lua 5.1==, non sono supportate le versioni fornite da Rocky Linux.  
+La versione 5.1 è necessaria per il corretto funzionamento di *rocks.nvim* che si occupa della gestione dei plugin garantendo inoltre la piena compatibilità con la versione utilizzata da Neovim.
 
 Da Neovim docs:
 
@@ -47,17 +47,17 @@ sudo dnf install -y epel-release yum-utils
 sudo dnf config-manager --set-enabled crb
 ```
 
-Una volta impostate le fonti è necessario installare alcuni pacchetti aggiuntivi richiesti sia per la costruzione di Neovim che per l'installazione della versione Lua richiesta, per installarli su una distribuzione Rocky Linux digitare:
+Una volta impostate le fonti è necessario installare alcuni pacchetti aggiuntivi richiesti sia per la costruzione di *Neovim* che per l'installazione della versione Lua richiesta, per installarli su una distribuzione Rocky Linux digitare:
 
 ```bash
 dnf install npm ncurses readline-devel icu ninja-build cmake gcc make unzip gettext curl glibc-gconv-extra tar git
 ```
 
-Terminata l'installazione si può passare alla costruzione della struttura che prevede, come primo passo l'installazione dell'editor Neovim.
+Terminata l'installazione si può passare alla costruzione della struttura che prevede, come primo passo l'installazione dell'editor *Neovim*.
 
 ## Installazione di Neovim
 
-Neovim è un editor di testo moderno, potente e altamente personalizzabile che offre un'esperienza familiare agli utenti di Vim.  
+*Neovim* è un editor di testo moderno, potente e altamente personalizzabile che offre un'esperienza familiare agli utenti di Vim.  
 Pur mantenendo la filosofia di Vim introduce al contempo miglioramenti e funzionalità con l'obiettivo di fornire una esperienza utente similare ma su una base di codice più moderna.  
 Tra i suoi miglioramenti troviamo:
 
@@ -74,7 +74,7 @@ La compilazione di Neovim da sorgente non presenta particolari problemi e, se si
 
 ### Scaricare i sorgenti
 
-Il progetto viene sviluppato su GitHub e per recuperare i sorgenti è necessario fare il clone del repository localmente. Portarsi quindi nel percorso scelto del proprio file system e scaricarli con:
+Il progetto viene sviluppato su *GitHub* e per recuperare i sorgenti è necessario fare il clone del repository localmente. Portarsi quindi nel percorso scelto del proprio file system e scaricarli con:
 
 ```bash
 git clone https://github.com/neovim/neovim
@@ -134,7 +134,7 @@ Run "nvim -V1 -v" for more info
 
     È opportuno quindi conservare la cartella con i sorgenti per una eventuale rimozione.
 
-Ora che l'editor è pronto all'uso si può passare all'installazione della versione di Lua corrispondente a quella fornita da Neovim.
+Ora che l'editor è pronto all'uso si può passare all'installazione della versione di *Lua* corrispondente a quella fornita da *Neovim*.
 
 ## Installazione di Lua 5.1
   
@@ -219,7 +219,7 @@ Se il sistema in uso è una versione desktop, molto probabilmente è già instal
     ```
 
 L'intero progetto si basa sulla versione stabile di Lua utilizzata sia da Neovim che da rocks.nvim ed è indispensabile che la versione predefinita per il profilo utente sia la 5.1.  
-Per soddisfare questo requisito aggiungere un *alias* in *.bashrc* per indicare al sistema la versione da utilizzare come predefinita.
+Per soddisfare questo requisito aggiungere un *alias* in *.bashrc* per indicare al sistema la versione da utilizzare come predefinita per quel spazio utente.
 Aprire il proprio `.bashrc` in un editor ed aggiungere la stringa seguente:
 
 ```bash
@@ -243,14 +243,14 @@ Ora tutte le volte che verrà richiesto l'eseguibile sarà utilizzata la version
 
 ### Aggiungere i file di intestazione
 
-L'installazione della versione richiesta non è sufficiente perché la configurazione funzioni correttamente. Il gestore dei plugin *rocks.nvim* necessita dei file di intestazione per compilare la sua versione di *luarocks*.  
-È necessario quindi collegare la libreria richiesta, **lua.h**, presente in `/usr/local/include/` nel percorso di ricerca dei file di intestazione (`/usr/include/`).
+L'installazione della versione richiesta non è sufficiente perché la configurazione funzioni correttamente. Il gestore dei plugin *rocks.nvim* necessita dei file *headers* di Lua per compilare la sua versione di *luarocks*.  
+È necessario quindi collegare la libreria richiesta, **lua.h**, presente in `/usr/local/include/` nel percorso di ricerca dei file *headers* (`/usr/include/`).
 
 !!! warning ""
 
     La mancanza di questo file non permette alla script di inizializzazione di compilare *luarocks* che termina con un errore interrompendo l'intero processo.
 
-Per il suo collegamento si utilizza uno dei percorsi di ricerca standard di *luarocks* `/usr/include/lua/<number_version>` collegato alla cartella con i file di intestazione della versione 5.1 in `/usr/local/include/`.
+Per il suo collegamento si utilizza uno dei percorsi di ricerca standard di *luarocks* `/usr/include/lua/<number_version>` collegato alla cartella con i file *headers* della versione 5.1 in `/usr/local/include/`.
 
 Per la sua realizzazione è necessario anche in questo caso operare come utente root o con i permessi di amministratore. Portarsi quindi nella cartella `include`:
 
@@ -270,7 +270,7 @@ Creare quindi il collegamento simbolico alla cartella `/usr/local/include/`.
 sudo ln -s /usr/local/include/ 5.1
 ```
 
-Il comando collega la cartella dove sono stati copiati i file di intestazione durante l'installazione di Lua 5.1 ad una cartella denominata `5.1` creata dal comando stesso.  
+Il comando collega la cartella dove sono stati copiati i file *headers* durante l'installazione di Lua 5.1 ad una cartella denominata `5.1` creata dal comando stesso.  
 La denominazione della cartella è arbitraria ma scegliendo di usare il numero della versione consente un richiamo mnemonico al suo contenuto e cosa più importante soddisfa i requisiti per la ricerca dei percorsi di *luarocks*.
 
 Per la sua verifica basta elencare la cartella `5.1` e dovrebbero comparire i file contenuti in `/usr/local/include/`:
@@ -290,8 +290,8 @@ Con questo ultimo passo l'ambiente per l'installazione è completo, sono soddisf
 ## Scaricare la configurazione
 
 La configurazione, sebbene ancora in fase di sviluppo, può essere usata quotidianamente per scrivere e modificare documentazione scritta in Markdown, quindi può essere installata come configurazione predefinita nel percorso `.config/nvim`.  
-Per gli utenti che hanno già una configurazione di Neovim presente sul sistema, esiste la possibilità di usare *rocksmarker* come editor secondario, consentendo così di continuare a usare la configurazione esistente per sviluppare i propri progetti.  
-Questo metodo vi permette anche di provare *rocksmarker*, in modo del tutto indipendente, per valutare se può essere uno strumento utile per il vostro lavoro quotidiano.
+Per gli utenti che hanno già una configurazione di Neovim presente sul sistema, esiste la possibilità di usare *Rocksmarker* come editor secondario, consentendo così di continuare a usare la configurazione esistente per sviluppare i propri progetti.  
+Questo metodo vi permette anche di provare *Rocksmarker*, in modo del tutto indipendente, per valutare se può essere uno strumento utile per il vostro lavoro quotidiano.
 
 ### Editor principale
 
@@ -310,7 +310,7 @@ nvim
 ### Editor secondario
 
 Per testare o utilizzare la configurazione come configurazione secondaria, utilizzare la variabile di Neovim *NVIM_APPNAME*; l'uso di questa variabile consente a Neovim di passare un nome arbitrario che viene utilizzato per la ricerca dei file di configurazione in `~/.config/` e per la successiva creazione della cartella dei file condivisi in `~/.local/share/` e della cache in `~/.cache/`.  
-Per impostare *Rocksmarker* come tipo di editor secondario:
+Per impostare *Rocksmarker* come editor secondario:
 
 ```bash
 git clone https://github.com/ambaradan/rocksmarker.git ~/.config/rocksmarker/
@@ -371,8 +371,14 @@ Run 'Rocks sync'?
 [Y]es, (N)o:  
 ```
 
-Una volta terminata l'installazione dei plugin chiudere l'editor e riaprirlo per dare a Neovim la possibilità di caricare le nuove configurazioni, al secondo avvio inoltre vengono installati dai plugin *mason-lspconfig* e *mason-tool-installer*, in modo del tutto automatico, i server linguistici (LSP), i linter e i formattatori necessari al corretto funzionamento dell'editor, terminata l'installazione dei server linguistici l'editor è pronto per essere utilizzato.
+Una volta terminata l'installazione dei plugin chiudere l'editor e riaprirlo per dare a Neovim la possibilità di caricare le nuove configurazioni, al secondo avvio inoltre vengono installati dai plugin *mason-lspconfig* e *mason-tool-installer*, in modo del tutto automatico, i *server linguistici* (LSP), i *linter* e i *formattatori* necessari al corretto funzionamento dell'editor, terminata l'installazione dei server linguistici l'editor è pronto per essere utilizzato.
 
 ![First Start](./assets/img/rocksmarker-first-install.png)
 
 ## Conclusioni
+
+Rocksmarker è una configurazione personalizzata di Neovim e ne integra tutte le funzionalità, fornisce inoltre una serie di funzionalità aggiuntive per la gestione dei file, per i repository git, per la diagnostica e per molto altro.  
+Per una panoramica delle scorciatoie che attivano le funzioni si consiglia di consultare il file `/lua/mappings.lua`.  
+In alternativa con il tasto ++space++ si attiva il menù dei comandi in basso a destra dove sono elencati tutti i comandi disponibili. Le lettere contrassegnate con un **+** forniscono ulteriori selezioni, selezionando la lettera corrispondente si passa al menu contestuale e si ritorna al menu principale con ++back++ mentre con ++"'"++ si richiama il menu per la navigazione del buffer.
+
+![Rocksmarker Menus](./assets/img/rocksmarker-menus.png)
