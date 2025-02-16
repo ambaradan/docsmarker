@@ -86,13 +86,13 @@ When you trip a markdownlint rule, you will receive an error with the rule numbe
 
 ## Integration into the editor
 
-The *Markdownlint* rules are used by the editor both for the error reporting function in the *nvim-lint* plugin configuration and for formatting code in *conform.nvim*.  
-The combination of the two controls makes it possible to minimize the errors that need to be corrected; the formatter corrects automatically remediable errors at each save, while the linter signals those that need manual intervention for their correction.
+The editor uses the *Markdownlint* rules for the error reporting function in the *nvim-lint* plugin configuration, and for formatting code in *conform.nvim*.  
+The combination of the two controls minimizes the need for correcting errors. The formatter corrects automatically remediable errors at each save, while the linter signals those that need manual intervention for their correction.
 
 ### Formatter
 
 As mentioned earlier the *conform.nvim* plugin provides code formatting, its setting is by file type (==formatters_by_ft==) and as you can see from the code below it provides support for many programming languages.  
-The function is set to be called at each buffer save (==format_on_save==) and when called uses the rules provided by *markdownlint*.  
+The editor runs this function on each buffer save (==format_on_save==) and when called, uses the rules provided by *markdownlint*.  
 In this way, all detected but recoverable errors are automatically corrected without the need for manual intervention.
 
 ```lua title="/lua/plugins/diagnostic.lua" linenums="2" hl_lines="2 8 12"
@@ -117,7 +117,7 @@ require("conform").setup({
 
 #### Manual formatting
 
-To have full control over buffer markdown errors, you can set up manual formatting. To do this, simply comment out the part about **format_on_save** and restart the editor.
+To have full control over buffer markdown errors, you can set up manual formatting. To do this, just comment out the part about **format_on_save** and restart the editor.
 
 ```lua title="codice da formattare" linenums="13"
  --format_on_save = {
@@ -128,11 +128,11 @@ To have full control over buffer markdown errors, you can set up manual formatti
 ```
 
 The editor in this configuration will flag all markdown errors in the buffer without applying any corrections; this can be didactically interesting for learning the rules and correcting one's writing.  
-Errors will be present even after the buffer is saved, allowing them to be studied and changes to be manually verified.
+Errors will be present even after saving the buffer, making it possible to study them and change them to be manually verified.
 
 !!! tip ""
 
-    Automatic formatting is still available, however, and can be applied with the shortcut ++space+"F "++. The key invokes the same function used for formatting by ==format_on_save==.
+    Automatic formatting is still available. You can apply it with the shortcut ++space+"F"++. The key invokes the same function used for formatting by ==format_on_save==.
 
     ```lua title="/lua/mappings.lua" linenums="70"
     {
@@ -147,8 +147,8 @@ Errors will be present even after the buffer is saved, allowing them to be studi
 
 ### Linter
 
-The linting function is provided by the *nvim-lint* plugin an extremely efficient asynchronous linter that complements the support provided by the Neovim language protocol. It can be configured to control a large number of programming languages, the available languages can be found in the [related section](https://github.com/mfussenegger/nvim-lint?tab=readme-ov-file#available-linters) of the project.  
-The functionality is invoked by an auto-command triggered by the **BufWritePost** event, an event that occurs each time the buffer is written to the hard disk. Again, code verification is defined by file type (==linters_by_ft==), and in the case of markdown documents, both code correctness with *markdownlint* and content correctness with *vale* is verified.
+The *nvim-lint* plugin provides the linting function, and is an extremely efficient asynchronous linter that complements the support provided by the Neovim language protocol. You can configure it to control a large number of programming languages. You can find a list of the available languages in the [related section](https://github.com/mfussenegger/nvim-lint?tab=readme-ov-file#available-linters) of the project.  
+An auto-command invokes this functionality, triggered by the **BufWritePost** event, an event that occurs each time you write the buffer to the hard disk. The definition of code verification comes by way of the file type (==linters_by_ft==), and in the case of markdown documents, verifies both code correctness with *markdownlint*, and content correctness with *vale*.
 
 ```lua title="/lua/plugins/diagnostic.lua" linenums="23" hl_lines="2 7"
 require("lint").linters_by_ft = {
@@ -165,3 +165,5 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 ```
 
 ## Conclusions
+
+Markdownlint is powerful tool. It is well integrated into the framework of Rocksmarker, and includes the ability to customize any rule in the `.markdownlint.yaml` file. In addition, further customizations described in the configuration of Rocksmarker in this document, make this feature flexible, similar to the remaining aspects of Rocksmarker and Neovim. The inclusion of Markdownlint helps you minimize errors that you might otherwise inject into your markdown code.
