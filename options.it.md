@@ -1,5 +1,5 @@
 ---
-title: Options
+title: Neovim Options
 author: Franco Colussi
 contributors: Steve Spencer
 tags:
@@ -8,15 +8,15 @@ tags:
     - markdown
 ---
 <!--vale off-->
-## Impostazione delle opzioni
 
-### Introduzione
+## Introduzione
 
 Una installazione standard di Neovim si presenta già pronta all'uso ma con un aspetto un po' semplice e certamente non ottimizzata per le vostre preferenze specifiche. Il primo passo per la personalizzazione dell'installazione passa dalla configurazione delle opzioni.  
 Le opzioni di Neovim sono uno strumento potente e flessibile che consentono di modificare numerosi aspetti dell'editor, dai più basilari come la visualizzazione dei numeri di riga nel buffer ad altre più avanzate come la sincronizzazione della clipboard del sistema o le impostazioni di formattazione.  
 La loro flessibilità consente di applicarle a vari livelli, a livello globale (==vim.g== - *global*) per le impostazioni generali dell'editor, a livello di finestra (==vim.wo== - *window options*) per eventuali impostazioni di una area di lavoro e a livello di buffer (==vim.bo== - *buffer options*) per una personalizzazione più granulare.
 
-Per sfruttare tutto il potenziale di Neovim la configurazione utilizza **ftplugin** per la configurazione dei tipi di file. Questo consente di adattare le impostazioni ad ogni tipo di file specifico snellendo il flusso di lavoro e permettendo così di lavorare in un ambiente di codifica più organizzato ed efficiente.
+Per sfruttare tutto il potenziale di Neovim la configurazione utilizza [ftplugin](https://neovim.io/doc/user/filetype.html#%3Afiletype-plugin-on) per la configurazione dei tipi di file, di conseguenza le opzioni specifiche si trovano nei rispettivi file della cartella `ftplugin`.  
+Questo consente di adattare le impostazioni ad ogni tipo di file specifico snellendo il flusso di lavoro e permettendo così di lavorare in un ambiente di codifica più organizzato ed efficiente.
 
 ## Opzioni globali
 
@@ -92,7 +92,9 @@ vim.o.number = true -- enable line numbers
 vim.o.signcolumn = "yes" -- displaying the signs
 ```
 
-L'opzione ==vim.o.laststatus = 3== serve a visualizzare una sola linea di stato che in caso contrario verrebbe visualizzata per buffer e quindi moltiplicata per il numero di buffer aperti.
+!!! Note ""
+
+    L'opzione ==vim.o.laststatus = 3== serve a visualizzare una sola *statusline* che in caso contrario verrebbe visualizzata per buffer e quindi moltiplicata per il numero di buffer aperti, comportamento più adatto al codice di programmazione e non necessario in un editor markdown.
 
 Le successive opzioni impostano il comportamento predefinito in cui vengono divise le finestre, questa impostazione è pensata principalmente per la consultazione delle pagine di aiuto di Neovim, in questo modo il comando ==:help== posiziona il buffer a destra rendendo comoda la sua consultazione mentre si edita il codice.
 
@@ -109,3 +111,5 @@ vim.o.sessionoptions = "buffers,curdir,folds,globals,tabpages,winpos,winsize"
 ```
 
 ## Conclusioni
+
+L'uso delle opzioni permette di configurare l'editor sia nell'aspetto che nel comportamento per adattarlo ad esigenze specifiche, esistono opzioni specifiche per ogni aspetto di Neovim che possono essere consultate sulla [pagina relativa](https://neovim.io/doc/user/options.html) della documentazione di Neovim.
