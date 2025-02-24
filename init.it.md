@@ -96,4 +96,14 @@ Infine cancella la directory temporanea di installazione *rocks.nvim*.
 
 Lo script in questo modo assicura la configurazione e l'ambiente necessario per il corretto funzionamento del plugin *rocks.nvim* in *Neovim*.
 
+!!! Note "Sviluppare la propria configurazione"
+
+    Lo script può essere usato anche per iniziare la propria personalizzazione dell'editor. Per farlo è sufficiente copiare lo script in un file chiamato `init.lua` nella cartella scelta per lo sviluppo posizionata in `~/.config/` e avviare Neovim usando la variabile ==NVIM_APPNAME==.  
+    Il comando da utilizzare, supponendo che la cartella scelta sia `~/.config/rocks_test`, sarà:
+
+    `NVIM_APPNAME=rocks_test nvim`
+
+    Neovim creerà la configurazione partendo dalla cartella scelta anche per i dati in `~.local/share/rocks_test` e i dati temporanei `~/.cache/rocks_test`, impostando cioè una nuova configurazione totalmente indipendente che contiene solo il gestore dei plugin.  
+    Da questo punto di partenza si può iniziare ad installare i plugin, configurare le opzioni e l'aspetto secondo preferenza.
+
 ## Conclusioni
