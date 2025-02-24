@@ -1,58 +1,75 @@
 ---
 title: Initialization procedure
-author: Franco Colussi
-contributors: Steve Spencer
+author: franco colussi
+contributors: steve spencer
 tags:
-    - neovim
+    - Neovim
     - editor
     - markdown
 ---
 <!--vale off-->
 ## Introduzione
 
-```lua
+L'inizializzazione della configurazione di rocksmarker viene gestita nel file `init.lua` presente nella cartella principale. Il file `init.lua` è il file di configurazione di Neovim dove gli utenti possono definire le proprie impostazioni e personalizzazioni in Lua.
+
+### Impostazioni personalizzate
+
+La prima parte del file `init.lua` inserisce le opzioni e i comandi personalizzati usando la funzione ==require==, la funzione permette di integrare nella configurazione di Neovim del codice lua scritto su file esterni consentendo in questo modo la sua personalizzazione ed espansione.  
+I comandi, o autocomandi, sono delle azioni che Neovim attua in base a determinati eventi, questi eventi sono codificati e sono consultabili sulla [documentazione di Neovim](https://Neovim.io/doc/user/autocmd.html#_5.-events). il loro utilizzo permette di creare dei comportamenti e delle funzioni di Neovim altrimenti non disponibili.
+
+```lua linenums="2"
+-- calls for input of options and autocommands
+require("options")
+require("commands")
+```
+
+### Procedura di bootstrap
+
+Segue poi il codice fornito dal progetto rocks.nvim per la gestione del plugin stesso e dei successivi plugin, il codice è commentato in maniera esaustiva ma viene comunque fornito un riassunto delle operazioni compiute dai vari passaggi dello script alla fine del codice visualizzato sotto.
+
+```lua title="rocks.nvim bootstrap" linenums="7" hl_lines="3 6 7 13 20 27 32 37 43 45"
 do
-    -- Specifies where to install/use rocks.nvim
+    -- specifies where to install/use rocks.nvim
     local install_location = vim.fs.joinpath(vim.fn.stdpath("data") --[[@as string]], "rocks")
 
-    -- Set up configuration options related to rocks.nvim (recommended to leave as default)
+    -- set up configuration options related to rocks.nvim (recommended to leave as default)
     local rocks_config = {
         rocks_path = vim.fs.normalize(install_location),
     }
 
     vim.g.rocks_nvim = rocks_config
 
-    -- Configure the package path (so that plugin code can be found)
+    -- configure the package path (so that plugin code can be found)
     local luarocks_path = {
         vim.fs.joinpath(rocks_config.rocks_path, "share", "lua", "5.1", "?.lua"),
         vim.fs.joinpath(rocks_config.rocks_path, "share", "lua", "5.1", "?", "init.lua"),
     }
     package.path = package.path .. ";" .. table.concat(luarocks_path, ";")
 
-    -- Configure the C path (so that e.g. tree-sitter parsers can be found)
+    -- configure the c path (so that e.g. tree-sitter parsers can be found)
     local luarocks_cpath = {
         vim.fs.joinpath(rocks_config.rocks_path, "lib", "lua", "5.1", "?.so"),
         vim.fs.joinpath(rocks_config.rocks_path, "lib64", "lua", "5.1", "?.so"),
     }
     package.cpath = package.cpath .. ";" .. table.concat(luarocks_cpath, ";")
 
-    -- Add rocks.nvim to the runtimepath
+    -- add rocks.nvim to the runtimepath
     vim.opt.runtimepath:append(vim.fs.joinpath(rocks_config.rocks_path, "lib", "luarocks", "rocks-5.1", "rocks.nvim", "*"))
 end
 
--- If rocks.nvim is not installed then install it!
+-- if rocks.nvim is not installed then install it!
 if not pcall(require, "rocks") then
     local rocks_location = vim.fs.joinpath(vim.fn.stdpath("cache") --[[@as string]], "rocks.nvim")
 
     if not vim.uv.fs_stat(rocks_location) then
-        -- Pull down rocks.nvim
+        -- pull down rocks.nvim
         local url = "https://github.com/nvim-neorocks/rocks.nvim"
         vim.fn.system({ "git", "clone", "--filter=blob:none", url, rocks_location })
-        -- Make sure the clone was successfull
-        assert(vim.v.shell_error == 0, "rocks.nvim installation failed. Try exiting and re-entering Neovim!")
+        -- make sure the clone was successfull
+        assert(vim.v.shell_error == 0, "rocks.nvim installation failed. try exiting and re-entering Neovim!")
     end
 
-    -- If the clone was successful then source the bootstrapping script
+    -- if the clone was successful then source the bootstrapping script
     vim.cmd.source(vim.fs.joinpath(rocks_location, "bootstrap.lua"))
 
     vim.fn.delete(rocks_location, "rf")
@@ -61,14 +78,22 @@ end
 
 Lo script imposta la configurazione e l'ambiente necessari per utilizzare il plugin rocks.nvim in Neovim. In particolare esegue le seguenti operazioni:
 
-- Specifica il percorso di installazione di rocks.nvim, la variabile ==install_location== viene impostata sul percorso in cui *rocks.nvim* verrà installato, utilizzando la funzione ==vim.fs.joinpath()== per costruire il percorso.
-- Imposta le opzioni di configurazione di rocks.nvim, la tabella ==rocks_config== viene creata con l'opzione ==rocks_path== impostata su *install_location* mentre la variabile globale ==vim.g.rocks_nvim== è impostata sulla tabella *rocks_config*.
-- Configura il percorso del pacchetto Lua, vengono aggiunti due percorsi alla variabile ==package.path==, che consente a Neovim di trovare i moduli Lua installati da *rocks.nvim*.
-- Configura il percorso del pacchetto C, vengono aggiunti due percorsi alla variabile ==package.cpath==, che consente a Neovim di trovare i moduli ==C== (ad esempio, i parser tree-sitter) installati da *rocks.nvim*.
-- Aggiunge ==rocks.nvim== al percorso del runtime, l'opzione ==vim.opt.runtimepath== viene aggiunta al percorso del plugin *rocks.nvim*.
-- Installare rocks.nvim se non è già installato, lo script controlla se il modulo ==rocks== può essere caricato. In caso contrario, procede all'installazione di rocks.nvim.  
-Per prima cosa controlla se la directory di installazione di rocks.nvim esiste. In caso contrario, clona il repository rocks.nvim da GitHub usando la funzione ==vim.fn.system()==.  
-Se la clonazione ha esito positivo, il codice invia lo script bootstrap.lua dal repository clonato per completare l'installazione.
-- Infine cancella la directory temporanea di installazione rocks.nvim.
+- **Specifica il percorso di installazione di rocks.nvim**:  
+Utilizzando la funzione ==vim.fs.joinpath()== imposta la variabile ==install_location== con il percorso di installazione di *rocks.nvim*. La cartella viene ricavata con l'uso della funzione `vim.fn.stdpath("data")` che fornisce il percorso standard usato da Neovim per la configurazione, per i dati e per i logs.
+- **Imposta le opzioni di configurazione di rocks.nvim:**  
+Crea la tabella ==rocks_config== con l'opzione ==rocks_path== impostata su *install_location* e imposta la variabile globale ==vim.g.rocks_nvim== sulla tabella *rocks_config*.
+- **Configura il percorso del pacchetto lua:**  
+Vengono aggiunti due percorsi alla variabile ==package.path==, che consente a Neovim di trovare i moduli lua installati da *rocks.nvim*.
+- **Configura il percorso del pacchetto C:**  
+Aggiunge due percorsi alla variabile ==package.cpath==, che consente a Neovim di trovare i moduli ==c== (ad esempio, i *parser tree-sitter*) installati da *rocks.nvim*.
+- **Aggiunge rocks.nvim al percorso del runtime:**  
+Aggiunge l'opzione ==vim.opt.runtimepath== al percorso del plugin *rocks.nvim*.
+- **Installa rocks.nvim se non è già installato:**  
+Lo script controlla se il modulo ==rocks== è disponibile. In caso contrario, procede all'installazione di rocks.nvim.  
+Per prima cosa controlla se esiste la directory di installazione di rocks.nvim. In caso contrario, clona il repository rocks.nvim da GitHub usando la funzione ==vim.fn.system()==.  
+Se il clone viene completato senza errori avvia lo script ==bootstrap.lua== dal repository clonato per completare l'installazione.  
+Infine cancella la directory temporanea di installazione *rocks.nvim*.
 
-Lo script in questo modo assicura che la configurazione e l'ambiente necessari siano impostati per l'uso del plugin *rocks.nvim* in *Neovim*. Gestisce l'installazione di *rocks.nvim* se non è già presente, rendendo conveniente per gli utenti iniziare a usare il plugin senza doverlo installare manualmente.
+Lo script in questo modo assicura la configurazione e l'ambiente necessario per il corretto funzionamento del plugin *rocks.nvim* in *Neovim*.
+
+## Conclusioni
