@@ -1,5 +1,5 @@
 ---
-title: Initialization procedure
+title: Init procedure
 author: franco colussi
 contributors: steve spencer
 tags:
@@ -10,7 +10,7 @@ tags:
 <!--vale off-->
 ## Introduzione
 
-L'inizializzazione della configurazione di rocksmarker viene gestita nel file `init.lua` presente nella cartella principale. Il file `init.lua` è il file di configurazione di Neovim dove gli utenti possono definire le proprie impostazioni e personalizzazioni in Lua.
+L'inizializzazione della configurazione di rocksmarker viene gestita nel file `init.lua` presente nella cartella principale. Il file `init.lua` è il file di configurazione di Neovim dove gli utenti possono definire le proprie impostazioni e personalizzazioni. È scritto in *Lua* e consente una maggiore flessibilità e potenza rispetto alla configurazione tradizionale di Vimscript.
 
 ### Impostazioni personalizzate
 
@@ -79,13 +79,13 @@ end
 Lo script imposta la configurazione e l'ambiente necessari per utilizzare il plugin rocks.nvim in Neovim. In particolare esegue le seguenti operazioni:
 
 - **Specifica il percorso di installazione di rocks.nvim**:  
-Utilizzando la funzione ==vim.fs.joinpath()== imposta la variabile ==install_location== con il percorso di installazione di *rocks.nvim*. La cartella viene ricavata con l'uso della funzione `vim.fn.stdpath("data")` che fornisce il percorso standard usato da Neovim per la configurazione, per i dati e per i logs.
+Utilizzando la funzione ==vim.fs.joinpath()== imposta la variabile ==install_location== con il percorso di installazione di *rocks.nvim*. La cartella viene ricavata con l'uso della funzione ==vim.fn.stdpath("data")== che fornisce il percorso standard usato da Neovim per la configurazione, per i dati e per i logs.
 - **Imposta le opzioni di configurazione di rocks.nvim:**  
 Crea la tabella ==rocks_config== con l'opzione ==rocks_path== impostata su *install_location* e imposta la variabile globale ==vim.g.rocks_nvim== sulla tabella *rocks_config*.
 - **Configura il percorso del pacchetto lua:**  
 Vengono aggiunti due percorsi alla variabile ==package.path==, che consente a Neovim di trovare i moduli lua installati da *rocks.nvim*.
 - **Configura il percorso del pacchetto C:**  
-Aggiunge due percorsi alla variabile ==package.cpath==, che consente a Neovim di trovare i moduli ==c== (ad esempio, i *parser tree-sitter*) installati da *rocks.nvim*.
+Aggiunge due percorsi alla variabile ==package.cpath==, che consente a Neovim di trovare i moduli ==C== (ad esempio, i *parser tree-sitter*) installati da *rocks.nvim*.
 - **Aggiunge rocks.nvim al percorso del runtime:**  
 Aggiunge l'opzione ==vim.opt.runtimepath== al percorso del plugin *rocks.nvim*.
 - **Installa rocks.nvim se non è già installato:**  
@@ -107,3 +107,7 @@ Lo script in questo modo assicura la configurazione e l'ambiente necessario per 
     Da questo punto di partenza si può iniziare ad installare i plugin, configurare le opzioni e l'aspetto secondo preferenza.
 
 ## Conclusioni
+
+Lo scopo di questo script è di assicurare che il plugin *rocks.nvim* sia correttamente configurato e disponibile per l'uso nell'ambiente *Neovim*. Il plugin *rocks.nvim* è un plugin di Neovim che fornisce un modo conveniente per gestire le dipendenze e i pacchetti Lua, in modo simile a come [LuaRocks](https://luarocks.org) funziona per i progetti *Lua* standalone.
+
+Eseguendo questo script, viene impostato l'ambiente necessario per l'uso di *rocks.nvim* e dei pacchetti associati, vengono inoltre configurate le opzioni e i comandi utili alla gestione dell'editor.
