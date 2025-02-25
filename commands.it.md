@@ -88,3 +88,27 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 L'autocomando crea un gruppo di autocomandi chiamato “highlight_yank” che viene attivato ogni volta che si verifica l'evento “TextYankPost”, evento che si verifica dopo ogni operazione di copia (*yank*) di una selezione di testo, viene attivato dopo che il testo è stato copiato, consentendoci di eseguire l'evidenziazione.
 
 La funzione di callback viene eseguita quando si verifica l'evento “TextYankPost”. All'interno della funzione, viene richiamata la funzione ==vim.highlight.on_yank()==, che evidenzia il testo selezionato (*yanked*).
+
+### `vertical_help`
+
+Questo codice assicura che quando si apre un buffer di aiuto, questo venga visualizzato in una finestra verticale sul lato destro dello schermo e che le dimensioni della finestra vengano adattate al contenuto.
+
+```lua
+vim.api.nvim_create_autocmd("FileType", {
+ group = vim.api.nvim_create_augroup("vertical_help", { clear = true }),
+ pattern = "help",
+ callback = function()
+  vim.bo.bufhidden = "unload"
+  vim.cmd.wincmd("L")
+  vim.cmd.wincmd("=")
+ end,
+})
+```
+
+Il codice crea un gruppo chiamato “vertical_help” e crea un autocomando che si attiva quando il file file è di tipo ==help==.
+
+All'interno della funzione di callback dell'autocomando troviamo:
+
+- L'opzione **vim.bo.bufhidden** impostata su ==unload== per il buffer corrente. Questo assicura che il buffer di aiuto venga scaricato quando la finestra viene chiusa, invece di essere nascosto.
+- Il comando **vim.cmd.wincmd(“L”)** sposta la finestra corrente nella posizione più a destra dello schermo.
+- Il comando **vim.cmd.wincmd(“=”)** equalizza la larghezza di tutte le finestre, assicurando che la finestra di aiuto occupi la massima larghezza disponibile.
