@@ -74,7 +74,7 @@ La funzione ==vim.keymap.set== viene utilizzata per creare una nuova mappa dei t
 ### `highlight_yank`
 
 Lo scopo di questo codice è quello di fornire un'indicazione visiva del testo che è stato selezionato. Quando si copia del testo in Neovim, il testo selezionato viene temporaneamente evidenziato, rendendo più facile vedere ciò che è stato copiato.  
-Nel complesso, questo codice è un modo semplice ed efficace per migliorare l'esperienza di editing di Neovim, fornendo un segnale visivo per il testo copiato o cancellato.
+Nel complesso, questo codice è un modo semplice ed efficace per migliorare l'esperienza di editing di Neovim, fornendo un segnale visivo per il testo copiato.
 
 ```lua
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -112,3 +112,22 @@ All'interno della funzione di callback dell'autocomando troviamo:
 - L'opzione **vim.bo.bufhidden** impostata su ==unload== per il buffer corrente. Questo assicura che il buffer di aiuto venga scaricato quando la finestra viene chiusa, invece di essere nascosto.
 - Il comando **vim.cmd.wincmd(“L”)** sposta la finestra corrente nella posizione più a destra dello schermo.
 - Il comando **vim.cmd.wincmd(“=”)** equalizza la larghezza di tutte le finestre, assicurando che la finestra di aiuto occupi la massima larghezza disponibile.
+
+### `term_spell_off`
+
+Lo scopo di questo codice è quello di disabilitare automaticamente la funzione di controllo ortografico ogni volta che viene aperto un buffer di terminale nell'editor Neovim. Ciò può essere utile se non si vuole che il controllo ortografico interferisca con i flussi di lavoro basati sul terminale.
+
+```lua
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+ group = vim.api.nvim_create_augroup("term_spell_off", { clear = true }),
+ callback = function()
+  vim.wo.spell = false
+ end,
+})
+```
+
+Il codice crea un gruppo di autocomandi chiamato “term_spell_off” e successivamente crea un autocomando che ascolta l'evento “TermOpen”.
+
+La funzione di callback viene attivata quando si presenta l'evento “TermOpen”. In questo caso, il callback imposta l'opzione ortografia su ==false== per la finestra corrente (*vim.wo.spell = false*). Questo disabilita la funzione di controllo ortografico nel buffer del terminale.
+
+L'evento “TermOpen” è un evento specifico di Neovim che si attiva quando viene aperto un nuovo buffer di terminale. Può essere utile per impostare configurazioni specifiche del terminale, come la disabilitazione del controllo ortografico, come mostrato nell'esempio.
