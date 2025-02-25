@@ -131,3 +131,7 @@ Il codice crea un gruppo di autocomandi chiamato “term_spell_off” e successi
 La funzione di callback viene attivata quando si presenta l'evento “TermOpen”. In questo caso, il callback imposta l'opzione ortografia su ==false== per la finestra corrente (*vim.wo.spell = false*). Questo disabilita la funzione di controllo ortografico nel buffer del terminale.
 
 L'evento “TermOpen” è un evento specifico di Neovim che si attiva quando viene aperto un nuovo buffer di terminale. Può essere utile per impostare configurazioni specifiche del terminale, come la disabilitazione del controllo ortografico, come mostrato nell'esempio.
+
+## Conclusioni
+
+Gli autocomandi in Neovim sono una potente funzione che consente di personalizzare il comportamento di Neovim eseguendo automaticamente funzioni o comandi quando si verificano eventi specifici. Possono essere utilizzati per automatizzare varie attività, come la formattazione del codice, l'impostazione dei tipi di file o il ridimensionamento delle finestre, rendendo la configurazione di Neovim più efficiente e adatta alle proprie esigenze.

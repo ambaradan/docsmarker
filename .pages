@@ -3,6 +3,7 @@ nav:
     - ... | index*.md
     - ... | install*.md
     - ... | init*.md
+    - ... | rocks-toml*.md
     - ... | commands*.md
     - ... | options*.md
     - Plugins: plugins
