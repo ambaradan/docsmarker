@@ -22,8 +22,26 @@ I vantaggi principali dell'utilizzo di un file rocks.toml con il plugin rocks.nv
 
 ### Sintassi del file `rocks.toml`
 
-Il file *rocks.toml* è usato per gestire le dipendenze nei progetti Lua. È un file di configurazione scritto nel formato TOML (Tom's Obvious, Minimal Language), che è un formato di file di configurazione leggibile dall'uomo.
-Il file è solitamente collocato nella directory principale del progetto Lua.
+Il file *rocks.toml* è usato per gestire le dipendenze nei progetti Lua. È un file di configurazione scritto nel formato TOML (Tom's Obvious, Minimal Language), che è un formato di file di configurazione leggibile dall'uomo. Il file è solitamente collocato nella directory principale del progetto Lua.
+
+```toml
+[config]
+colorscheme = "bamboo"
+# List of Neovim plugins to install alongside their versions.
+# If the plugin name contains a dot then you must add quotes to the key name!
+[plugins]
+"rocks.nvim" = "2.43.1"
+"rocks-config.nvim" = "3.1.0"
+# "rocks-git.nvim" = "2.5.2"
+"rocks-treesitter.nvim" = "1.3.0"
+"rocks-edit.nvim" = "scm"
+```
+
+Spiegazione della sintassi:
+La tabella config contiene le opzioni di configurazione del plugin rocks.nvim.
+In questo caso, l'opzione colorscheme è impostata su “bamboo”.
+
+La tabella plugins contiene l'elenco dei plugin Neovim da installare, con le relative versioni. Le chiavi della tabella dei plugin sono i nomi dei plugin e i valori sono le versioni da installare. Se il nome del plugin contiene un punto (ad esempio, “rocks-config.nvim”), la chiave deve essere racchiusa tra virgolette. La versione può essere un numero di versione specifico (ad esempio, “2.43.1”) o un riferimento al sistema di controllo delle versioni (ad esempio, “scm” per l'ultimo commit del sistema di controllo dei sorgenti).
 
 ### Bundles
 
