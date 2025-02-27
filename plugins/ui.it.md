@@ -41,3 +41,36 @@ Caratteristiche
 - Completa personalizzazione di ogni componente.
 - Fornitori incorporati per cose come la modalità vi, le informazioni sui file, la dimensione dei file, la posizione del cursore, la diagnostica (usando l'LSP incorporato di Neovim), i rami e le differenze di git (usando gitsigns.nvim), ecc.
 - Minimalista, fornisce solo il minimo indispensabile e consente all'utente di costruire i propri componenti con estrema facilità.
+
+```lua linenums="108"
+ vim_mode = {
+  provider = {
+   name = "vi_mode",
+   opts = {
+    show_mode_name = true,
+    padding = "center",
+   },
+  },
+  hl = function()
+   return {
+    name = require("feline.providers.vi_mode").get_mode_highlight_name(),
+    bg = require("feline.providers.vi_mode").get_mode_color(),
+    fg = "bg3",
+    style = "bold",
+   }
+  end,
+  left_sep = "block",
+  right_sep = "right_rounded",
+ },
+```
+
+La tabella vim_mode definisce un componente per il plugin Feline, che è uno statusline personalizzabile per Neovim.
+La tabella provider specifica il provider di questo componente, responsabile della generazione del contenuto da visualizzare. In questo caso, il provider è “vi_mode”, che visualizza la modalità Vim corrente.
+La tabella opts all'interno della tabella provider imposta le opzioni per il provider, come ad esempio se mostrare il nome della modalità e come allineare il nome della modalità all'interno del componente.
+La funzione hl definisce l'evidenziazione del componente. Utilizza il modulo require(“feline.providers.vi_mode”) per ottenere il nome e il colore dell'evidenziazione per la modalità Vim corrente, quindi imposta il colore di sfondo, il colore di primo piano e lo stile del testo.
+
+I campi left_sep e right_sep definiscono i separatori da usare rispettivamente sui lati sinistro e destro del componente.
+
+Questa configurazione visualizza la modalità Vim corrente nella riga di stato, con il nome della modalità centrato e il componente evidenziato in base alla modalità corrente.
+
+Il codice Lua fornito imposta una tabella di configurazione c con una tabella nidificata vim_mode. Questa tabella vim_mode contiene informazioni su un componente in una configurazione Feline.
