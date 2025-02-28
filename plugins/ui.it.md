@@ -194,10 +194,6 @@ feline.setup({
 })
 ```
 
-La funzione *feline.setup()* serve a configurare il plugin feline, la tabella dei **components** viene passata come primo argomento alla funzione *setup()*. Questa tabella contiene i vari componenti che saranno visualizzati nella statusline.  
-Il parametro **theme** è impostato su *bamboo*, lo schema di colori predefinito per il plugin feline.  
-Il parametro **vi_mode_colors** è impostato sulla tabella *vi_mode_colors*, che contiene le configurazioni dei colori per le diverse modalità di Vi che saranno usate nella statusline.
-
-Nel complesso, questo codice imposta il plugin feline con i componenti, il tema e le configurazioni dei colori delle modalità Vi specificate, consentendo di ottenere una statusline personalizzata e molto informativa.
+Il codice configura attraverso la funzione *feline.setup()* il parametro **components**, la tabella cioè che definisce i diversi componenti da visualizzare nella statusline e successivamente il parametro **theme** che definisce i colori e gli stili da utilizzare, per ultimo viene configurato il parametro **vi_mode_colors** che definisce i colori da usare per le diverse modalità di Vi (ad esempio, modalità normale, modalità inserimento, modalità visuale, ecc.). Ciò consente alla statusline di cambiare aspetto in base alla modalità Vi, rendendo più facile l'identificazione della modalità corrente.
 
 ### nvim-cokeline
