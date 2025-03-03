@@ -1,9 +1,9 @@
 ---
 title: Init procedure
-author: Franco colussi
-contributors: Steve spencer
+author: Franco Colussi
+contributors: Steve Spencer
 tags:
-    - Neovim
+    - neovim
     - editor
     - markdown
 ---
