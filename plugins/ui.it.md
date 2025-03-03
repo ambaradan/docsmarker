@@ -79,20 +79,21 @@ Fornisce i moduli per la visualizzazione di molti aspetti di Neovim come varie l
 
 La configurazione del plugin inizia con la definizione del tema che sarà poi richiamato nella parte finale che si occupa di unire tutti i componenti:
 
-```lua linenums="80"
+```lua
+local get_col = require("cokeline/utils").get_hex
 local bamboo = {
- fg = "#c7dab9",
- bg = "#2f312c",
- bg3 = "#3a3d37",
- light_grey = "#838781",
- green = "#8fb573",
- yellow = "#ffccb2",
- purple = "#aaaaff",
- orange = "#ff9966",
- light_yellow = "#e2c792",
- coral = "#f08080",
- dark_blue = "#758094",
- dark_coral = "#893f45",
+ fg = get_col("Pmenu", "fg"),
+ bg = get_col("TabLineFill", "bg"),
+ bg3 = get_col("Normal", "bg"),
+ grey = get_col("Comment", "fg"),
+ green = get_col("String", "fg"),
+ yellow = get_col("DiagnosticWarn", "fg"),
+ purple = get_col("DiagnosticHint", "fg"),
+ red = get_col("DiagnosticError", "fg"),
+ cyan = get_col("DiagnosticInfo", "fg"),
+ orange = get_col("WarningMsg", "fg"),
+ coral = get_col("ErrorMsg", "fg"),
+ blue = get_col("Function", "fg"),
 }
 ```
 
@@ -197,3 +198,41 @@ feline.setup({
 Il codice configura attraverso la funzione *feline.setup()* il parametro **components**, la tabella cioè che definisce i diversi componenti da visualizzare nella statusline e successivamente il parametro **theme** che definisce i colori e gli stili da utilizzare, per ultimo viene configurato il parametro **vi_mode_colors** che definisce i colori da usare per le diverse modalità di Vi (ad esempio, modalità normale, modalità inserimento, modalità visuale, ecc.). Ciò consente alla statusline di cambiare aspetto in base alla modalità Vi, rendendo più facile l'identificazione della modalità corrente.
 
 ### nvim-cokeline
+
+```lua linenums="298"
+local get_hex = require("cokeline/utils").get_hex
+
+local green = vim.g.terminal_color_2
+local yellow = vim.g.terminal_color_3
+
+require("cokeline").setup({
+ default_hl = {
+  fg = function(buffer)
+   return buffer.is_focused and get_hex("Normal", "fg") or get_hex("Conceal", "fg")
+  end,
+  bg = get_hex("FloatermBorder", "bg"),
+ },
+```
+
+Il codice inizia richiedendo la funzione **get_hex** del modulo **cokeline/utils**, che viene utilizzata per ottenere i valori esadecimali dei colori per le varie evidenziazioni di Neovim, quindi imposta le variabili verde e giallo ai valori delle variabili globali di Neovim *terminal_color_2* e *terminal_color_3*, rispettivamente.  
+La parte principale del codice è la funzione *cokeline.setup()*, che configura la tabella **default_hl** impostando i gruppi di evidenziazione predefiniti per i buffer. La funzione **fg** restituisce il colore di primo piano in base al fatto che il buffer sia focalizzato o meno, il colore viene ricavato con la funzione *get_hex()*. La funzione **bg** è impostata sul colore di sfondo del gruppo di evidenziazione *FloatermBorder*.
+
+La tabella dei **components**, anche in questo caso è modulare e contiene le parti da visualizzare. Il codice seguente è un estratto della tabella a scopo dimostrativo:
+
+```lua linenums="311"
+ components = {
+  {
+   text = "｜",
+   fg = function(buffer)
+    return buffer.is_modified and yellow or green
+   end,
+  },
+  ....
+  ....
+```
+
+Il codice imposta nella tabella dei componenti un singolo componente con il testo “｜” utilizzando poi la funzione fg per impostare il colore di primo piano del componente. Se il buffer è modificato, utilizza il colore giallo, altrimenti il colore verde.
+
+Questo codice imposta l'aspetto del plugin Cokeline, compresi i colori di primo piano e di sfondo dei buffer e l'indicatore del buffer modificato.
+
+Questo codice configura il plugin Cokeline con gruppi di evidenziazione e componenti di buffer personalizzati, fornendo una visualizzazione del buffer visivamente accattivante e informativa in Neovim.
