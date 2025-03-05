@@ -21,7 +21,7 @@ I vantaggi principali dell'utilizzo di un file *rocks.toml* con il plugin rocks.
 
 ### Sintassi
 
-Il file *rocks.toml* è usato per gestire le dipendenze nei progetti Lua. È un file di configurazione scritto nel formato TOML (Tom's Obvious, Minimal Language), che è un formato di file di configurazione leggibile dall'uomo. Il file è solitamente collocato nella directory principale del progetto Lua.
+Il file *rocks.toml* è un file di configurazione scritto nel formato TOML (Tom's Obvious, Minimal Language), che è un formato di file di configurazione leggibile dall'uomo. Il file è solitamente collocato nella directory principale del progetto Lua.
 
 Qui sotto è mostrato un estratto del file di configurazione di Rocksmarker come introduzione alla sua scrittura, questa è solo una piccola parte del file e si consiglia la sua consultazione globale.  
 Per richiamare il file di configurazione in Rocksmarker utilizzare il comando ==:Rocks edit==.
@@ -49,8 +49,20 @@ Esiste poi la possibilità di disattivare un plugin commentandolo (*# "rocks-git
 
 ### Bundles
 
-I bundle sono utili quando si ha un insieme di pacchetti che vengono comunemente usati insieme nel progetto.
-Definendo un bundle, è possibile installare tutti i pacchetti del bundle con una singola operazione.
+I bundle in Rocksmarker sono usati per definire un insieme di pacchetti esterni (*rocks*) su cui si basa la configurazione di Neovim. I bundle in rocks.nvim hanno le seguenti funzioni:
+
+- **Gestione delle dipendenze**:  
+Consente di elencare i pacchetti esterni che la configurazione di Neovim richiede. Dichiarando le dipendenze nelle tabelle relative, ci si assicura che siano correttamente installate e disponibili per l'uso nella configurazione.
+
+- **Vincoli di versione**:  
+Permette di specificare le versioni o gli intervalli di versioni desiderati per ogni dipendenza, per garantire la compatibilità con la configurazione di Neovim. Questo aiuta a evitare potenziali problemi derivanti da versioni o aggiornamenti incompatibili.
+
+- **Configurazione personalizzata**:  
+Aiuta a definire una configurazione personalizzata per ogni dipendenza, come l'abilitazione o la disabilitazione di funzioni, l'impostazione di opzioni o la regolazione del comportamento. In questo modo è possibile adattare il comportamento di ogni pacchetto alle proprie esigenze e preferenze specifiche.
+
+!!! tip ""
+
+    I bundle sono utili quando si ha un insieme di pacchetti che vengono comunemente usati insieme nel progetto. Definendo un bundle, è possibile installare tutti i pacchetti del bundle con una singola operazione.
 
 Ad esempio questo codice può essere utilizzato come punto di partenza per la creazione di un ambiente di sviluppo Neovim con il supporto di vari linguaggi e strumenti di programmazione.
 
@@ -75,12 +87,6 @@ Il codice definisce una tabella chiamata **items** che contiene un elenco di plu
 - Il plugin **mason-tool-installer.nvim** è un'estensione del gestore di pacchetti *mason.nvim*, che consente di installare e gestire automaticamente vari strumenti di sviluppo, come linters, formattatori e altro.
 - Il plugin **luasnip** è un motore di snippet per Neovim, che fornisce un modo potente e flessibile per creare e gestire snippet di codice, che possono essere utilizzati insieme al motore di completamento *nvim-cmp*.
 
-I bundle sono molto utili per i seguenti motivi:
-
-- Rendono più facile la gestione delle dipendenze nel progetto, poiché è sufficiente installare un singolo bundle anziché più pacchetti singoli.
-- Possono aiutare a garantire che il progetto utilizzi un insieme coerente di dipendenze, poiché tutti i pacchetti del bundle sono noti per funzionare bene insieme.
-- Possono rendere più facile la distribuzione del progetto ad altri, che possono semplicemente installare il bundle invece di dover installare ogni dipendenza individualmente.
-
 ## Conclusioni
 
-Il file **rocks.toml** è un modo semplice ed efficace per gestire le dipendenze nei progetti Lua. Definendo le dipendenze del progetto in un file di configurazione centralizzato, si può garantire che il progetto abbia un insieme coerente e riproducibile di dipendenze, rendendo più facile lo sviluppo, il test e la distribuzione e il plugin *rocks.nvim* consente di sfruttare facilmente queste funzionalità.
+Il file **rocks.toml** consente di gestire in modo semplice ed efficace le dipendenze nei progetti Lua. Definendo le dipendenze del progetto in un file di configurazione centralizzato, si può garantire che il progetto abbia un insieme coerente e riproducibile di dipendenze, rendendo più facile lo sviluppo, il test e la distribuzione e il plugin *rocks.nvim* consente di sfruttare pienamente queste funzionalità.
