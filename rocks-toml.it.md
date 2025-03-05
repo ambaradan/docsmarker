@@ -1,5 +1,5 @@
 ---
-title: rocks.toml
+title: Rocks.toml
 author: Franco Colussi
 contributors: Steve Spencer
 tags:
@@ -15,9 +15,9 @@ Consente di specificare i pacchetti Lua (o “*rocks*”) da cui dipende la conf
 
 I vantaggi principali dell'utilizzo di un file *rocks.toml* con il plugin rocks.nvim sono:
 
-- **Gestione delle dipendenze**: Il file rocks.toml consente di centralizzare e gestire le dipendenze Lua utilizzate dalla configurazione di Neovim. Ciò rende più facile mantenere le dipendenze aggiornate e garantisce che la configurazione funzioni in modo coerente in ambienti diversi.
-- **Riproducibilità**: Specificando le versioni esatte dei pacchetti Lua utilizzati, il file rocks.toml aiuta a garantire che la configurazione di Neovim possa essere riprodotta e condivisa con altri senza problemi.
-- **Installazione automatica**: Il plugin rocks.nvim installa e gestisce automaticamente le dipendenze Lua specificate nel file rocks.toml, in modo da non doversi preoccupare di installare e configurare manualmente ogni dipendenza.
+- **Gestione delle dipendenze**: Il file rocks.toml consente di centralizzare e gestire i plugin utilizzati dalla configurazione di Neovim. Ciò rende più facile mantenerli aggiornati e garantisce che la configurazione funzioni in modo coerente in ambienti diversi.
+- **Riproducibilità**: Specificando le versioni esatte dei plugin utilizzati, il file rocks.toml aiuta a garantire che la configurazione di Neovim possa essere riprodotta e condivisa con altri senza problemi.
+- **Installazione automatica**: Il plugin rocks.nvim installa e gestisce automaticamente le dipendenze dei plugin specificati nel file rocks.toml, in modo da non doversi preoccupare di installare e configurare manualmente ogni dipendenza.
 
 ### Sintassi
 
@@ -49,16 +49,16 @@ Esiste poi la possibilità di disattivare un plugin commentandolo (*# "rocks-git
 
 ### Bundles
 
-I bundle in Rocksmarker sono usati per definire un insieme di pacchetti esterni (*rocks*) su cui si basa la configurazione di Neovim. I bundle in rocks.nvim hanno le seguenti funzioni:
+I bundle in Rocksmarker sono usati per definire un insieme di plugins su cui si basa la configurazione di Neovim. I bundle in *rocks.nvim* hanno le seguenti funzioni:
 
 - **Gestione delle dipendenze**:  
-Consente di elencare i pacchetti esterni che la configurazione di Neovim richiede. Dichiarando le dipendenze nelle tabelle relative, ci si assicura che siano correttamente installate e disponibili per l'uso nella configurazione.
+Consente di elencare i plugin che la configurazione di Neovim richiede. Dichiarando le dipendenze nelle tabelle relative, ci si assicura che siano correttamente installate e disponibili per l'uso nella configurazione.
 
 - **Vincoli di versione**:  
-Permette di specificare le versioni o gli intervalli di versioni desiderati per ogni dipendenza, per garantire la compatibilità con la configurazione di Neovim. Questo aiuta a evitare potenziali problemi derivanti da versioni o aggiornamenti incompatibili.
+Permette di specificare le versioni o gli intervalli di versioni desiderati per ogni plugin, per garantire la compatibilità. Questo aiuta a evitare potenziali problemi derivanti da versioni o aggiornamenti incompatibili.
 
 - **Configurazione personalizzata**:  
-Aiuta a definire una configurazione personalizzata per ogni dipendenza, come l'abilitazione o la disabilitazione di funzioni, l'impostazione di opzioni o la regolazione del comportamento. In questo modo è possibile adattare il comportamento di ogni pacchetto alle proprie esigenze e preferenze specifiche.
+Aiuta a definire una configurazione personalizzata per ogni plugin, come l'abilitazione o la disabilitazione di funzioni, l'impostazione di opzioni o la regolazione del comportamento. In questo modo è possibile adattare il comportamento di ogni plugin alle proprie esigenze e preferenze specifiche.
 
 !!! tip ""
 
