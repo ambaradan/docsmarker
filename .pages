@@ -6,6 +6,7 @@ nav:
     - ... | rocks-toml*.md
     - ... | commands*.md
     - ... | options*.md
+    - ... | mappings*.md
     - Plugins: plugins
     - LSP: lsp
     - Rocks: rocks
