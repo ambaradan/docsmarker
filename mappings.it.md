@@ -56,3 +56,27 @@ end, { noremap = true, silent = true })
 ```
 
 In questo esempio, la mappatura di tasti <leader>s esegue una funzione che salva il file attuale con :wq e stampa un messaggio di conferma. La funzione è definita all'interno della mappatura di tasti e viene eseguita quando l'utente preme la chiave leader seguita da 's' in modalità normale. La mappatura di tasti è configurata con noremap per evitare la mappatura ricorsiva e con silent per sopprimere l'eco dei comandi.
+
+## Mappatura in Rocksmaker
+
+```lua
+local remap = function(mode, lhs, rhs, opts)
+ pcall(vim.keymap.del, mode, lhs)
+ return vim.keymap.set(mode, lhs, rhs, opts)
+end
+```
+
+La funzione remap definita nello script Lua è un'utilità progettata per semplificare il processo di impostazione delle mappature dei tasti in Vim, un popolare editor di testo. Richiede quattro parametri: mode, lhs, rhs e opts. Il parametro mode specifica la modalità in cui verrà applicata la mappatura dei tasti (ad esempio, modalità normale, inserto o visuale). Il parametro lhs (lato sinistro) rappresenta la combinazione di tasti che l'utente vuole mappare, mentre rhs (lato destro) è l'azione o il comando che corrisponde a quella combinazione di tasti. Il parametro opzionale opts consente all'utente di fornire ulteriori opzioni per la mappatura dei tasti, ad esempio se deve essere silenziosa o non ricorsiva. La funzione inizia utilizzando pcall (chiamata protetta) per tentare di eliminare in modo sicuro qualsiasi mappatura esistente per la combinazione di tasti lhs specificata nella modalità indicata. In questo modo si evitano errori se la mappatura dei tasti non esiste già. Infine, imposta la nuova mappatura utilizzando vim.keymap.set, creando o aggiornando di fatto il binding dei tasti in Vim. Questa funzione semplifica il processo di gestione delle mappature dei tasti, assicurando che gli utenti possano facilmente personalizzare la loro esperienza di editing senza incontrare conflitti o errori dovuti a mappature preesistenti.
+
+```lua
+local make_opt = function(desc)
+ return {
+  silent = true,
+  noremap = true,
+  desc = desc,
+ }
+end
+
+```
+
+La funzione make_opt nello script Lua fornito è progettata per creare una tabella standardizzata di opzioni che può essere utilizzata per configurare le mappature di chiavi in un editor di testo o in un'applicazione che supporta lo scripting Lua, come Neovim. Questa funzione accetta un singolo parametro, desc, che è una stringa che descrive la mappatura di chiavi che si sta creando. Restituisce una tabella contenente diverse coppie chiave-valore: silent, impostata a true per sopprimere i messaggi di output quando la mappatura viene eseguita; noremap, anch'essa impostata a true per evitare una mappatura ricorsiva; e desc, che contiene la descrizione passata alla funzione. L'incapsulamento di queste opzioni in una funzione riutilizzabile semplifica il processo di definizione delle mappature chiave, garantendo al contempo coerenza e chiarezza nelle descrizioni. Questo migliora la manutenibilità e la leggibilità del codice, rendendo più facile per gli sviluppatori capire lo scopo di ogni mappatura a colpo d'occhio.
