@@ -64,6 +64,16 @@ Per semplificare ulteriormente la scrittura delle mappature in Rocksmarker sono 
 
 Le funzioni definite inoltre consentono di superare la limitazione di quattro componenti che normalmente limita l'uso di vim.keymap.set, fornendo un modo più flessibile e organizzato per configurare le mappature dei tasti in Neovim.
 
+### Funzioni di mappatura
+
+Il codice può essere consultato nel file `lua/utils/editor.lua`, questo file è utilizzato per raccogliere tutte le funzioni personalizzate dedicate alla gestione di Rocksmarker. Le funzioni sono importate con la funzione Lua *require*:
+
+```lua
+local editor = require("utils.editor")
+```
+
+E sono le seguenti:
+
 ```lua
 --- Function to set key mappings with options
 function M.set_key_mapping(mode, lhs, rhs, desc)
@@ -89,26 +99,43 @@ end
 
 `M.set_key_mapping(mode, lhs, rhs, desc)`
 
-:    Questa è una funzione di alto livello che semplifica la creazione di una mappatura dei tasti. Riceve il mode (modalità - ad esempio, normale, inserimento, visualizzazione), lhs (la combinazione di tasti a sinistra che si desidera mappare), rhs (il comando o l'azione da eseguire) e desc(una descrizione per la mappatura).
-Converte la descrizione (desc) in un'opzione usando M.make_opt(desc) e poi invoca M.remap(mode, lhs, rhs, opts).
+:    Questa funzione semplifica la creazione della mappatura dei tasti, riceve il **mode** (modalità - ad esempio, normale, inserimento, visualizzazione), **lhs** (la combinazione di tasti che si desidera mappare), **rhs** (il comando o l'azione da eseguire) e **desc** (una descrizione per la mappatura). Converte infine la descrizione (*desc)* in un'opzione usando *M.make_opt(desc)* e poi invoca la successiva funzione *M.remap(mode, lhs, rhs, opts)*.
 
 `M.remap(mode, lhs, rhs, opts)`
 
-:    Questa funzione gestisce effettivamente la mappatura dei tasti. Inizialmente, utilizza pcall per tentare di rimuovere eventuali mappature esistenti usando vim.keymap.del. Questo è importante per evitare conflitti con mappature precedenti.
-Quindi, imposta la nuova mappatura usando vim.keymap.set(mode, lhs, rhs, opts). Qui, opts è l'oggetto delle opzioni creato in M.make_opt(desc).
+:    Questa funzione gestisce effettivamente la mappatura dei tasti. Inizialmente, utilizza *pcall* per tentare di rimuovere eventuali mappature esistenti usando *vim.keymap.del*. Questo è importante per evitare conflitti con mappature precedenti. Quindi, imposta la nuova mappatura usando **vim.keymap.set(mode, lhs, rhs, opts)**. Qui, *opts* è l'oggetto delle opzioni creato in *M.make_opt(desc)*.
 
 `M.make_opt(desc)`
 
 :    Crea e restituisce un set di opzioni di base per le mappature dei tasti. Le opzioni specificate includono:
-silent: prevenire l'eco dell'azione nella linea di comando.
-noremap: assicurarsi che la mappatura non venga ulteriormente interpretata, mantenendo la sua logica.
-desc: una descrizione fornita, utile per ottenere aiuto o per la documentazione.
+
+- **silent**: per prevenire l'eco dell'azione nella linea di comando.
+- **noremap**: per assicurarsi che la mappatura non venga ulteriormente interpretata, mantenendo la sua logica.
+- **desc**: per fornire una descrizione, utile per ottenere aiuto o per la documentazione.
 
 !!! Note "Superamento della limitazione dei quattro Componenti"
 
-    Le mappature dei tasti in Vim sono normalmente limitate nei loro parametri a sole quattro componenti: modalità, la stringa di tasti a sinistra, la stringa di tasti a destra e le opzioni. Le funzioni di cui sopra aiutano a superare questa limitazione in quanto:
+    Le mappature dei tasti in Neovim sono normalmente limitate nei loro parametri a sole quattro componenti: modalità, la stringa di tasti a sinistra, la stringa di tasti a destra e le opzioni. Le funzioni di cui sopra aiutano a superare questa limitazione in quanto:
 
     - **Separano la logica**: La logica di creazione della mappatura è separata dalla logica di definizione delle opzioni, permettendo di mantenere un codice più pulito e gestibile.  
     - **Consentono la loro riutilizzabilità**: Le funzioni possono essere riutilizzate per differenti mappature senza il bisogno di ripetere il codice per gestire le opzioni, riducendo ridondanza e migliorando la manutenibilità.  
-    - **Facilitano la loro estensione**: È possibile facilmente aggiungere ulteriori opzioni o modificare le funzionalità senza dover modificare la parte fondamentale di vim.keymap.set, mantenendo così la compatibilità con le future versioni di Vim/Neovim.
-    
+    - **Facilitano la loro estensione**: È possibile facilmente aggiungere ulteriori opzioni o modificare le funzionalità senza dover modificare la parte fondamentale di vim.keymap.set, mantenendo così la compatibilità con le future versioni di 
+    Neovim.
+
+### Scrittura delle mappature
+
+Con le funzioni sopra descritte il comando iniziale:
+
+```lua
+vim.keymap.set('n', '<leader>s', ':w<CR>', {
+    noremap = true,
+    silent = true,
+    desc = "Quick save mapping"
+})
+```
+
+Diventa:
+
+```lua
+editor.remap('n', '<leader>s', ':w<CR>', editor.make_opt("Quick save mapping")) 
+```
