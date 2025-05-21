@@ -1,0 +1,11 @@
+---
+nav:
+    - ... | index*.md
+    - ... | install*.md
+    - ... | init*.md
+    - ... | commands*.md
+    - ... | options*.md
+    - ... | mappings*.md
+    - Plugins: plugins
+    - LSP: lsp
+    - Rocks: rocks
