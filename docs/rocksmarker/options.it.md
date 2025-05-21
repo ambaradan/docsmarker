@@ -31,7 +31,7 @@ Questa sezione definisce variabili globali che influenzano il comportamento gene
 `vim.g.loaded_perl_provider = 0`  
 `vim.g.loaded_node_provider = 0`
 
-: Disabilitano i provider di linguaggio per Python, Ruby, Perl e Node.js. Questo può essere fatto per ridurre l'overhead se questi linguaggi non sono necessari per il progetto, e per evitare avvisi di checkhealth relativi a dipendenze non soddisfatte per questi provider.
+: Disabilitano i provider di linguaggio per Python, Ruby, Perl e Node.js. Questo è fatto per ridurre l'overhead di questi linguaggi che non sono necessari per il progetto, e per evitare avvisi prodotti dal comando `:checkhealth` relativi a dipendenze non soddisfatte per questi provider.
 
 ### Opzioni dell'Editor
 
