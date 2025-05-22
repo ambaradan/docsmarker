@@ -134,11 +134,9 @@ Queste opzioni personalizzano l'aspetto e il comportamento dell'interfaccia uten
 
 : Configurano il comportamento dei split verticali e orizzontali. I split permettono di visualizzare più file o parti di file contemporaneamente, migliorando la produttività e la gestione del codice.
 
-Opzioni per Persisted.nvim
+### Opzioni per persisted.nvim
 
-Queste opzioni sono specifiche per il plugin persisted.nvim, che permette di salvare e ripristinare sessioni di Neovim.
-
-### Opzioni di Sessione
+Queste opzioni sono specifiche per il plugin *persisted.nvim*, che permette di salvare e ripristinare sessioni di Neovim.
 
 : `vim.o.sessionoptions = "buffers,curdir,folds,globals,tabpages,winpos,winsize"`
 

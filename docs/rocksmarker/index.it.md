@@ -1,5 +1,5 @@
 ---
-title: Rocksmarker
+title: Introduzione
 author: Franco Colussi
 contributors: Steve Spencer
 tags:
@@ -8,9 +8,7 @@ tags:
     - markdown
 ---
 <!--vale off-->
-# Rocksmarker - Neovim Markdown IDE
-
-## Introduzione
+## Neovim IDE for Markdown
 
 Il progetto mira a costruire una configurazione di Neovim ottimizzata per la scrittura di documentazione in formato Markdown con un'installazione standard di Neovim come base. Questo progetto utilizza un progetto giovane ma molto promettente, rocks.nvim, per la gestione dei plugin. L'idea è nata dalla curiosità di sviluppare una configurazione di Neovim che non fosse gestita da lazy.nvim, il gestore “de facto” di tutte le principali configurazioni attualmente disponibili (NvChad, LunarVim, LazyVim e altri).
 
@@ -56,10 +54,3 @@ Nella configurazione di questo progetto sono inclusi tutti i plugin disponibili 
 ## Riconoscimenti
 
 Un grande ringraziamento va agli sviluppatori di NvChad per l'eccellente codice prodotto che è servito come studio e ispirazione per la stesura di questa configurazione. Un ringraziamento va anche agli sviluppatori di *rocks.nvim*, che hanno portato una ventata di aria fresca nella gestione dei plugin di Neovim, e a tutti gli sviluppatori dei plugin utilizzati.
-
-## Riferimenti
-
-[Neovim](https://neovim.io/) - costruito per gli utenti che desiderano le parti migliori di Vim, e di più  
-[Rocks.nvim](https://github.com/nvim-neorocks/rocks.nvim) - un approccio moderno alla gestione dei plugin Neovim  
-*[luarocks.org]: (<https://luarocks.org/>) - consente la creazione e l'installazione di moduli Lua come pacchetti autonomi  
-[NvChad](https://nvchad.com) - eccellente editor per lo sviluppo di codice, principalmente Lua ma facilmente estensibile

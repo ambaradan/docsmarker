@@ -8,103 +8,54 @@ tags:
     - markdown
 ---
 <!--vale off-->
-## Introduzione
 
-L'inizializzazione della configurazione di rocksmarker viene gestita nel file `init.lua` presente nella cartella principale. Il file `init.lua` è il file di configurazione di Neovim dove gli utenti possono definire le proprie impostazioni e personalizzazioni. È scritto in *Lua* e consente una maggiore flessibilità e potenza rispetto alla configurazione tradizionale di Vimscript.
+## Panoramica
 
-### Impostazioni personalizzate
+Il file *init.lua* fornito è una configurazione di bootstrap per il plugin rocks.nvim. Questa plugin è progettato per gestire le dipendenze Lua per Neovim, fornendo un modo semplice e efficiente per installare e gestire librerie e plugin Lua all'interno dell'ambiente di Neovim.
 
-La prima parte del file `init.lua` inserisce le opzioni e i comandi personalizzati usando la funzione ==require==, la funzione permette di integrare nella configurazione di Neovim del codice lua scritto su file esterni consentendo in questo modo la sua personalizzazione ed espansione.  
-I comandi, o autocomandi, sono delle azioni che Neovim attua in base a determinati eventi, questi eventi sono codificati e sono consultabili sulla [documentazione di Neovim](https://Neovim.io/doc/user/autocmd.html#_5.-events). il loro utilizzo permette di creare dei comportamenti e delle funzioni di Neovim altrimenti non disponibili.
+### Obiettivi
 
-```lua linenums="2"
--- calls for input of options and autocommands
+L'obiettivo principale di questo file è quello di fornire una configurazione di base per *rocks.nvim*, consentendo agli utenti di installare e gestire facilmente le dipendenze Lua all'interno di Neovim. Ciò include la gestione delle librerie e dei plugin, nonché la configurazione dell'ambiente di Neovim per consentire una integrazione senza problemi con le dipendenze installate.
+
+### Funzionalità principali
+
+Il file *init.lua* contiene una serie di impostazioni e configurazioni che consentono di:
+
+* Specificare la posizione di installazione di rocks.nvim
+* Configurare le opzioni relative a rocks.nvim
+* Impostare il percorso dei pacchetti Lua per consentire a Neovim di trovare e utilizzare le librerie e i plugin installati
+* Configurare il percorso C per consentire a Neovim di trovare e utilizzare le librerie condivise
+* Aggiungere rocks.nvim al percorso di runtime di Neovim
+
+### Chiamate a funzioni
+
+Nella parte finale del file init.lua, sono presenti tre chiamate a funzioni utilizzate per richiamare altri script Lua e configurare ulteriormente l'ambiente di Neovim. Queste chiamate sono fondamentali per completare la configurazione di rocks.nvim e abilitare funzionalità aggiuntive.
+Le Tre Chiamate a Funzioni
+
+Le tre chiamate a funzioni presenti in fondo al file sono:
+
+```lua
 require("options")
 require("commands")
+require("mappings")
 ```
 
-### Procedura di bootstrap
+Ognuna di queste chiamate serve a un scopo specifico:
 
-Segue poi il codice fornito dal progetto rocks.nvim per la gestione del plugin stesso e dei successivi plugin, il codice è commentato in maniera esaustiva ma viene comunque fornito un riassunto delle operazioni compiute dai vari passaggi dello script alla fine del codice visualizzato sotto.
+: `require("options")`
 
-```lua title="rocks.nvim bootstrap" linenums="7" hl_lines="3 6 7 13 20 27 32 37 43 45"
-do
-    -- specifies where to install/use rocks.nvim
-    local install_location = vim.fs.joinpath(vim.fn.stdpath("data") --[[@as string]], "rocks")
+: La funzione `require("options")` richiama lo script Lua *options.lua*, che contiene le impostazioni di configurazione per rocks.nvim. Questo script consente di personalizzare ulteriormente l'ambiente di Neovim, ad esempio impostando le opzioni di visualizzazione, di editing e di ricerca.
 
-    -- set up configuration options related to rocks.nvim (recommended to leave as default)
-    local rocks_config = {
-        rocks_path = vim.fs.normalize(install_location),
-    }
+: `require("commands")`
 
-    vim.g.rocks_nvim = rocks_config
+: La funzione `require("commands")` richiama lo script Lua *commands.lua*, che definisce i comandi personalizzati per rocks.nvim. Questi comandi possono essere utilizzati per eseguire azioni specifiche all'interno di Neovim, come ad esempio l'installazione di nuove librerie o la gestione delle dipendenze.
 
-    -- configure the package path (so that plugin code can be found)
-    local luarocks_path = {
-        vim.fs.joinpath(rocks_config.rocks_path, "share", "lua", "5.1", "?.lua"),
-        vim.fs.joinpath(rocks_config.rocks_path, "share", "lua", "5.1", "?", "init.lua"),
-    }
-    package.path = package.path .. ";" .. table.concat(luarocks_path, ";")
+: `require("mappings")`
 
-    -- configure the c path (so that e.g. tree-sitter parsers can be found)
-    local luarocks_cpath = {
-        vim.fs.joinpath(rocks_config.rocks_path, "lib", "lua", "5.1", "?.so"),
-        vim.fs.joinpath(rocks_config.rocks_path, "lib64", "lua", "5.1", "?.so"),
-    }
-    package.cpath = package.cpath .. ";" .. table.concat(luarocks_cpath, ";")
+: La funzione `require("mappings")` richiama lo script Lua *mappings.lua*, che definisce le mappature dei tasti per rocks.nvim. Queste mappature consentono di assegnare azioni specifiche a combinazioni di tasti, semplificando l'interazione con l'ambiente di Neovim.
+Importanza delle Chiamate a Funzioni
 
-    -- add rocks.nvim to the runtimepath
-    vim.opt.runtimepath:append(vim.fs.joinpath(rocks_config.rocks_path, "lib", "luarocks", "rocks-5.1", "rocks.nvim", "*"))
-end
-
--- if rocks.nvim is not installed then install it!
-if not pcall(require, "rocks") then
-    local rocks_location = vim.fs.joinpath(vim.fn.stdpath("cache") --[[@as string]], "rocks.nvim")
-
-    if not vim.uv.fs_stat(rocks_location) then
-        -- pull down rocks.nvim
-        local url = "https://github.com/nvim-neorocks/rocks.nvim"
-        vim.fn.system({ "git", "clone", "--filter=blob:none", url, rocks_location })
-        -- make sure the clone was successfull
-        assert(vim.v.shell_error == 0, "rocks.nvim installation failed. try exiting and re-entering Neovim!")
-    end
-
-    -- if the clone was successful then source the bootstrapping script
-    vim.cmd.source(vim.fs.joinpath(rocks_location, "bootstrap.lua"))
-
-    vim.fn.delete(rocks_location, "rf")
-end
-```
-
-Lo script imposta la configurazione e l'ambiente necessari per utilizzare il plugin rocks.nvim in Neovim. In particolare esegue le seguenti operazioni:
-
-- **Specifica il percorso di installazione di rocks.nvim**:  
-Utilizzando la funzione *vim.fs.joinpath()* imposta la variabile *install_location* con il percorso di installazione di *rocks.nvim*. La cartella viene ricavata con l'uso della funzione *vim.fn.stdpath("data")* che fornisce il percorso standard usato da Neovim per la configurazione dei i dati.
-- **Imposta le opzioni di configurazione di rocks.nvim:**  
-Crea la tabella *rocks_config* con l'opzione *rocks_path* impostata su *install_location* e imposta la variabile globale *vim.g.rocks_nvim* sulla tabella *rocks_config*.
-- **Configura il percorso del pacchetto lua:**  
-Vengono aggiunti due percorsi alla variabile *package.path*, che consente a Neovim di trovare i moduli lua installati da *rocks.nvim*.
-- **Configura il percorso del pacchetto C:**  
-Aggiunge due percorsi alla variabile *package.cpath*, che consente a Neovim di trovare i moduli ==C== (ad esempio, i *parser tree-sitter*) installati da *rocks.nvim*.
-- **Aggiunge rocks.nvim al percorso del runtime:**  
-Aggiunge l'opzione *vim.opt.runtimepath* al percorso del plugin *rocks.nvim*.
-- **Installa rocks.nvim se non è già installato:**  
-Lo script controlla se il modulo *rocks* è disponibile. In caso contrario, procede all'installazione di rocks.nvim.  
-Per prima cosa controlla se esiste la directory di installazione di rocks.nvim. In caso contrario, clona il repository rocks.nvim da GitHub usando la funzione *vim.fn.system()*.  
-Se il clone viene completato senza errori avvia lo script *bootstrap.lua* dal repository clonato per completare l'installazione.  
-Infine cancella la directory temporanea di installazione *rocks.nvim*.
-
-Lo script in questo modo assicura la configurazione e l'ambiente necessario per il corretto funzionamento del plugin *rocks.nvim* in *Neovim*.
-
-!!! Note "Sviluppare la propria configurazione"
-
-    Lo script può essere usato anche per iniziare la propria personalizzazione dell'editor. Per farlo è sufficiente copiare lo script in un file chiamato `init.lua` nella cartella scelta per lo sviluppo posizionata in `~/.config/` e avviare Neovim usando la variabile ==NVIM_APPNAME==.  
-    Il comando da utilizzare, supponendo che la cartella scelta sia `~/.config/rocks_test`, sarà:
-
-    `NVIM_APPNAME=rocks_test nvim`
-
-    Neovim creerà la configurazione partendo dalla cartella scelta anche per i dati in `~.local/share/rocks_test` e i dati temporanei `~/.cache/rocks_test`, impostando cioè una nuova configurazione totalmente indipendente che contiene solo il gestore dei plugin.  
-    Da questo punto di partenza si può iniziare ad installare i plugin, configurare le opzioni e l'aspetto secondo preferenza.
+Le tre chiamate a funzioni presenti in fondo al file init.lua sono fondamentali per completare la configurazione di rocks.nvim e abilitare funzionalità aggiuntive. Queste chiamate consentono di personalizzare l'ambiente di Neovim, definire comandi personalizzati e assegnare azioni specifiche a combinazioni di tasti.
 
 ## Conclusioni
 
