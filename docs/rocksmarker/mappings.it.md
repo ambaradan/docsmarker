@@ -10,14 +10,13 @@ tags:
 <!--vale off-->
 ## Introduzione a mappings.lua
 
-Il file mappings.lua rappresenta un elemento fondamentale nella configurazione di Neovim, in quanto contiene una serie di impostazioni personalizzate per le combinazioni di tasti e le azioni associate. All'interno di mappings.lua, sono definite numerose combinazioni di tasti che attivano funzioni specifiche, come ad esempio la salvataggio del buffer corrente, la creazione di un nuovo buffer, la chiusura del buffer attuale o di tutti i buffer aperti.  
-Inoltre, sono presenti anche mappature per l'accesso a funzionalità avanzate come la ricerca e la sostituzione di testo, la gestione dei buffer e la navigazione all'interno dei file.
+Il file `lua/mappings.lua` rappresenta un elemento fondamentale nella configurazione di Neovim, in quanto contiene le impostazioni personalizzate per le combinazioni di tasti e le azioni associate. All'interno di *mappings.lua*, sono definite numerose combinazioni di tasti che attivano funzioni specifiche, come ad esempio il salvataggio del buffer corrente, la creazione di un nuovo buffer, la chiusura del buffer attuale o di tutti i buffer aperti.  
+Inoltre, sono presenti anche mappature per l'accesso a funzionalità avanzate come la ricerca e la sostituzione di testo e la navigazione all'interno dei file.
 
 ## Mappatura in Rocksmaker
 
-Per semplificare ulteriormente la scrittura delle mappature in Rocksmarker sono fornite alcune funzioni dedicate presenti nel file `lua/utils/editor.lua`. Lo scopo del codice è quello di definire funzioni utili per la gestione delle mappature dei tasti all'interno dell'ambiente Neovim. La funzione **M.set_key_mapping** in particolare costituisce l'interfaccia principale per l'impostazione di nuove mappature di tasti.
-
-Le funzioni definite inoltre consentono di superare la limitazione di quattro componenti che normalmente limita l'uso di vim.keymap.set, fornendo un modo più flessibile e organizzato per configurare le mappature dei tasti in Neovim.
+Per semplificare ulteriormente la scrittura delle mappature in Rocksmarker sono fornite alcune funzioni dedicate presenti nel file `lua/utils/editor.lua`. Lo scopo del codice è quello di definire le funzioni per la gestione delle mappature dei tasti all'interno dell'editor. La funzione **M.set_key_mapping** in particolare costituisce l'interfaccia principale per l'impostazione di nuove mappature di tasti.  
+Le funzioni definite inoltre consentono di superare la limitazione di quattro componenti che normalmente limita l'uso di **vim.keymap.set**, fornendo un modo più flessibile e organizzato per configurare le mappature dei tasti in Neovim.
 
 ### Funzioni di mappatura
 
@@ -73,68 +72,113 @@ Un esempio è il seguente:
 ```lua
 -- conform - manual formatting
 editor.remap("n", "<leader>F", function()
-	require("conform").format({ lsp_fallback = true })
+ require("conform").format({ lsp_fallback = true })
 end, editor.make_opt("format buffer"))
 ```
 
 In questo caso la variabile editor viene utilizzata per accedere a due funzioni diverse:
 
-- `remap` per creare una nuova mappatura definita per la modalità normale ("n"), e la combinazione di tasti <leader>F. Quando viene premuta questa combinazione, viene eseguita la formattazione del buffer corrente.
+- `remap` per creare una nuova mappatura definita per la modalità normale ("n"), e la combinazione di tasti `<leader>F`. Quando viene premuta questa combinazione, viene eseguita la formattazione del buffer corrente.
 
-- `make_opt` per creare un oggetto di opzioni per la mappatura di tasti. In questo caso, alle opzioni sopra citate (silent, noremap, e desc) viene aggiunto "format buffer" per fornire una breve spiegazione dell'azione eseguita dalla mappatura.
+- `make_opt` per creare un oggetto di opzioni per la mappatura dei tasti. In questo caso, alle opzioni sopra citate *silent* e *noremap* viene aggiunto "format buffer" come *desc* per fornire una breve spiegazione dell'azione eseguita dalla mappatura.
 
 ### Mappature per i buffer
 
-Il file mappings.lua fornisce diverse mappature dei buffer che consentono di gestire i buffer in Neovim in modo efficiente. Queste mappature sono definite nella sezione *Buffer mappings* e sono elencate di seguito:
+Il file mappings.lua fornisce diverse mappature dei buffer che consentono di gestire i buffer in modo efficiente:
 
-- Salvare il buffer corrente: `<C-s>` Questa mappatura salva il buffer corrente quando si preme ++ctrl+"s"++ in modalità di inserimento o normale.
-- Creare un nuovo buffer: `<leader>b` Questa mappatura crea un nuovo buffer quando si preme ++space+"b"++ in modalità normale.
-- Chiudere il buffer corrente: `<leader>x` Questa mappatura chiude il buffer corrente quando si preme ++space+"x"++ in modalità normale.
-- Chiudere tutti i buffer: `<leader>X` Questa mappatura chiude tutti i buffer quando si preme ++space+"X"++ in modalità normale.
+: **Salvare il buffer corrente**: `<C-s>`
 
-Queste mappature consentono di gestire i buffer in Neovim in modo rapido e efficiente, senza dover utilizzare i comandi di Neovim standard. Ad esempio, è possibile salvare il buffer corrente senza dover digitare :w e premere Invio.
+: Salva il buffer corrente quando si preme ++ctrl+"s"++ in modalità di inserimento o normale.
+
+: **Creare un nuovo buffer**: `<leader>b`
+
+: Crea un nuovo buffer quando si preme ++space+"b"++ in modalità normale.
+
+: **Chiudere il buffer corrente**: `<leader>x`
+
+: Chiude il buffer corrente quando si preme ++space+"x"++ in modalità normale.
+
+: **Chiudere tutti i buffer**: `<leader>X`
+
+: Chiude tutti i buffer quando si preme ++space+"X"++ in modalità normale.
+
+!!! tip "Uso di `<leader>X`"
+
+    La chiusura di tutti i buffer aperti nell'editor con un solo comando risulta molto utile quando si lavora su più progetti e si desidera cambiare progetto senza uscire dall'editor visto che il plugin persisted.nvim non gestisce questo aspetto. Quindi per evitare di avere nella nuova sessione anche i file aperti nella precedente è possibile rimuoverli in una sola operazione prima di cambiare sessione.
+
+Queste mappature consentono di gestire i buffer in Neovim in modo rapido e efficiente, senza dover utilizzare i comandi di Neovim standard. Ad esempio, è possibile salvare il buffer corrente senza dover digitare ++semicolon+"w"++ e premere ++enter++.
 
 ### Mappature dell'Editor
 
-Il file mappings.lua fornisce diverse mappature dell'editor che consentono di gestire l'editor in Neovim in modo efficiente. Queste mappature sono definite nella sezione Editor mappings e sono elencate di seguito:
+Il file mappings.lua fornisce diverse mappature dell'editor che consentono di gestire l'editor in Neovim in modo efficiente:
 
-#### Comandi di base
+: **Quit editor**: `<leader>q`
 
-- Quit editor: `<leader>q` consente di uscire dall'editor corrente quando si preme ++space+"q"++ in modalità normale.
-- Clear highlights: `<Esc>` cancella gli highlight di ricerca quando si preme ++esc++ in modalità normale.
-- Telescope cmdline: `,` (virgola) apre la linea di comando in un buffer di Telescope quando si preme ++comma++ in modalità normale.
+: Consente di uscire dall'editor corrente quando si preme ++space+"q"++ in modalità normale.
 
-#### Formattazione e copia
+: **Clear highlights**: `<Esc>`
 
-- Formattazione del buffer: `<leader>F` formatta il buffer corrente quando si preme ++space+"F"++ in modalità normale.
-- Copia testo selezionato: `<C-c>` (in modalità visuale) copia il testo selezionato nella clipboard di sistema quando si preme ++ctrl+c++ in modalità visuale.
-- Taglia testo selezionato: `<C-x>` (in modalità visuale) taglia il testo selezionato e lo copia nella clipboard di sistema quando si preme ++ctrl+x++ in modalità visuale.
-- Copia riga intera: `<S-c>` (in modalità normale) copia la riga intera nella clipboard di sistema quando si preme ++shift+"c"++ in modalità normale.
-- Taglia riga intera: `<S-x>` (in modalità normale) taglia la riga intera e la copia nella clipboard di sistema quando si preme ++shift+"x"++ in modalità normale.
+: Cancella gli highlight di ricerca quando si preme ++esc++ in modalità normale.
 
-#### Incolla e sostituisci
+: **Telescope cmdline**: `,` (virgola)
 
-- Incolla testo: `<C-v>` (in modalità normale e visuale) incolla il testo dalla clipboard di sistema quando si preme ++ctrl+"v"++ in modalità normale o visuale.
-- Incolla testo in modalità di inserimento: `<C-v>` (in modalità di inserimento) incolla il testo dalla clipboard di sistema quando si preme ++ctrl+"v"++ in modalità di inserimento.
-- Incolla senza sovrascrivere il registro: `<S-v>` (in modalità visuale) incolla il testo senza sovrascrivere il registro quando si preme ++shift+"v"++ in modalità visuale.
+: Apre la linea di comando in un buffer di Telescope quando si preme ++comma++ in modalità normale.
 
-#### Altri comandi
+: **Formattazione del buffer**: `<leader>F`
 
-- Spostamento del blocco di testo: `J`e `K` (in modalità visuale) spostano il blocco di testo selezionato verso l'alto o verso il basso quando si preme ++"J"++ o ++"K"++ in modalità visuale.
-- Toggle diagnostica: `<leader>dd` attiva o disattiva il testo virtuale della diagnostica nel buffer quando si preme ++space+"d"+"d"++ in modalità normale.
+: Formatta il buffer corrente quando si preme ++space+"F"++ in modalità normale.
+
+: **Copia testo selezionato**: `<C-c>` (in modalità visuale)
+
+: Copia il testo selezionato nella clipboard di sistema quando si preme ++ctrl+c++ in modalità visuale.
+
+: **Taglia testo selezionato**: `<C-x>` (in modalità visuale)
+
+: Taglia il testo selezionato e lo copia nella clipboard di sistema quando si preme ++ctrl+x++ in modalità visuale.
+
+: **Copia riga intera**: `<S-c>` (in modalità normale)
+
+: Copia la riga intera nella clipboard di sistema quando si preme ++shift+"c"++ in modalità normale.
+
+: **Taglia riga intera**: `<S-x>` (in modalità normale)
+
+: Taglia la riga intera e la copia nella clipboard di sistema quando si preme ++shift+"x"++ in modalità normale.
+
+: **Incolla testo**: `<C-v>` (in modalità normale e visuale)
+
+: Incolla il testo dalla clipboard di sistema quando si preme ++ctrl+"v"++ in modalità normale o visuale.
+
+: **Incolla testo**: `<C-v>` (in modalità di inserimento)
+
+: Incolla il testo dalla clipboard di sistema quando si preme ++ctrl+"v"++ in modalità di inserimento.
+
+: **Incolla senza sovrascrivere il registro**: `<S-v>` (in modalità visuale)
+
+: Incolla il testo senza sovrascrivere il registro quando si preme ++shift+"v"++ in modalità visuale.
+
+: **Spostamento del blocco di testo**: `J`e `K` (in modalità visuale)
+
+: Spostano il blocco di testo selezionato verso l'alto o verso il basso quando si preme ++"J"++ o ++"K"++ in modalità visuale.
+
+: **Toggle diagnostica**: `<leader>dd`
+
+: Attiva o disattiva il testo virtuale della diagnostica nel buffer quando si preme ++space+"d"+"d"++ in modalità normale.
 
 ### Mappature di Neo-Tree
 
-Il file mappings.lua fornisce diverse mappature per Neo-Tree che consentono di gestire il file system in Neovim in modo efficiente. Queste mappature sono definite nella sezione neo-tree.nvim mappings e sono elencate di seguito:
+Il file mappings.lua fornisce diverse mappature per *neo-tree.nvim* che consentono di gestire il file system in Neovim in modo efficiente. Queste mappature sono definite nella sezione neo-tree.nvim mappings e sono elencate di seguito:
 
-#### Comandi di base
+: **Apri Neo-Tree in floating window**: `.` (comma)
 
-- Apri Neo-Tree in floating window: `.` apre e chiude Neo-Tree in una finestra flottante quando si preme il ++"."++ in modalità normale.
-- Apri Neo-Tree in finestra a destra: `<C-n>` apre e chiude Neo-Tree in una finestra a destra quando si preme ++ctrl+"n"++ in modalità normale.
+: Apre e chiude Neo-Tree in una finestra flottante quando si preme il ++"."++ in modalità normale.
 
-#### Comandi di navigazione
+: **Apri Neo-Tree in finestra a destra**: `<C-n>`
 
-- Rivela file corrente in Neo-Tree: `<leader>fr` Questa mappatura rivela il file corrente in Neo-Tree quando si preme ++space+"f"+"r"++ in modalità normale.
+: Apre e chiude Neo-Tree in una finestra a destra quando si preme ++ctrl+"n"++ in modalità normale.
+
+: **Rivela file corrente in Neo-Tree**: `<leader>fr`
+
+: Rivela il file corrente in Neo-Tree quando si preme ++space+"f"+"r"++ in modalità normale.
 
 Queste mappature consentono di accedere rapidamente alle funzionalità di Neo-Tree e di gestire il file system in Neovim in modo efficiente. Ad esempio, è possibile aprire Neo-Tree in una finestra galleggiante senza dover utilizzare i comandi di Neovim standard.
 
@@ -142,28 +186,47 @@ Queste mappature consentono di accedere rapidamente alle funzionalità di Neo-Tr
 
 Il file mappings.lua fornisce diverse mappature per bufferline.nvim che consentono di gestire i buffer in Neovim in modo efficiente:
 
-#### Comandi di navigazione
+: **Seleziona buffer**: `<leader>bp`
 
-- Seleziona buffer: `<leader>bp` apre la finestra di selezione dei buffer quando si preme ++space+"b"+"p"++ in modalità normale.
- Chiudi buffer selezionato: `<leader>bc` chiude il buffer selezionato quando si preme ++space+"b"+"c"++ in modalità normale.
+: Apre la finestra di selezione dei buffer quando si preme ++space+"b"+"p"++ in modalità normale.
 
-#### Comandi di ciclazione
+: **Chiudi buffer selezionato**: `<leader>bc`
 
-- Cicla al buffer successivo: `<TAB>` passa al buffer successivo quando si preme il tasto ++tab++ in modalità normale.
-- Cicla al buffer precedente: `<S-TAB>` passa al buffer precedente quando si preme ++shift+tab++ in modalità normale.
+: Chiude il buffer selezionato quando si preme ++space+"b"+"c"++ in modalità normale.
+
+: **Cicla al buffer successivo**: `<TAB>`
+
+: Passa al buffer successivo quando si preme il tasto ++tab++ in modalità normale.
+
+: **Cicla al buffer precedente**: `<S-TAB>`
+
+: Passa al buffer precedente quando si preme ++shift+tab++ in modalità normale.
 
 Queste mappature consentono di gestire i buffer in Neovim in modo rapido e efficiente, senza dover utilizzare i comandi di Neovim standard. Ad esempio, è possibile passare al buffer successivo o precedente senza dover digitare `:bnext` o `:bprevious`.
 
 ### Mappature di Telescope
 
 Il file mappings.lua fornisce diverse mappature per Telescope che consentono di eseguire ricerche e operazioni di file in Neovim in modo efficiente. Queste mappature sono definite nella sezione telescope.nvim mappings e sono elencate di seguito:
-Comandi di ricerca
 
-- Elenco dei buffer: `<leader>fb` Questa mappatura apre la finestra di Telescope con l'elenco dei buffer aperti quando si preme ++space+"f"+"b"++ in modalità normale.
-- Ricerca di file: `<leader>ff` Questa mappatura apre la finestra di Telescope per la ricerca di file nella directory corrente quando si preme ++space+"f"+"f"++ in modalità normale.
-- Ricerca di file recenti: `<leader>fo` Questa mappatura apre la finestra di Telescope con l'elenco dei file recentemente aperti quando si preme ++space+"f"+"o"++ in modalità normale.
-- Ricerca di file frequenti: `<leader>fc` Questa mappatura apre la finestra di Telescope con l'elenco dei file più frequentemente utilizzati quando si preme ++space+"f"+"c"++ in modalità normale.
-- Ricerca all'interno del buffer corrente: `<Leader>fz` Questa mappatura apre la finestra di Telescope per la ricerca all'interno del buffer corrente quando si preme ++space+"f"+"z"++ in modalità normale.
+: **Elenco dei buffe**r: `<leader>fb`
+
+: Apre la finestra di Telescope con l'elenco dei buffer aperti quando si preme ++space+"f"+"b"++ in modalità normale.
+
+: **Ricerca di file**: `<leader>ff`
+
+: Apre la finestra di Telescope per la ricerca di file nella directory corrente quando si preme ++space+"f"+"f"++ in modalità normale.
+
+: **Ricerca di file recenti**: `<leader>fo`
+
+: Apre la finestra di Telescope con l'elenco dei file recentemente aperti quando si preme ++space+"f"+"o"++ in modalità normale.
+
+: **Ricerca di file frequenti**: `<leader>fc`
+
+: Apre la finestra di Telescope con l'elenco dei file più frequentemente utilizzati quando si preme ++space+"f"+"c"++ in modalità normale.
+
+: **Ricerca all'interno del buffer corrente**: `<Leader>fz`
+
+: Apre la finestra di Telescope per la ricerca all'interno del buffer corrente quando si preme ++space+"f"+"z"++ in modalità normale.
 
 Queste mappature consentono di eseguire ricerche e operazioni di file in Neovim in modo rapido e efficiente, senza dover utilizzare i comandi di Neovim standard. Ad esempio, è possibile aprire la finestra di Telescope per la ricerca di file senza dover digitare `:Telescope find_files`.
 
@@ -171,11 +234,17 @@ Queste mappature consentono di eseguire ricerche e operazioni di file in Neovim 
 
 Il file mappings.lua fornisce diverse mappature per trouble.nvim che consentono di gestire gli errori e le diagnostiche in Neovim in modo efficiente:
 
-#### Comandi di diagnostica
+: **Toggle diagnostica globale**: `<leader>dt`
 
-- Toggle diagnostica globale: `<leader>dt` Questa mappatura attiva o disattiva la diagnostica globale quando si preme ++space+"d"+"t"++ in modalità normale.
-- Toggle diagnostica del buffer corrente: `<leader>db` Questa mappatura attiva o disattiva la diagnostica del buffer corrente quando si preme ++space+"d"+"b"++ in modalità normale.
-- Toggle simboli del buffer corrente: `<leader>ds` Questa mappatura attiva o disattiva la visualizzazione dei simboli del buffer corrente quando si preme ++space+"d"+"s"++ in modalità normale.
+: Attiva o disattiva la diagnostica globale quando si preme ++space+"d"+"t"++ in modalità normale.
+
+: **Toggle diagnostica del buffer corrente**: `<leader>db`
+
+: Attiva o disattiva la diagnostica del buffer corrente quando si preme ++space+"d"+"b"++ in modalità normale.
+
+: **Toggle simboli del buffer corrente**: `<leader>ds`
+
+: Attiva o disattiva la visualizzazione dei simboli del buffer corrente quando si preme ++space+"d"+"s"++ in modalità normale.
 
 Queste mappature consentono di gestire gli errori e le diagnostiche in Neovim in modo rapido e efficiente, senza dover utilizzare i comandi di Neovim standard. Ad esempio, è possibile attivare o disattivare la diagnostica globale senza dover digitare `:TroubleToggle`.
 
@@ -183,139 +252,114 @@ Queste mappature consentono di gestire gli errori e le diagnostiche in Neovim in
 
 Il file mappings.lua fornisce diverse mappature per la gestione delle sessioni in Neovim utilizzando il plugin persisted.nvim:
 
-#### Comandi di sessione
+: **Seleziona sessione**: `<A-s>`
 
-- Seleziona sessione: `<A-s>` apre la finestra di selezione delle sessioni quando si preme Alt+s in modalità normale.
-- Carica ultima sessione: `<A-l>` carica l'ultima sessione salvata quando si preme ++alt+"l"++ in modalità normale.
-- Seleziona sessione (alternativa): `<leader>sS` apre la finestra di selezione delle sessioni quando si preme ++space+"s"+"S"++ in modalità normale.
-- Salva sessione corrente: `<leader>ss` salva la sessione corrente quando si preme Space+ss in modalità normale.
-- Carica ultima sessione (alternativa): `<leader>sl` carica l'ultima sessione salvata quando si preme ++space+"s"+"l"++ in modalità normale.
-- Interrompi sessione corrente: `<leader>st` interrompe la sessione corrente quando si preme ++space+"s"+"t"++ in modalità normale.
+: Apre la finestra di selezione delle sessioni quando si preme Alt+s in modalità normale.
+
+: **Carica ultima sessione**: `<A-l>`
+
+: Carica l'ultima sessione salvata quandao si preme ++alt+"l"++ in modalità normale.
+
+: **Seleziona sessione (alternativa)**: `<leader>sS`
+
+: Apre la finestra di selezione delle sessioni quando si preme ++space+"s"+"S"++ in modalità normale.
+
+: **Salva sessione corrente**: `<leader>ss`
+
+: Salva la sessione corrente quando si preme Space+ss in modalità normale.
+
+: **Carica ultima sessione (alternativa)**: `<leader>sl`
+
+: Carica l'ultima sessione salvata quando si preme ++space+"s"+"l"++ in modalità normale.
+
+: **Interrompi sessione corrente**: `<leader>st`
+
+: Interrompe la sessione corrente quando si preme ++space+"s"+"t"++ in modalità normale.
 
 Queste mappature consentono di gestire le sessioni in Neovim in modo rapido e efficiente, senza dover utilizzare i comandi di Neovim standard. Ad esempio, è possibile caricare l'ultima sessione salvata senza dover digitare `:Persisted load`.
 
-### Ricerca e Sostituzione - Nvim-Spectre
+### Ricerca e Sostituzione
 
-Il file mappings.lua fornisce diverse mappature per la ricerca e la sostituzione di testo in Neovim utilizzando il plugin Nvim-Spectre. Queste mappature sono definite nella sezione search and replace - nvim-spectre e sono elencate di seguito:
-Comandi di ricerca e sostituzione
+#### nvim-spectre
 
-    Attiva/disattiva Spectre: <leader>R Questa mappatura attiva o disattiva la modalità di ricerca e sostituzione di Spectre quando si preme Space+R in modalità normale.
-    Ricerca parola corrente: <leader>rw Questa mappatura esegue una ricerca della parola corrente nel file quando si preme Space+rw in modalità normale.
-    Ricerca parola corrente nel file: <leader>rp Questa mappatura esegue una ricerca della parola corrente nel file corrente quando si preme Space+rp in modalità normale.
+Il file mappings.lua fornisce diverse mappature per la ricerca e la sostituzione di testo in Neovim utilizzando il plugin nvim-Spectre:
 
-Queste mappature consentono di eseguire ricerche e sostituzioni di testo in Neovim in modo rapido e efficiente, senza dover utilizzare i comandi di Neovim standard. Ad esempio, è possibile eseguire una ricerca della parola corrente nel file senza dover digitare :Spectre search.
+: **Attiva/disattiva Spectre**: `<leader>R`
 
-La mappatura di Nvim-Spectre consente di utilizzare la seguente funzionalità:
+: Attiva o disattiva la modalità di ricerca e sostituzione di Spectre quando si preme ++space+"R"++ in modalità normale.
 
-    Ricerca di testo: è possibile eseguire ricerche di testo nel file corrente o in tutti i file del progetto.
-    Sostituzione di testo: è possibile sostituire il testo trovato con un nuovo testo.
-    Modalità di ricerca: è possibile selezionare la modalità di ricerca, ad esempio ricerca di parole intere o ricerca di espressioni regolari.
+: **Ricerca parola corrente**: `<leader>rw`
 
-Inoltre, Nvim-Spectre offre molte altre funzionalità avanzate, come ad esempio:
+: Esegue una ricerca della parola corrente nel file quando si preme ++space+"r"+"w"++ in modalità normale.
 
-    Ricerca in più file: è possibile eseguire ricerche in più file contemporaneamente.
-    Ricerca in directory: è possibile eseguire ricerche in directory e sottodirectory.
-    Esclusione di file: è possibile escludere file o directory dalla ricerca.
+: **Ricerca parola corrente nel file**: `<leader>rp`
 
-Ricerca e Sostituzione - Searchbox.nvim
+: Esegue una ricerca della parola corrente nel file corrente quando si preme ++space+"r"+"p"++ in modalità normale.
+
+Queste mappature consentono di eseguire ricerche e sostituzioni di testo in Neovim in modo rapido e efficiente, senza dover utilizzare i comandi di Neovim standard. Ad esempio, è possibile eseguire una ricerca della parola corrente nel file senza dover digitare `:Spectre search.`
+
+La mappatura di nvim-Spectre consente di eseguire ricerche di testo nel file corrente o in tutti i file del progetto, sostituire il testo trovato con un nuovo testo e selezionare la modalità di ricerca, ad esempio ricerca di parole intere o ricerca di espressioni regolari.
+
+Inoltre offre altre funzionalità avanzate, come ad esempio la possibilità di eseguire ricerche in più file contemporaneamente, di eseguire ricerche in directory e sottodirectory ed escludere file o directory dalla ricerca.
+
+#### searchbox.nvim
 
 Il file mappings.lua fornisce diverse mappature per la ricerca e la sostituzione di testo in Neovim utilizzando il plugin Searchbox.nvim. Queste mappature sono definite nella sezione search and replace - searchbox.nvim e sono elencate di seguito:
 Comandi di ricerca e sostituzione
 
-    Ricerca incrementale: <leader>si Questa mappatura esegue una ricerca incrementale del testo quando si preme Space+si in modalità normale.
-    Ricerca di corrispondenze: <leader>sa Questa mappatura esegue una ricerca di corrispondenze del testo quando si preme Space+sa in modalità normale.
-    Sostituzione di testo: <leader>sr Questa mappatura esegue una sostituzione di testo quando si preme Space+sr in modalità normale.
+- Ricerca incrementale: `<leader>si` esegue una ricerca incrementale del testo quando si preme ++space+"s"+"i"++ in modalità normale.
+- Ricerca di corrispondenze: `<leader>sa` esegue una ricerca di corrispondenze del testo quando si preme ++space+"s"+"a"++ in modalità normale.
+- Sostituzione di testo: `<leader>sr` esegue una sostituzione di testo quando si preme ++space+"s"+"r"++ in modalità normale.
 
-Queste mappature consentono di eseguire ricerche e sostituzioni di testo in Neovim in modo rapido e efficiente, senza dover utilizzare i comandi di Neovim standard. Ad esempio, è possibile eseguire una ricerca incrementale del testo senza dover digitare :Searchbox incsearch.
+Queste mappature consentono di eseguire ricerche e sostituzioni di testo in Neovim in modo rapido e efficiente, senza dover utilizzare i comandi di Neovim standard. Ad esempio, è possibile eseguire una ricerca incrementale del testo senza dover digitare `:Searchbox incsearch`.
 
-La mappatura di Searchbox.nvim consente di utilizzare la seguente funzionalità:
+### Mappature di Diffview
 
-    Ricerca di testo: è possibile eseguire ricerche di testo nel file corrente o in tutti i file del progetto.
-    Sostituzione di testo: è possibile sostituire il testo trovato con un nuovo testo.
-    Modalità di ricerca: è possibile selezionare la modalità di ricerca, ad esempio ricerca di parole intere o ricerca di espressioni regolari.
+Il file mappings.lua fornisce diverse mappature per la visualizzazione delle differenze tra file in Neovim utilizzando il plugin diffview.nvim:
 
-Inoltre, Searchbox.nvim offre molte altre funzionalità avanzate, come ad esempio:
+- Apri Diffview: `<leader>dv` Questa mappatura apre la finestra di Diffview per visualizzare le differenze tra il file corrente e la versione precedente quando si preme ++space+"d"+"v"++ in modalità normale.
+- Apri storia del file: `<leader>dh` Questa mappatura apre la finestra di Diffview per visualizzare la storia del file corrente quando si preme ++space+"d"+"h"++ in modalità normale.
+- Apri storia del buffer: `<leader>df` Questa mappatura apre la finestra di Diffview per visualizzare la storia del buffer corrente quando si preme ++space+"d"+"f"++ in modalità normale.
+- Chiudi Diffview: `<leader>dc` Questa mappatura chiude la finestra di Diffview quando si preme ++space+"d"+"c"++ in modalità normale.
+- Confronta con HEAD: `<leader>dH` Questa mappatura apre la finestra di Diffview per confrontare il file corrente con la versione HEAD quando si preme +space+"d"+"H"++ in modalità normale.
 
-    Ricerca in più file: è possibile eseguire ricerche in più file contemporaneamente.
-    Ricerca in directory: è possibile eseguire ricerche in directory e sottodirectory.
-    Esclusione di file: è possibile escludere file o directory dalla ricerca.
-    Opzioni di ricerca: è possibile personalizzare le opzioni di ricerca, ad esempio la sensibilità al caso o la ricerca di parole intere.
+Queste mappature consentono di visualizzare le differenze tra file e buffer in Neovim in modo rapido e efficiente, senza dover utilizzare i comandi di Neovim standard. Ad esempio, è possibile aprire la finestra di Diffview per visualizzare le differenze tra il file corrente e la versione precedente senza dover digitare `:DiffviewOpen`.
 
-Searchbox.nvim è un plugin molto potente e flessibile per la ricerca e la sostituzione di testo in Neovim, e può essere utilizzato in combinazione con altri plugin per migliorare la produttività e l'efficienza dell'editor.
+### Mappature di Git
 
-Mappature di Diffview
+Il file mappings.lua fornisce diverse mappature per la gestione di Git in Neovim:
 
-Il file mappings.lua fornisce diverse mappature per la visualizzazione delle differenze tra file in Neovim utilizzando il plugin Diffview.nvim. Queste mappature sono definite nella sezione diffview.nvim mappings e sono elencate di seguito:
-Comandi di diff
+- Apri Neogit: `<leader>gm` apre Neogit, un'interfaccia utente per Git, quando si preme ++space+"g"+"m"++ in modalità normale.
+- Apri Neogit per il buffer corrente: `<leader>gM` apre Neogit per il buffer corrente quando si preme ++space+"g"+"M"++ in modalità normale.
+- Visualizza la storia dei commit: `<leader>gh` visualizza la storia dei commit del repository quando si preme ++space+"g"+"h"++ in modalità normale.
+- Visualizza la storia dei commit del buffer corrente: `<leader>gb` visualizza la storia dei commit del buffer corrente quando si preme +space+"g"+"b"++ in modalità normale.
 
-    Apri Diffview: <leader>dv Questa mappatura apre la finestra di Diffview per visualizzare le differenze tra il file corrente e la versione precedente quando si preme Space+dv in modalità normale.
-    Apri storia del file: <leader>dh Questa mappatura apre la finestra di Diffview per visualizzare la storia del file corrente quando si preme Space+dh in modalità normale.
-    Apri storia del buffer: <leader>df Questa mappatura apre la finestra di Diffview per visualizzare la storia del buffer corrente quando si preme Space+df in modalità normale.
-    Chiudi Diffview: <leader>dc Questa mappatura chiude la finestra di Diffview quando si preme Space+dc in modalità normale.
-    Confronta con HEAD: <leader>dH Questa mappatura apre la finestra di Diffview per confrontare il file corrente con la versione HEAD quando si preme Space+dH in modalità normale.
+Queste mappature consentono di gestire Git in Neovim in modo rapido e efficiente, senza dover utilizzare i comandi di Neovim standard. Ad esempio, è possibile aprire Neogit senza dover digitare `:Neogit`.
 
-Queste mappature consentono di visualizzare le differenze tra file e buffer in Neovim in modo rapido e efficiente, senza dover utilizzare i comandi di Neovim standard. Ad esempio, è possibile aprire la finestra di Diffview per visualizzare le differenze tra il file corrente e la versione precedente senza dover digitare :DiffviewOpen.
+La mappatura di Git consente di gestire i repository Git direttamente all'interno di Neovim, visualizzare la storia dei commit dei repository e dei buffer ed eseguire comandi Git direttamente da Neovim.
 
-La mappatura di Diffview.nvim consente di utilizzare la seguente funzionalità:
+### Mappature per il Terminale
 
-    Visualizzazione delle differenze: è possibile visualizzare le differenze tra file e buffer in una finestra separata.
-    Navigazione tra le differenze: è possibile navigare tra le differenze utilizzando i tasti di navigazione standard di Neovim.
-    Confronto con versioni precedenti: è possibile confrontare il file corrente con versioni precedenti utilizzando la finestra di Diffview.
-
-Inoltre, Diffview.nvim offre molte altre funzionalità avanzate, come ad esempio:
-
-    Supporto per Git: è possibile utilizzare Diffview.nvim con Git per visualizzare le differenze tra commit e branch.
-    Supporto per altri sistemi di controllo versione: è possibile utilizzare Diffview.nvim con altri sistemi di controllo versione, come ad esempio Mercurial e Subversion.
-    Personalizzazione della finestra di Diffview: è possibile personalizzare la finestra di Diffview utilizzando le opzioni di configurazione di Neovim.
-
-Mappature di Git
-
-Il file mappings.lua fornisce diverse mappature per la gestione di Git in Neovim. Queste mappature sono definite nella sezione git mappings e sono elencate di seguito:
-Comandi di Git
-
-    Apri Neogit: <leader>gm Questa mappatura apre Neogit, un'interfaccia utente per Git, quando si preme Space+gm in modalità normale.
-    Apri Neogit per il buffer corrente: <leader>gM Questa mappatura apre Neogit per il buffer corrente quando si preme Space+gM in modalità normale.
-    Visualizza la storia dei commit: <leader>gh Questa mappatura visualizza la storia dei commit del repository quando si preme Space+gh in modalità normale.
-    Visualizza la storia dei commit del buffer corrente: <leader>gb Questa mappatura visualizza la storia dei commit del buffer corrente quando si preme Space+gb in modalità normale.
-
-Queste mappature consentono di gestire Git in Neovim in modo rapido e efficiente, senza dover utilizzare i comandi di Neovim standard. Ad esempio, è possibile aprire Neogit senza dover digitare :Neogit.
-
-La mappatura di Git consente di utilizzare la seguente funzionalità:
-
-    Gestione dei repository: è possibile gestire i repository Git direttamente all'interno di Neovim.
-    Visualizzazione della storia dei commit: è possibile visualizzare la storia dei commit dei repository e dei buffer.
-    Esecuzione di comandi Git: è possibile eseguire comandi Git direttamente all'interno di Neovim.
-
-Mappature per il Terminale
-
-Le mappature per il terminale sono fondamentali per utilizzare Neovim in modo efficiente. Il file mappings.lua fornisce diverse mappature per il terminale che consentono di gestire il terminale in modo comodo. Queste mappature sono definite nella sezione "Toggle terminal mappings" e sono elencate di seguito:
-Mappature per il Terminale
+Le mappature per il terminale sono fondamentali per utilizzare Neovim in modo efficiente. Il file mappings.lua fornisce diverse mappature per il terminale che consentono di gestire il terminale in modo comodo:
 
 Il terminale è uno strumento potente in Neovim che consente di eseguire comandi del sistema operativo all'interno dell'editor. Per utilizzare il terminale in modo efficiente, è necessario conoscere le mappature seguenti:
 
-    Toggle Terminale Orizzontale: <a-t> Questa mappatura consente di aprire e chiudere il terminale in modalità orizzontale. Quando si preme Alt+t in modalità normale, inserimento o terminale, il terminale si apre o chiude in modalità orizzontale.
-    Toggle Terminale Verticale: <a-v> Questa mappatura consente di aprire e chiudere il terminale in modalità verticale. Quando si preme Alt+v in modalità normale, inserimento o terminale, il terminale si apre o chiude in modalità verticale.
-    Toggle Terminale Float: <a-f> Questa mappatura consente di aprire e chiudere il terminale in modalità float. Quando si preme Alt+f in modalità normale, inserimento o terminale, il terminale si apre o chiude in modalità float.
-    Esci dalla Modalità Terminale: jk Questa mappatura consente di uscire dalla modalità terminale e tornare alla modalità normale. Quando si preme "jk" in modalità terminale, si esce dalla modalità terminale e si torna alla modalità normale.
+- Toggle Terminale Orizzontale: `<a-t>` Questa mappatura consente di aprire e chiudere il terminale in modalità orizzontale. Quando si preme ++alt+"t"++ in modalità normale, inserimento o terminale, il terminale si apre o chiude in modalità orizzontale.
+- Toggle Terminale Verticale: `<a-v>` Questa mappatura consente di aprire e chiudere il terminale in modalità verticale. Quando si preme ++alt+"v"++ in modalità normale, inserimento o terminale, il terminale si apre o chiude in modalità verticale.
+- Toggle Terminale Float: `<a-f>` Questa mappatura consente di aprire e chiudere il terminale in modalità float. Quando si preme ++alt+"f"++ in modalità normale, inserimento o terminale, il terminale si apre o chiude in modalità float.
 
-Utilizzo delle Mappature del Terminale
+Per utilizzare le mappature del terminale, è sufficiente premere la combinazione di tasti corrispondente alla mappatura desiderata. Ad esempio, per aprire il terminale in modalità orizzontale, è sufficiente premere ++alt+"t"++ in modalità normale.
 
-Per utilizzare le mappature del terminale, è sufficiente premere la combinazione di tasti corrispondente alla mappatura desiderata. Ad esempio, per aprire il terminale in modalità orizzontale, è sufficiente premere Alt+t in modalità normale.
-Esempio di Utilizzo
+Supponendo di voler eseguire un comando del sistema operativo all'interno di Neovim è possibile utilizzare la mappatura per aprire il terminale in modalità orizzontale. Premendo ++alt+"t"++ in modalità normale e il terminale si apre in modalità orizzontale.
 
-Supponiamo di voler eseguire un comando del sistema operativo all'interno di Neovim. Per fare ciò, possiamo utilizzare la mappatura per aprire il terminale in modalità orizzontale. Premiamo Alt+t in modalità normale e il terminale si apre in modalità orizzontale. A questo punto, possiamo eseguire il comando del sistema operativo desiderato.
+### Mappature per fidget.nvim
 
-In conclusione, le mappature per il terminale sono fondamentali per utilizzare Neovim in modo efficiente. Conoscere queste mappature consente di gestire il terminale in modo comodo e di eseguire comandi del sistema operativo all'interno dell
+Fidget.nvim è un'estensione per Neovim che fornisce una visualizzazione dei messaggi di LSP (Language Server Protocol) in tempo reale:
 
-Mappature per Fidget.nvim
+- Visualizza Messaggi Fidget: `<leader>lg` Questa mappatura consente di visualizzare i messaggi di Fidget.nvim. Quando si preme ++space+"l"+"g"++ in modalità normale, si apre una finestra con i messaggi di fidget.nvim.
 
-Fidget.nvim è un'estensione per Neovim che fornisce una visualizzazione dei messaggi di LSP (Language Server Protocol) in tempo reale. Per utilizzare Fidget.nvim in modo efficiente, è necessario conoscere la mappatura seguente:
+## Conclusioni
 
-    Visualizza Messaggi Fidget: <leader>lg Questa mappatura consente di visualizzare i messaggi di Fidget.nvim. Quando si preme Space+lg in modalità normale, si apre una finestra con i messaggi di Fidget.nvim.
+In conclusione, le mappature presentate in questo documento rappresentano una raccolta completa e personalizzata di comandi e scorciatoie per migliorare l'esperienza di utilizzo dell'editor di codice. La funzione `editor.remap()` è stata utilizzata in modo estensivo per costruire queste mappature, offrendo una grande flessibilità e personalizzazione nella definizione di comandi personalizzati.
 
-Utilizzo delle Mappature di Fidget.nvim
-
-Per utilizzare la mappatura di Fidget.nvim, è sufficiente premere la combinazione di tasti corrispondente alla mappatura desiderata. Ad esempio, per visualizzare i messaggi di Fidget.nvim, è sufficiente premere Space+lg in modalità normale.
-Esempio di Utilizzo
-
-Supponiamo di voler visualizzare i messaggi di LSP per il file corrente. Per fare ciò, possiamo utilizzare la mappatura per visualizzare i messaggi di Fidget.nvim. Premiamo Space+lg in modalità normale e si apre una finestra con i messaggi di Fidget.nvim. A questo punto, possiamo visualizzare i messaggi di LSP per il file corrente e diagnosticare eventuali problemi.
+La funzione `editor.remap()` consente di ridefinire i comandi esistenti o di crearne di nuovi, assegnando loro azioni specifiche e descrizioni personalizzate. Ciò permette di creare una raccolta di mappature che coprono una vasta gamma di funzionalità, dalle operazioni di base come la salvataggio e la chiusura dei buffer, alle funzionalità più avanzate come la gestione dei file, la ricerca e la sostituzione del testo, e la gestione dei commit Git.
