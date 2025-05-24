@@ -1,5 +1,5 @@
 ---
-title: Neovim Options
+title: Options
 author: Franco Colussi
 contributors: Steve Spencer
 tags:
