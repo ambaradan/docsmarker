@@ -84,7 +84,7 @@ In questo caso la variabile editor viene utilizzata per accedere a due funzioni 
 
 ### Mappature per i buffer
 
-Il file mappings.lua fornisce diverse mappature dei buffer che consentono di gestire i buffer in modo efficiente:
+Queste mappature personalizzate aiutano a ridurre il tempo speso nella gestione dei buffer e a migliorare la produttività complessiva.
 
 : **Salvare il buffer corrente**: `<C-s>`
 
@@ -110,7 +110,7 @@ Queste mappature consentono di gestire i buffer in Neovim in modo rapido e effic
 
 ### Mappature dell'Editor
 
-Il file mappings.lua fornisce diverse mappature dell'editor che consentono di gestire l'editor in Neovim in modo efficiente:
+Le mappature definite nella sezione "Editor mappings" rappresentano un insieme di comandi personalizzati per migliorare l'esperienza di editing nel proprio ambiente di lavoro. Queste mappature consentono di eseguire operazioni come la formattazione del testo, la gestione dei buffer, la ricerca e la sostituzione di testo, nonché l'accesso a funzionalità avanzate come la visualizzazione della diagnostica e la gestione dei simboli.
 
 : **Quit editor**: `<leader>q`
 
@@ -166,7 +166,7 @@ Il file mappings.lua fornisce diverse mappature dell'editor che consentono di ge
 
 ### Mappature di Neo-Tree
 
-Il file mappings.lua fornisce diverse mappature per *neo-tree.nvim* che consentono di gestire il file system in Neovim in modo efficiente. Queste mappature sono definite nella sezione neo-tree.nvim mappings e sono elencate di seguito:
+Queste mappature personalizzate aiutano a sfruttare al meglio le funzionalità di Neo-tree, migliorando la produttività e semplificando la gestione dei file e delle directory all'interno dell'editor. Ciò consente di lavorare in modo più efficiente e organizzato, con una visibilità completa sulla struttura dei file e delle directory del proprio progetto.
 
 : **Apri Neo-Tree in floating window**: `.` (comma)
 
@@ -184,11 +184,11 @@ Queste mappature consentono di accedere rapidamente alle funzionalità di Neo-Tr
 
 ### Mappature di Bufferline
 
-Il file mappings.lua fornisce diverse mappature per bufferline.nvim che consentono di gestire i buffer in Neovim in modo efficiente:
+Queste mappature personalizzate aiutano a gestire i buffer in modo più rapido e intuitivo, riducendo il tempo speso nella navigazione e nella gestione dei buffer e consentendo di concentrarsi maggiormente sul lavoro di editing e sviluppo. Ciò migliora la produttività e la gestione dello spazio di lavoro, rendendo l'editor più efficiente e facile da utilizzare.
 
 : **Seleziona buffer**: `<leader>bp`
 
-: Apre la finestra di selezione dei buffer quando si preme ++space+"b"+"p"++ in modalità normale.
+: Permette la selezione dei buffer quando si preme ++space+"b"+"p"++ in modalità normale.
 
 : **Chiudi buffer selezionato**: `<leader>bc`
 
@@ -206,7 +206,7 @@ Queste mappature consentono di gestire i buffer in Neovim in modo rapido e effic
 
 ### Mappature di Telescope
 
-Il file mappings.lua fornisce diverse mappature per Telescope che consentono di eseguire ricerche e operazioni di file in Neovim in modo efficiente. Queste mappature sono definite nella sezione telescope.nvim mappings e sono elencate di seguito:
+Queste mappature personalizzate aiutano a sfruttare al meglio le funzionalità di Telescope, migliorando la produttività e semplificando la gestione dei file e della navigazione all'interno dell'editor. Ciò consente di lavorare in modo più efficiente e organizzato, con una visibilità completa sulla struttura dei file e delle directory del proprio progetto.
 
 : **Elenco dei buffe**r: `<leader>fb`
 
@@ -232,7 +232,7 @@ Queste mappature consentono di eseguire ricerche e operazioni di file in Neovim 
 
 ### Mappature di Trouble
 
-Il file mappings.lua fornisce diverse mappature per trouble.nvim che consentono di gestire gli errori e le diagnostiche in Neovim in modo efficiente:
+Queste mappature personalizzate aiutano a gestire i messaggi di errore e di avviso in modo più efficiente, riducendo il tempo speso nella risoluzione dei problemi e migliorando la produttività complessiva. Ciò consente di lavorare in modo più fluido e concentrato, con una visibilità completa sui problemi presenti nel codice e una gestione più efficace degli errori e degli avvertimenti.
 
 : **Toggle diagnostica globale**: `<leader>dt`
 
@@ -250,7 +250,7 @@ Queste mappature consentono di gestire gli errori e le diagnostiche in Neovim in
 
 ### Mappature di persisted.nvim
 
-Il file mappings.lua fornisce diverse mappature per la gestione delle sessioni in Neovim utilizzando il plugin persisted.nvim:
+Queste mappature personalizzate aiutano a gestire le sessioni di lavoro in modo più efficiente, permettendo di riprendere il lavoro da dove si era interrotto e di mantenere lo stato dell'editor tra le diverse sessioni di lavoro. Ciò consente di lavorare in modo più organizzato e produttivo, con la possibilità di riprendere il lavoro in qualsiasi momento e di mantenere la continuità delle attività.
 
 : **Seleziona sessione**: `<A-s>`
 
@@ -282,7 +282,7 @@ Queste mappature consentono di gestire le sessioni in Neovim in modo rapido e ef
 
 #### nvim-spectre
 
-Il file mappings.lua fornisce diverse mappature per la ricerca e la sostituzione di testo in Neovim utilizzando il plugin nvim-Spectre:
+Queste mappature personalizzate aiutano a semplificare le operazioni di ricerca e sostituzione, riducendo il tempo speso nella ricerca di testo. Ciò consente di lavorare in modo più efficiente e preciso, con la possibilità di eseguire ricerche e sostituzioni in modo rapido e personalizzato, e di mantenere il controllo sul testo e sulla sua formattazione.
 
 : **Attiva/disattiva Spectre**: `<leader>R`
 
@@ -315,7 +315,7 @@ Queste mappature consentono di eseguire ricerche e sostituzioni di testo in Neov
 
 ### Mappature di Diffview
 
-Il file mappings.lua fornisce diverse mappature per la visualizzazione delle differenze tra file in Neovim utilizzando il plugin diffview.nvim:
+Queste mappature personalizzate aiutano a semplificare le operazioni di confronto e visualizzazione delle differenze, con la possibilità di visualizzare e gestire le differenze tra file in modo rapido e personalizzato, e di mantenere il controllo sulle modifiche e sulla storia delle versioni.
 
 - Apri Diffview: `<leader>dv` Questa mappatura apre la finestra di Diffview per visualizzare le differenze tra il file corrente e la versione precedente quando si preme ++space+"d"+"v"++ in modalità normale.
 - Apri storia del file: `<leader>dh` Questa mappatura apre la finestra di Diffview per visualizzare la storia del file corrente quando si preme ++space+"d"+"h"++ in modalità normale.
