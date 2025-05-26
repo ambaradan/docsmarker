@@ -1,5 +1,6 @@
 ---
 nav:
+    - ... | index*.md
     - ... | marksman*.md
     - ... | vale*.md
     - ... | markdownlint*.md
