@@ -1,5 +1,5 @@
 ---
-title: Autocommands
+title: Autocmds
 author: Franco Colussi
 contributors: Steve Spencer
 tags:
@@ -11,79 +11,91 @@ tags:
 
 ## Introduzione
 
-I comandi automatici (*autocmds*) in Neovim sono un meccanismo per definire comportamenti personalizzati e azioni automatizzate che si attivano in risposta a eventi specifici all'interno dell'editor. Questi comandi guidati dagli eventi consentono di creare esperienze di editing altamente personalizzate e dinamiche, eseguendo funzioni o azioni predefinite quando vengono soddisfatte particolari condizioni, forniscono un modo per estendere e personalizzare le funzionalità di Neovim al di là delle impostazioni predefinite.
+Neovim offre una vasta gamma di funzionalità per personalizzare e automatizzare il proprio flusso di lavoro. Tra queste, gli autocmds (abbreviazione di "auto-commands") sono una delle caratteristiche più potenti e versatili. In questo capitolo, esploreremo le funzionalità fornite dagli autocmds di Rocksmarker e come sono utilizzati per migliorare la produttività e l'esperienza di utilizzo dell'editor.
 
-Possono essere utilizzati per eseguire automaticamente operazioni come la formattazione del codice, l'impostazione di regole di indentazione specifiche, l'applicazione dell'evidenziazione della sintassi o l'esecuzione di operazioni complesse quando i file vengono aperti, salvati o modificati. Questa flessibilità consente di creare flussi di lavoro sofisticati che si adattano a diversi tipi di file, strutture di progetto o preferenze personali.
+### Cos'è un Autocmd?
 
-I comandi automatici sono implementati utilizzando il sistema di gestione degli eventi di Lua in Neovim, consentendo una configurazione più concisa e performante rispetto al tradizionale Vimscript. Possono essere concatenati, eseguiti in modo condizionale e integrati con altre API di Neovim, fornendo un meccanismo robusto per la creazione di comportamenti di editing complessi e intelligenti che si adattano a diversi linguaggi di programmazione, tipi di progetto e requisiti di flusso di lavoro individuali.
+Un autocmd è un comando che viene eseguito automaticamente quando si verifica un determinato evento all'interno di Neovim. Gli eventi possono variare da azioni come l'apertura di un file, la modifica di un buffer, la chiusura di una finestra, fino a eventi più specifici come l'inserimento di un carattere o la pressione di un tasto.
 
-### Sintassi
+### Funzionalità degli Autocmds
 
-La struttura di base di un autocomando è progettata per essere flessibile e intuitiva, consente la definizione di comportamenti personalizzati attivati da eventi specifici. La sintassi fondamentale ruota attorno alla manifestazione di un evento, di un pattern opzionale per la corrispondenza di file o buffer e dell'azione da eseguire quando si verifica l'evento.
+Gli autocmds in Neovim offrono una serie di funzionalità che possono essere utilizzate per personalizzare e automatizzare il proprio flusso di lavoro. Alcune delle funzionalità più importanti includono:
 
-I componenti fondamentali di un autocomando includono tipicamente il tipo di evento, che rappresenta il momento e l'azione specifica che attiva il comando.  
-Gli eventi possono andare da azioni legate ai file, come l'apertura, il salvataggio o la creazione di un nuovo buffer, a interazioni più complesse, come i movimenti del cursore, i cambi di modalità o i trigger specifici dei plugin. L'evento è il meccanismo principale per rilevare quando un'azione particolare deve essere avviata.
+: **Esecuzione automatica di comandi**
 
-L'azione di un autocomando definisce il comando o la funzione da eseguire quando si verifica l'evento specificato. Nella configurazione Lua di Neovim, questo comporta tipicamente la chiamata di una funzione, l'impostazione di opzioni specifiche del buffer o l'esecuzione di trasformazioni complesse. L'azione può essere un semplice comando di una riga o una funzione più elaborata che implementa una logica sofisticata basata sul contesto di editing corrente.
+: Gli autocmds possono essere utilizzati per eseguire comandi automaticamente quando si verifica un determinato evento.
 
-La sintassi base è la seguente:
+: **Personalizzazione dell'interfaccia**
+
+: Gli autocmds possono essere utilizzati per personalizzare l'interfaccia di Neovim, ad esempio modificando la visualizzazione dei buffer, le impostazioni della finestra, ecc.
+
+: **Gestione dei file e dei buffer**
+
+: Gli autocmds possono essere utilizzati per gestire i file e i buffer, ad esempio caricando automaticamente un file quando si apre un buffer, o salvando un file quando si chiude un buffer.
+
+: **Integrazione con altri strumenti**
+
+: Gli autocmds possono essere utilizzati per integrare Neovim con altri strumenti e applicazioni, ad esempio eseguendo comandi esterni o interagendo con altri editor.
+
+### Vantaggi degli Autocmds
+
+Gli autocmds offrono una serie di vantaggi rispetto ad altri metodi di personalizzazione e automazione in Neovim.
+
+: **Flessibilità**
+
+: Gli autocmds possono essere utilizzati per eseguire una vasta gamma di comandi e azioni, rendendoli estremamente flessibili e personalizzabili.
+
+: **Automazione**
+
+: Gli autocmds possono essere utilizzati per automatizzare molti compiti ripetitivi, liberando il tempo dell'utente per concentrarsi su attività più importanti.
+
+: **Integrazione**
+
+: Gli autocmds possono essere utilizzati per integrare Neovim con altri strumenti e applicazioni, migliorando la produttività e l'efficienza.
+
+## Autocmds in Rocksmarker
+
+Il file *commands.lua* svolge un ruolo importante nella configurazione dell'ambiente di editing di Rocksmarker. Questo file contiene una serie di comandi e impostazioni che migliorano l'esperienza dell'utente, automatizzando diverse operazioni e personalizzando il comportamento dell'editor.
+
+Il file commands.lua contiene diverse sezioni che coprono aspetti diversi della configurazione di Neovim. Le principali aree di interesse sono:
+
+: **Gruppi di autocmd**
+
+: Vengono definiti gruppi di autocmd per gestire eventi specifici, come il riavvio dell'editor o la chiusura di una finestra del terminale.
+
+: **Gestione dei file**
+
+: Vengono definite regole per il riavvio dei file quando l'editor riprende il focus o quando si verificano interazioni con il terminale.
+
+: **Chiusura di file specifici**
+
+: Vengono definite scorciatoie per chiudere rapidamente determinati tipi di file, come ad esempio i buffer di aiuto o le finestre di notifica.
+
+: **Evidenziazione del testo**
+
+: Viene attivata l'evidenziazione del testo dopo l'operazione di copia per fornire un feedback visivo all'utente.
+
+: **Gestione della finestra di aiuto**
+
+: Vengono definite regole per aprire le pagine di aiuto in una finestra verticale e equalizzare le dimensioni delle finestre.
+
+### Gruppo RocksmarkerSet
+
+La creazione di un gruppo di autocmd con un nome univoco e la possibilità di svuotarlo offre una grande flessibilità e facilità di gestione per le azioni automatiche in Neovim.
 
 ```lua
--- Basic Autocmd Template
-vim.api.nvim_create_autocmd({event}, {
-    desc = "Description of autocmd purpose",
-    pattern = {pattern},
-    group = vim.api.nvim_create_augroup("group_name", { clear = true }),
-    callback = function(args)
-        -- Your code here
-    end
-})
+local augroup = vim.api.nvim_create_augroup("RocksmarkerSet", { clear = true })
 ```
 
-La funzione *vim.api.nvim_create_autocmd()* è fornita dalle API Lua di Neovim per creare autocomandi personalizzati. Questa funzione fornisce un approccio pulito alla definizione di comportamenti guidati da eventi all'interno dell'editor. Richiede due argomenti principali: il tipo di evento e una tabella di configurazione che specifica i parametri aggiuntivi.
+Questa riga di codice crea un nuovo gruppo di autocmd chiamato **RocksmarkerSet** e lo svuota se già esiste, in modo da poter aggiungere nuovi autocmd senza conflitti con quelli esistenti.  
+Il gruppo di autocmd viene quindi assegnato alla variabile **augroup**, che può essere utilizzata successivamente per aggiungere nuovi autocmd al gruppo.  
+Questo consente di mantenere una struttura organizzata e facile da gestire per le azioni automatiche all'interno di Neovim.
 
-Il primo argomento rappresenta l'evento o l'array di eventi che attiveranno l'autocomando. Questi eventi possono essere azioni specifiche come “BufEnter”, “FileType”, “InsertLeave” o eventi multipli passati come tabella. Questa flessibilità consente di creare comportamenti complessi, attivati da più eventi, che rispondono alle varie interazioni dell'editor.
+#### Autocmd per il riavvio dei file
 
-La tabella di configurazione contiene le chiavi opzionali. La chiave “pattern” consente di interagire con tipi di file specifici, estensioni di file o caratteristiche del buffer. Questo permette di controllare con precisione quando l'autocomando deve essere eseguito. Ad esempio, si può impostare un autocomando perché venga applicato solo ai buffer di terminale o a specifiche strutture di directory.
+Questo autocmd è particolarmente utile per garantire che il contenuto dei file aperti in Neovim sia sempre aggiornato, anche quando vengono apportate modifiche esterne. Ciò aiuta a prevenire situazioni in cui l'utente potrebbe lavorare su una versione obsoleta di un file, riducendo il rischio di perdita di dati o di sovrascrittura di modifiche.
 
-La funzione “callback” è il luogo in cui viene implementata la logica effettiva dell'autocomando. Questa funzione contiene il codice che verrà eseguito quando si verifica l'evento specificato. Fornisce una sandbox per implementare comportamenti personalizzati, come la formattazione, l'impostazione di opzioni specifiche del buffer o l'esecuzione di trasformazioni complesse.
-
-Le altre chiavi opzionali sono usate per organizzare e gestire gli autocomandi ("group") e per fornire una descrizione per l'autocomando specifico ("desc"), migliorando in questo modo la leggibilità e la manutenibilità del codice.
-
-### Augroups
-
-Un gruppo (autogruppo) è un meccanismo per organizzare e gestire autocomandi correlati all'interno dell'ambiente di scripting dell'editor. Serve per raggruppare più comandi guidati da eventi sotto un'unica collezione, consentendo la creazione di comportamenti dell'editor più modulari e gestibili. Utilizzando l'opzione clear = true, gli autogruppi assicurano che i comandi esistenti vengano rimossi prima di aggiungerne di nuovi, evitando potenziali conflitti o eventi duplicati.
-
-La struttura base è la seguente:
-
-```lua
--- Create the augroup
-local augroup = vim.api.nvim_create_augroup("MyCustomGroup", { clear = true })
--- Define an autocommand within the group
-vim.api.nvim_create_autocmd("{event}", {
-    group = augroup,
-    pattern = "{pattern}",
-    callback = function()
-        -- Your code here
-    end
-})
-```
-
-Il frammento di codice mostra la creazione di un autogruppo, con la successiva  creazione di un autocomando. Utilizzando *vim.api.nvim_create_augroup()*, viene creato un nuovo autogruppo denominato “*MyCustomGroup*” con l'opzione *clear = true*, che assicura la rimozione di qualsiasi comando esistente nel gruppo prima di crearne di nuovi.
-
-## Comandi della configurazione
-
-La configurazione degli autocomandi in Rocksmarker sono definiti nel file `lua/commands.lua` ed inizia con la configurazione del gruppo:
-
-```lua
-local augroup = vim.api.nvim_create_augroup(“RocksmarkerSet”, { clear = true })
-```
-
-La riga di codice è un'istruzione Lua utilizzata per definire un gruppo locale di autocomandi. Questo gruppo, chiamato “RocksmarkerSet”, serve a organizzare gli autocomandi correlati in un'unità coesa per facilitarne la gestione. Includendo l'opzione *{ clear = true }*, il codice assicura che tutti gli autocomandi esistenti all'interno di questo gruppo vengano rimossi prima di aggiungerne di nuovi, evitando potenziali conflitti o duplicazioni.
-
-### `checktime`
-
-```lua
+```lua title="Reload files"
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
  group = augroup,
  desc = "Reload files when focus is regained or terminal interactions occur",
@@ -95,12 +107,29 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 })
 ```
 
-Questo autocomando viene attivato da tre eventi specifici: quando la finestra ottiene il focus, quando un terminale si chiude e quando l'utente lascia una sessione di terminale. Fa parte del gruppo di autocomandi augroup, definito in precedenza, che organizza le funzionalità correlate.  
-Lo scopo di questo autocomando è ricaricare i file nel buffer ogni volta che l'utente riprende il focus o interagisce con un terminale. La funzione di callback controlla se il tipo di buffer corrente non è una riga di comando (“c”); se è vero, esegue il comando checktime, che controlla se il file è stato modificato esternamente e lo ricarica se necessario. Questa funzionalità garantisce che venga sempre visualizzata la versione più aggiornata di un file, in particolare dopo le interazioni con il terminale che possono influenzare il contenuto del file.
+Questo autocmd viene attivato da tre eventi diversi:
 
-### `close_with_q`
+: `FocusGained`
 
-```lua
+: Quando l'editor Neovim riprende il focus dopo essere stato minimizzato o coperto da un'altra finestra.
+
+: `TermClose`
+
+: Quando una finestra del terminale all'interno di Neovim viene chiusa.
+
+: `TermLeave`
+
+: Quando l'utente esce dalla modalità del terminale all'interno di Neovim.
+
+Quando uno di questi eventi si verifica, l'autocmd esegue la funzione di *callback* definita. All'interno di questa funzione, viene controllato se il tipo di buffer (**buftype**) non è "**c**", che indica un buffer di comando. Se la condizione è vera, l'autocmd esegue il comando **checktime**.
+
+Il comando *checktime* verifica se il file aperto in Neovim è stato modificato esternamente (ad esempio, da un altro programma) e, in caso affermativo, riavvia il file all'interno di Neovim per riflettere le modifiche più recenti.
+
+#### Chiusura rapida di determinati Tipi di File
+
+L'autocmd per la chiusura rapida di determinati tipi di file è una funzionalità utile che semplifica la gestione dei file e dei buffer in Neovim, migliorando l'esperienza dell'utente e aumentando la produttività.
+
+```lua title="Close some filetypes"
 vim.api.nvim_create_autocmd("FileType", {
  group = augroup,
  desc = "Allow closing specific utility buffers with 'q' key",
@@ -122,11 +151,33 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 ```
 
-Questo autocomando migliora l'esperienza utente creando un comportamento coerente per la chiusura di specifici buffer di utilità utilizzando il tasto ++"q"++. L'autocomando viene attivato per un elenco predefinito di tipi di buffer, tra cui schermate di aiuto, finestre di correzione rapida, notifiche, pannelli informativi LSP e altri buffer di utilità. Quando questi tipi di buffer vengono caricati, lo script imposta automaticamente due comportamenti chiave: in primo luogo, contrassegna il buffer come nascosto (impedendo che appaia negli elenchi dei buffer) e, in secondo luogo, mappa il tasto 'q' per chiudere immediatamente il buffer corrente. Ciò fornisce un metodo per chiudere rapidamente le finestre di utilità in diversi contesti di Neovim, migliorando la navigazione e riducendo la necessità di combinazioni multiple di tasti per uscire da buffer specializzati.
+Questo autocmd si attiva per i seguenti tipi di file:
 
-### `highlight_yank`
+- PlenaryTestPopup
+- help
+- lspinfo
+- man
+- notify
+- qf
+- startuptime
+- checkhealth
+- spectre_panel
 
-```lua
+Quando si apre un file di uno dei tipi sopra elencati, l'autocmd esegue la funzione di callback definita. All'interno di questa funzione, vengono eseguite due operazioni:
+
+: `vim.bo[event.buf].buflisted = false`
+
+: Questo comando imposta l'opzione **buflisted** del buffer su *false*, il che significa che il buffer non verrà elencato nella lista dei buffer aperti in Neovim.
+
+: `vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })`
+
+: Questo comando definisce una mappatura dei tasti per il buffer corrente. Nella modalità normale ("n"), la pressione del tasto ++"q"++ eseguirà il comando `close`, che chiuderà il *buffer*. L'opzione *silent = true* assicura che il comando venga eseguito senza visualizzare messaggi di stato.
+
+#### Evidenziazione del testo dopo la copia
+
+L'autocmd per l'evidenziazione del testo dopo la copia è una funzionalità che aiuta a visualizzare immediatamente il testo copiato e a comprendere meglio il contesto in cui verrà utilizzato.
+
+```lua title="Highlight on yank"
 vim.api.nvim_create_autocmd("TextYankPost", {
  group = augroup,
  desc = "Highlight text after yanking to provide visual feedback",
@@ -136,12 +187,17 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 ```
 
-Questo autocomando ha lo scopo di migliorare l'esperienza di copia del testo, fornendo un feedback visivo durante le operazioni. L'autocomando viene attivato dall'evento “TextYankPost”, che si verifica immediatamente dopo la copia di una selezione di testo.  
-Richiamando la funzione vim.highlight.on_yank() all'interno del callback, lo script evidenzia temporaneamente il segmento di testo appena copiato, creando una breve indicazione visiva dell'azione di copia. Questa implementazione offre un metodo efficace per confermare la selezione del testo, aiutando durante le operazioni di editing e riducendo i potenziali errori, rendendo la manipolazione del testo più facile da usare.
+Questo autocmd si attiva quando si verifica l'evento **TextYankPost**, che si verifica dopo che il testo è stato copiato nella clipboard.
 
-### `vertical_help`
+Quando si verifica l'evento *TextYankPost*, l'autocmd esegue la funzione di callback definita. All'interno di questa funzione, viene chiamata la funzione `vim.highlight.on_yank()`, che attiva l'evidenziazione del testo copiato.
 
-```lua
+Il testo copiato viene evidenziato per un breve periodo di tempo dopo la copia. Ciò aiuta gli utenti a visualizzare immediatamente il testo copiato e a comprendere meglio il contesto in cui verrà utilizzato.
+
+#### Buffer di aiuto verticale
+
+Questo autocmd consente di visualizzare le pagine di aiuto in una finestra verticale e di equalizzare le dimensioni delle finestre. L'apertura delle pagine di aiuto in una finestra verticale al posto di quella orizzontale di default in Neovim consente di visualizzare le informazioni di aiuto in una modalità più ergonomica.
+
+```lua title="Vertical help"
 vim.api.nvim_create_autocmd("FileType", {
  group = augroup,
  desc = "Open help documents in a vertical split and equalize window sizes",
@@ -154,23 +210,25 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 ```
 
-Questo autocomando è progettato per migliorare l'esperienza di visualizzazione dei documenti di aiuto, regolando automaticamente il layout della finestra all'apertura dei file di aiuto.  
-Attivato dall'evento “FileType” con uno schema specifico per i buffer “help”, implementa tre comportamenti chiave. In primo luogo, imposta l'opzione bufhidden del buffer su “unload”, che aiuta a gestire in modo efficiente la memoria del buffer. In secondo luogo, utilizza vim.cmd.wincmd(“L”) per spostare la finestra di aiuto all'estrema destra dell'editor, creando un layout verticale diviso. Infine, utilizza vim.cmd.wincmd(“=”) per uniformare le dimensioni di tutte le finestre aperte, garantendo una visualizzazione equilibrata ed esteticamente gradevole. Questo codice permette una visualizzazione della documentazione di aiuto ottimizzata per una migliore leggibilità e navigazione dei suoi contenuti.
+Questo autocmd si attiva quando si apre un file di tipo **help**, che è il tipo di file utilizzato per le pagine di aiuto in Neovim.
 
-### `term_spell_off`
+Quando si apre un file di tipo *help*, l'autocmd esegue la funzione di *callback* definita. All'interno di questa funzione, vengono eseguite tre operazioni:
 
-```lua
-vim.api.nvim_create_autocmd({ "TermOpen" }, {
- group = augroup,
- desc = "Disable spell checking when opening terminal buffers",
- callback = function()
-  vim.wo.spell = false
- end,
-})
-```
+: `vim.bo.bufhidden = "unload"`
 
-Questo autocomando è progettato per migliorare l'esperienza del buffer del terminale disabilitando automaticamente la funzionalità di controllo ortografico all'apertura del terminale. Attivato dall'evento “TermOpen” l'autocomando si concentra sull'impostazione dell'opzione ortografica locale della finestra (vim.wo.spell) su false. Questa implementazione garantisce che quando si apre un buffer di terminale all'interno di Neovim, non si venga distratti da evidenziazioni o suggerimenti per il controllo ortografico, tipicamente irrilevanti nelle interfacce a riga di comando.
+: Questo comando imposta l'opzione **bufhidden** del buffer su "*unload*", che significa che il buffer verrà chiuso quando non è più necessario.
 
-## Conclusioni
+: `vim.cmd.wincmd("L")`
 
-Gli autocomandi in Neovim sono una potente funzione che consente di personalizzare il comportamento di Neovim eseguendo automaticamente funzioni o comandi quando si verificano eventi specifici. Possono essere utilizzati per automatizzare varie attività, come la formattazione del codice, l'impostazione dei tipi di file o il ridimensionamento delle finestre, rendendo la configurazione di Neovim più efficiente e adatta alle proprie esigenze.
+: Questo comando esegue il comando **wincmd** con l'argomento "**L**", che significa "vai a sinistra" e apre la finestra di aiuto a destra della finestra corrente.
+
+: `vim.cmd.wincmd("=")`
+
+: Questo comando esegue il comando **wincmd** con l'argomento "**=**", che significa "equalizza le dimensioni delle finestre" e assicura che le finestre abbiano dimensioni uguali.
+
+L'aiuto verticale aiuta a lavorare in modo più efficiente e produttivo, poiché si possono visualizzare facilmente le informazioni di aiuto e navigare tra le finestre senza dover lasciare la finestra corrente.
+
+## Conclusione
+
+Il file *commands.lua* rappresenta un elemento importante nella personalizzazione dell'ambiente di editing di Neovim. Attraverso la definizione di diversi autocmd, questo file consente di automatizzare operazioni ripetitive, migliorare la produttività e semplificare il flusso di lavoro.  
+Ognuna delle funzionalità incluse nel file è progettata per migliorare l'esperienza utente e aumentare la produttività, consentendo di lavorare in modo più efficiente e concentrato.
