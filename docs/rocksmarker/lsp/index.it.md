@@ -10,7 +10,7 @@ tags:
 <!-- vale off -->
 ## Introduzione
 
-Il Language Server Protocol (LSP) è un protocollo di comunicazione tra un editor di testo e un server di linguaggio, progettato per fornire funzionalità di editing avanzate come completamento del codice, diagnosi degli errori e refactoring. Neovim supporta nativamente il Language Server Protocol, offrendo agli utenti una esperienza di editing più ricca e potente. Il server di linguaggio fornisce informazioni sulla struttura e sulla semantica del codice, il client utilizza queste informazioni per fornire funzionalità di editing avanzate agli utenti.
+Il [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) (LSP) è un protocollo di comunicazione tra un editor di testo e un server di linguaggio, progettato per fornire funzionalità di editing avanzate come completamento del codice, diagnosi degli errori e refactoring. Neovim supporta nativamente il Language Server Protocol, offrendo agli utenti una esperienza di editing più ricca e potente. Il server di linguaggio fornisce informazioni sulla struttura e sulla semantica del codice, il client utilizza queste informazioni per fornire funzionalità di editing avanzate agli utenti.
 
 ## LSP in Neovim
 
