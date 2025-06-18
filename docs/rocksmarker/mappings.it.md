@@ -10,7 +10,7 @@ tags:
 <!--vale off-->
 ## Introduzione a mappings.lua
 
-Il file mapping.lua è un componente fondamentale nella configurazione di Neovim. Questo file contiene le definizioni delle mappature di tastiera, ovvero le associazioni tra le combinazioni di tasti e le azioni che devono essere eseguite quando vengono premute.
+Il file `lua/mapping.lua` è un componente fondamentale nella configurazione di Neovim. Questo file contiene le definizioni delle mappature di tastiera, ovvero le associazioni tra le combinazioni di tasti e le azioni che devono essere eseguite quando queste vengono premute.
 
 Le mappature di tastiera sono essenziali per migliorare la produttività e l'efficienza nel lavoro con Neovim. Consentono di eseguire operazioni complesse con pochi tasti, riducendo il tempo e lo sforzo necessari per completare le attività.  
 Inoltre, le mappature di tastiera possono essere personalizzate per adattarsi alle esigenze specifiche dell'utente, rendendo Neovim un ambiente di lavoro ancora più confortevole e intuitivo.
@@ -106,7 +106,7 @@ Le mappature per i buffer definite in questa sezione rappresentano un insieme di
 
 !!! tip "Uso di `<leader>X`"
 
-    La chiusura di tutti i buffer aperti nell'editor con un solo comando risulta molto utile quando si lavora su più progetti e si desidera cambiare progetto senza uscire dall'editor visto che il plugin persisted.nvim non gestisce questo aspetto. Quindi per evitare di avere nella nuova sessione anche i file aperti nella precedente è possibile rimuoverli in una sola operazione prima di cambiare sessione.
+    La chiusura di tutti i buffer aperti nell'editor con un solo comando risulta molto utile quando si lavora su più progetti e si desidera cambiare progetto senza uscire dall'editor visto che il plugin **persisted.nvim** non gestisce questo aspetto. Quindi per evitare di avere nella nuova sessione anche i file aperti nella precedente è possibile rimuoverli in una sola operazione prima di cambiare sessione.
 
 Queste mappature consentono di gestire i buffer in Neovim in modo rapido e efficiente, senza dover utilizzare i comandi di Neovim standard. Ad esempio, è possibile salvare il buffer corrente senza dover digitare ++semicolon+"w"++ e premere ++enter++.
 

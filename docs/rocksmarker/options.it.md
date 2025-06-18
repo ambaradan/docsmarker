@@ -10,9 +10,9 @@ tags:
 <!--vale off-->
 ## Introduzione
 
-Il file options.lua consente di definire e personalizzare le opzioni di configurazione dell'editor in modo efficiente e organizzato, le opzioni definite in questo file influenzano direttamente l'esperienza dell'utente.
+Il file `lua/options.lua` consente di definire e personalizzare le opzioni di configurazione dell'editor in modo efficiente e organizzato, le opzioni definite in questo file influenzano direttamente l'esperienza dell'utente.
 
-L'utilizzo del file options.lua consente una personalizzazione avanzata dell'editor senza la necessità di modificare il codice sorgente, di mantenere tutte le opzioni di configurazione in un unico file che facilita la gestione e la manutenzione della configurazione.
+L'utilizzo del file *options.lua* consente una personalizzazione avanzata dell'editor senza la necessità di modificare il codice sorgente, di mantenere tutte le opzioni di configurazione in un unico file per facilitare la gestione e la manutenzione della configurazione.
 
 ## Options.lua in Rocksmarker
 
@@ -24,11 +24,11 @@ Questa sezione definisce variabili globali che influenzano il comportamento gene
 
 : `vim.g.mapleader = vim.keycode("<Space>")`
 
-: Imposta il tasto `<Space>` come leader key. Il leader key è un prefisso utilizzato per definire mappature personalizzate (scorciatoie da tastiera). Ciò significa che tutte le mappature personalizzate definite nel file di configurazione inizieranno con la pressione del tasto `<Space>`.
+: Imposta il tasto `<Space>`  come leader key. Il leader key è un prefisso utilizzato per definire mappature personalizzate (scorciatoie da tastiera). Ciò significa che tutte le mappature personalizzate definite nel file di configurazione inizieranno con la pressione del tasto ++space++.
 
 : `vim.g.markdown_recommended_style = 0`
 
-: Disabilita lo stile raccomandato per il Markdown. Questo potrebbe essere fatto per evitare conflitti con lo stile preferito dal progetto Rocksmarker o per personalizzare ulteriormente la formattazione del Markdown.
+: Disabilita lo stile raccomandato per il Markdown. Questo potrebbe è fatto per evitare conflitti con lo stile preferito dal progetto Rocksmarker.
 
 : `vim.g.loaded_python3_provider = 0`  
 `vim.g.loaded_ruby_provider = 0`  
@@ -63,11 +63,11 @@ Questa sezione configura il comportamento dell'editor di testo, influenzando la 
 
 : `vim.o.timeoutlen = 400`
 
-: Imposta il tempo di attesa (in millisecondi) dopo ogni tasto premuto prima di considerarlo parte di una sequenza di comandi. Questo può influenzare la velocità di esecuzione dei comandi e la sensibilità della tastiera.
+: Imposta il tempo di attesa (in millisecondi) dopo ogni tasto premuto prima di considerarlo parte di una sequenza di comandi. Questo influenza la velocità di esecuzione dei comandi e la sensibilità della tastiera.
 
 : `vim.o.undofile = true`
 
-: Abilita il salvataggio automatico della cronologia degli undo, permettendo di annullare modifiche anche dopo aver chiuso e riaperto il file. Ciò può essere particolarmente utile per recuperare versioni precedenti del codice.
+: Abilita il salvataggio automatico della cronologia degli undo, permettendo di annullare modifiche anche dopo aver chiuso e riaperto il file. Ciò è particolarmente utile per recuperare versioni precedenti del codice.
 
 : `vim.o.cursorline = true`
 
@@ -91,7 +91,7 @@ Queste opzioni controllano come il codice viene indentato automaticamente.
 
 : `vim.o.tabstop = 4`
 
-: Definisce il numero di spazi rappresentati da un carattere di tabulazione (quando expandtab è disabilitato). Una larghezza di tab di 4 spazi è una convenzione comune in molti progetti di codifica.
+: Definisce il numero di spazi rappresentati da un carattere di tabulazione (quando expandtab è disabilitato). Una larghezza di tab di 4 spazi è una convenzione comune per il codice Markdown.
 
 : `vim.o.softtabstop = 4`
 
@@ -111,15 +111,15 @@ Queste opzioni personalizzano l'aspetto e il comportamento dell'interfaccia uten
 
 : `vim.o.termguicolors = true`
 
-: Abilita l'uso di colori a 24 bit (true color) nel terminale. Richiede un terminale che supporti true color per funzionare correttamente.  
+: Abilita l'uso di colori a 24 bit (true color) nel terminale. Richiede un terminale che supporti true color per funzionare correttamente.
 
 : `vim.o.mouse = "a"`
 
-: Abilita l'uso del mouse in tutti i modi (normale, visuale, inserimento, ecc.). Ciò può rendere più intuitivo l'uso di Neovim per gli utenti abituati agli editor di testo con interfaccia grafica.
+: Abilita l'uso del mouse in tutti le modalità (normale, visuale, inserimento, ecc.). Ciò può rende più intuitivo l'uso di Neovim per gli utenti abituati agli editor di testo con interfaccia grafica.
 
 : `vim.o.showmode = false`
 
-: Nasconde l'indicatore di modalità (ad esempio, "INSERT", "VISUAL") dalla riga di stato. Questo può aiutare a ridurre la quantità di informazioni visualizzate e a mantenere la concentrazione sul codice.
+: Nasconde l'indicatore di modalità (ad esempio, "INSERT", "VISUAL") dalla riga di stato. Questo aiuta a ridurre la quantità di informazioni visualizzate e a mantenere la concentrazione sul codice.
 
 : `vim.o.laststatus = 3`
 

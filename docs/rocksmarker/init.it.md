@@ -1,5 +1,5 @@
 ---
-title: Init
+title: Init Procedure
 author: franco colussi
 contributors: steve spencer
 tags:
@@ -10,16 +10,12 @@ tags:
 <!--vale off-->
 ## Introduzione
 
-Il file **init.lua** è un file di configurazione che contiene le impostazioni e le personalizzazioni per Neovim.  
+Il file `init.lua` è un file di configurazione che contiene le impostazioni e le personalizzazioni per Neovim.  
 Il file viene eseguito automaticamente quando viene avviato Neovim, la sua funzione è quella di eseguire una serie di comandi e funzioni Lua in sequenza, queste azioni configurano l'ambiente di editing di Neovim.
 
 ## Init.lua in Rocksmarker
 
-Il file *init.lua* fornito da Rocksmarker è una configurazione di *bootstrap* per il plugin **rocks.nvim**. Questa plugin è progettato per gestire le dipendenze Lua per Neovim, fornendo un modo semplice e efficiente per installare e gestire librerie e plugin Lua all'interno dell'ambiente di Neovim.
-
-### Obiettivi
-
-L'obiettivo principale di questo file è quello di fornire una configurazione di base per *rocks.nvim* che consenta di installare e gestire facilmente le dipendenze Lua all'interno di Neovim. Ciò include la gestione delle librerie e dei plugin, nonché la configurazione dell'ambiente di Neovim per consentire una integrazione senza problemi con le dipendenze installate.
+Il file *init.lua* fornito da Rocksmarker integra una configurazione di *bootstrap* per il plugin **rocks.nvim**. L'obiettivo principale di questo file è quello di fornire una configurazione di base per *rocks.nvim* che consenta di installare e gestire facilmente le dipendenze Lua all'interno di Neovim. Ciò include la gestione delle librerie e dei plugin, nonché la configurazione dell'ambiente di Neovim per consentire una integrazione senza problemi con le dipendenze installate.
 
 ### Funzionalità principali
 
@@ -35,7 +31,8 @@ Per una descrizione dettagliata dello script di *bootstrap* consultare la [pagin
 
 ### Chiamate a funzioni
 
-Nella parte finale del file *init.lua*, sono presenti tre chiamate a funzioni utilizzate per richiamare altri script Lua e configurare ulteriormente l'ambiente di Neovim. Queste chiamate sono fondamentali per completare la configurazione di *rocks.nvim* e abilitare le funzionalità aggiuntive.
+Nella parte finale del file *init.lua*, sono presenti tre chiamate a funzioni utilizzate per richiamare altri script Lua e configurare ulteriormente l'ambiente di Neovim. Queste chiamate sono fondamentali per completare la configurazione di *rocks.nvim* e abilitare le funzionalità aggiuntive.  
+Le tre chiamate a funzioni presenti sono fondamentali per completare la configurazione di Rocksmarker e abilitare le funzionalità aggiuntive.
 
 Le tre chiamate a funzioni presenti in fondo al file sono:
 
@@ -59,9 +56,7 @@ Ognuna di queste chiamate serve a un scopo specifico:
 
 : La funzione `require("mappings")` richiama lo script *mappings.lua*, che definisce le mappature dei tasti. Queste mappature consentono di assegnare azioni specifiche a combinazioni di tasti, semplificando l'interazione con l'ambiente di Neovim.
 
-Le tre chiamate a funzioni presenti in fondo al file *init.lua* sono fondamentali per completare la configurazione di *rocks.nvim* e abilitare funzionalità aggiuntive. Queste chiamate consentono di personalizzare l'ambiente di Neovim, definire comandi personalizzati e assegnare azioni specifiche a combinazioni di tasti.
-
 ## Conclusioni
 
 Lo scopo di questo script è di assicurare che il plugin *rocks.nvim* sia correttamente configurato e disponibile per l'uso nell'ambiente *Neovim*.  
-Eseguendo questo script, viene impostato l'ambiente necessario per l'uso di *rocks.nvim* e dei pacchetti associati, vengono inoltre configurate le opzioni e i comandi utili alla gestione dell'editor.
+Eseguendo questo script, viene impostato l'ambiente necessario per l'uso di Rocksmarker e dei pacchetti associati, vengono inoltre configurate le opzioni e i comandi utili alla gestione dell'editor.
