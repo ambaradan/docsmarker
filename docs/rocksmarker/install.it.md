@@ -8,22 +8,10 @@ tags:
     - markdown
 ---
 <!--vale off-->
-# Rocksmarker
 
-## IDE Neovim per il codice Markdown
+## Introduzione
 
-Un progetto IDE **sperimentale** per la scrittura di documentazione in codice Markdown; il progetto utilizza il nuovo gestore di plugin [rocks.nvim](https://github.com/nvim-neorocks/rocks.nvim).  
-**Rocks.nvim** si differenzia dai precedenti gestori di plugin per la sua filosofia di fondo, ovvero che la scrittura della configurazione di base (*dipendenze*, *opzioni di base* ...) è compito dello sviluppatore e non dell'utente. Questo permette all'utente finale di avere un'esperienza iniziale più semplice, mentre la personalizzazione avanzata dei plugin tramite file di configurazione rimane sempre possibile.  
-Gli sviluppatori hanno anche creato un'infrastruttura per la distribuzione dei plugin, che non vengono scaricati dai rispettivi progetti, ma dal portale [luarocks](https://luarocks.org/modules/neorocks); in questo modo i pacchetti vengono prima testati e poi rilasciati. Di conseguenza, il rilascio di nuove versioni avviene solitamente in ritardo rispetto alle modifiche apportate ai progetti.
-
-## Scopo del progetto
-
-Fornire un editor il più completo possibile per la scrittura di documentazione Markdown per Rocky Linux; a tal fine gli obiettivi prefissati sono:
-
-- Impostazione automatica delle opzioni di Neovim per i file Markdown
-- Evidenziare i tag Markdown nel buffer
-- Offrire una modalità zen per la modifica dei documenti
-- Fornire snippet personalizzati per la scrittura dei tag **mkdocs-material** oltre che per i tag Markdown standard.
+L'installazione di Rocksmarker richiede che siano soddisfatti alcuni requisiti anche per il sistema operativo in uso. In particolare è necessaria una versione ben definita dell'interprete Lua, inoltre la configurazione è ottimizzata per le versioni di Neovim 0.11+.  
 
 ### Prerequisiti
 
