@@ -11,7 +11,8 @@ tags:
 
 ## Introduzione
 
-L'installazione di Rocksmarker richiede che siano soddisfatti alcuni requisiti anche per il sistema operativo in uso. In particolare è necessaria una versione ben definita dell'interprete Lua, inoltre la configurazione è ottimizzata per le versioni di Neovim 0.11+.  
+L'installazione di Rocksmarker richiede che siano soddisfatti alcuni requisiti anche per il sistema operativo in uso. In particolare è necessaria una versione ben definita dell'interprete Lua (versione 5.1), versione utilizzata anche da Neovim.  
+La configurazione è ottimizzata per le versioni di Neovim 0.11+ e potrebbe non funzionare correttamente con le versioni precedenti.
 
 ### Prerequisiti
 
