@@ -26,6 +26,8 @@ Successivamente, avviare Neovim e il processo di installazione inizierà automat
 
 Se si preferisce utilizzare Rocksmarker come configurazione secondaria per markdown, è possibile clonare il repository in una cartella diversa, ad esempio `~/.config/rocksmarker`, e avviare Neovim con l'opzione **NVIM_APPNAME=rocksmarker nvim**.
 
+![Basic UI](./assets/images/basic_ui.png)
+
 ## Funzionalità offerte da Rocksmarker
 
 Rocksmarker è una configurazione avanzata per Neovim che offre una vasta gamma di funzionalità per migliorare l'esperienza di editing, in particolare per la scrittura e la modifica di documentazione in markdown. Ecco alcune delle principali funzionalità offerte:
@@ -104,6 +106,8 @@ In sintesi, l'utilizzo di **rocks.nvim** come gestore dei plugin in Rocksmarker 
 ## Ottimizzazione per il Linguaggio Markdown
 
 Rocksmarker è stato progettato con una particolare attenzione all'ottimizzazione per il linguaggio Markdown. L'obiettivo di Rocksmarker è quello di fornire un ambiente di editing che sia non solo potente e versatile, ma anche altamente specializzato per le esigenze specifiche degli autori che lavorano con Markdown.
+
+![Markdown UI](./assets/images/markdown_ui.png)
 
 ### Ottimizzazioni
 

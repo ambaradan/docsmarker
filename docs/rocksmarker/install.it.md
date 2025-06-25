@@ -11,19 +11,19 @@ tags:
 
 ## Introduzione
 
-L'installazione di Rocksmarker richiede che siano soddisfatti alcuni requisiti anche per il sistema operativo in uso. In particolare è necessaria una versione ben definita dell'interprete Lua (versione 5.1), versione utilizzata anche da Neovim.  
-La configurazione è ottimizzata per le versioni di Neovim 0.11+ e potrebbe non funzionare correttamente con le versioni precedenti.
+Rocksmarker è un progetto IDE sperimentale per la scrittura di documentazione in Markdown che sfrutta il nuovo gestore di plugin **rocks.nvim** per Neovim.  
+Per sfruttarne appieno le potenzialità e garantire un'installazione corretta, è fondamentale preparare adeguatamente l'ambiente Linux sottostante. Questo capitolo illustra i passaggi necessari, dalla configurazione dei repository all'installazione di Neovim e di una versione specifica di Lua, essenziale per il corretto funzionamento di Rocksmarker.
 
 ### Prerequisiti
 
 - Una distribuzione Linux installata e configurata in versione desktop. In questa guida è utilizzata Rocky Linux e di conseguenza dovrebbe funzionare correttamente su tutte le derivate RHEL (Red Hat Enterprise Linux). Per l'installazione su altre distribuzioni fare riferimento alle relative documentazioni.
-- Padronanza nell'esecuzione di comandi da riga di comando
+- Padronanza nell'esecuzione di comandi da terminale.
 - Possibilità di eseguire alcuni comandi come utente root o con i permessi di amministratore.
 
 ### Prerequisiti per Neovim, Lua e Rocksmarker
 
 Il progetto necessita di alcune dipendenze specifiche per la sua corretta esecuzione, in particolare è necessaria la versione ==Lua 5.1==, non sono supportate le versioni fornite da Rocky Linux.  
-La versione 5.1 è necessaria per il corretto funzionamento di *rocks.nvim* che si occupa della gestione dei plugin garantendo inoltre la piena compatibilità con la versione utilizzata da Neovim.
+La versione 5.1 garantisce il corretto funzionamento di *rocks.nvim* che si occupa della gestione dei plugin garantendo inoltre anche la piena compatibilità con la versione utilizzata da Neovim.
 
 Da Neovim docs:
 
@@ -56,7 +56,7 @@ Tra i suoi miglioramenti troviamo:
 
 !!! note "Versione compilata"
 
-    Per una corretta esecuzione di Rocksmarker è necessaria una versione ==0.10.0== o superiore di Neovim, per questo si consiglia l'utilizzo della versione compilata. La versione fornita da *EPEL* risulta datata (0.8.0) e non è compatibile con *rocks.nvim* e i plugin utilizzati.  
+    Per una corretta esecuzione di Rocksmarker è necessaria una versione ==0.11.0== o superiore di Neovim, per questo si consiglia l'utilizzo della versione compilata. La versione fornita da *EPEL* risulta datata (0.8.0) e non è compatibile con *rocks.nvim* e i plugin utilizzati.  
     Per ulteriori informazioni è possibile consultare le istruzioni contenute nella sezione [Avvio rapido](https://github.com/neovim/neovim/blob/master/BUILD.md) del sito di Neovim.
 
 La compilazione di Neovim da sorgente non presenta particolari problemi e, se si soddisfano i requisiti di cui sopra risulta agevole da svolgere.
@@ -78,7 +78,7 @@ git checkout stable
 
 !!! note ""
 
-    L'uso del comando ==git checkout stable== per posizionare *git* nel ramo stabile prima della compilazione assicura l'uso della versione stabile (raccomandata). Se viene omesso, la compilazione verrà eseguita con il ramo di sviluppo (al momento la 0.11).
+    L'uso del comando ==git checkout stable== per posizionare *git* nel ramo stabile prima della compilazione assicura l'uso della versione stabile (raccomandata). Se viene omesso, la compilazione verrà eseguita con il ramo di sviluppo (al momento la 0.12).
 
 ### Compilazione e installazione
 
@@ -362,12 +362,8 @@ Run 'Rocks sync'?
 
 Una volta terminata l'installazione dei plugin chiudere l'editor e riaprirlo per dare a Neovim la possibilità di caricare le nuove configurazioni, al secondo avvio inoltre vengono installati dai plugin *mason-lspconfig* e *mason-tool-installer*, in modo del tutto automatico, i *server linguistici* (LSP), i *linter* e i *formattatori* necessari al corretto funzionamento dell'editor, terminata l'installazione dei server linguistici l'editor è pronto per essere utilizzato.
 
-![First Start](./assets/img/rocksmarker-first-install.png)
-
 ## Conclusioni
 
 Rocksmarker è una configurazione personalizzata di Neovim e ne integra tutte le funzionalità, fornisce inoltre una serie di funzionalità aggiuntive per la gestione dei file, per i repository git, per la diagnostica e per molto altro.  
 Per una panoramica delle scorciatoie che attivano le funzioni si consiglia di consultare il file `/lua/mappings.lua`.  
-In alternativa con il tasto ++space++ si attiva il menù dei comandi in basso a destra dove sono elencati tutti i comandi disponibili. Le lettere contrassegnate con un **+** forniscono ulteriori selezioni, selezionando la lettera corrispondente si passa al menu contestuale e si ritorna al menu principale con ++back++ mentre con ++"'"++ si richiama il menu per la navigazione del buffer.
-
-![Rocksmarker Menus](./assets/img/rocksmarker-menus.png)
+In alternativa con il tasto ++space++ si attiva il menù dei comandi dove sono elencati tutti i comandi disponibili. Le lettere contrassegnate con un **+** forniscono ulteriori selezioni, selezionando la lettera corrispondente si passa al menu contestuale e si ritorna al menu principale con ++back++ mentre con ++esc++ si chiude il menu senza eseguire alcun comando.

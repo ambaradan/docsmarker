@@ -1,5 +1,5 @@
 ---
-title: Init Procedure
+title: Init procedure
 author: franco colussi
 contributors: steve spencer
 tags:
