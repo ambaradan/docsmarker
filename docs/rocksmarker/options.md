@@ -10,101 +10,146 @@ tags:
 
 ## Introduction
 
-A standard installation of Neovim comes ready to use but with a somewhat plain appearance and certainly not optimized for your specific preferences. The first step in customizing the installation is through configuring the options.  
-Neovim's options are a powerful and flexible tool that allows for the modification of many aspects of the editor, from the most basic such as displaying line numbers in the buffer, to more advanced ones such as synchronizing the system clipboard or formatting settings.  
-This flexibility allows their application at various levels: At the global level (==vim.g== - *global*) for general editor settings, at the window level (==vim.wo== - *window options*) for any work area settings, and at the buffer level (==vim.bo== - *buffer options*) for more granular customization.
+The `lua/options.lua` file allows you to define and customize the editor's configuration options in an efficient and organized manner. The options defined in this file directly affect the user experience.
 
-To use the full potential of Neovim the configuration uses [ftplugin](https://neovim.io/doc/user/filetype.html#%3Afiletype-plugin-on) for configuring file types. You can find the specific options in the files in the `ftplugin` folder.  
-This allows the tailoring of settings to each specific file type, streamlining the workflow and enabling a more organized and efficient coding environment.
+Using the *options.lua* file allows for advanced customization of the editor without the need to modify the source code, keeping all configuration options in a single file to facilitate configuration management and maintenance.
 
-## Global options
+## Options.lua in Rocksmarker
 
-The definition of Rocksmarker's global settings are in the file `lua/options.lua` and are all commented out for a better understanding of their influence on Neovim's behavior. The main ones are those defined at the beginning of the file and are as follows:
+The **options.lua** file in the Rocksmarker project is designed to provide a set of default settings that enhance the Neovim user experience, covering aspects such as file management, text formatting, navigation, and user interface customization.
 
-```lua
--- Global configurations
-vim.g.mapleader = vim.keycode("<Space>") -- leader key
-vim.g.markdown_recommended_style = 0 -- disable Markdown recommended style
--- disable providers
--- remove warnings in ':checkhealth'
-vim.g.loaded_python3_provider = 0
-vim.g.loaded_ruby_provider = 0
-vim.g.loaded_perl_provider = 0
-vim.g.loaded_node_provider = 0
-```
+### Global configuration
 
-These settings determine the key used as the *leader key*. The *leader key* is the keyboard key that invokes all other key combinations, set to ++space+++.  
+This section defines global variables that affect the general behavior of Neovim.
 
-!!! Note ""
+: `vim.g.mapleader = vim.keycode("<Space>")`
 
-    In Rocksmarker, pressing it invokes the menu provided by *which-key.nvim*, which allows improved navigation between the commands provided and their descriptions.
+: Set the `<Space>` key as the leader key. The leader key is a prefix used to define custom mappings (keyboard shortcuts). This means that all custom mappings defined in the configuration file will start with pressing the ++space++ key.
 
-Following this is the disabling of the recommended style for markdown code *vim.g.markdown_recommended_style = 0* as it is not compatible with the Rocky Linux documentation.  
-Embedded style mainly affects the formatting of code provided by the *language server*, a function handled in Rocksmarker by the *conform.nvim* plugin. For example, the built-in style sets the width of the document to 80 characters, and already this is not compatible with markdown written for documentation.
+: `vim.g.markdown_recommended_style = 0`
 
-The next options have no effect on the editor configuration but are functional for debugging. They allow for the elimination of errors displayed by the ==:checkhealth== check, referring to these languages that are not the subject of the project.
+: Disables the recommended style for Markdown. This is done to avoid conflicts with the preferred style of the Rocksmarker project.
 
-!!! Tip "Troubleshooting"
+: `vim.g.loaded_python3_provider = 0`  
+`vim.g.loaded_ruby_provider = 0`  
+`vim.g.loaded_perl_provider = 0`  
+`vim.g.loaded_node_provider = 0`
 
-    The ==checkhealth== command along with the ==messages== command are indispensable tools for troubleshooting configuration problems.
+: Disable language providers for Python, Ruby, Perl, and Node.js. This is done to reduce the overhead of these languages that are not necessary for the project, and to avoid warnings produced by the `:checkhealth` command related to unmet dependencies for these providers.
 
 ### Editor options
 
-The next options set the behavior of the editor in buffer management. Behaviors such as search method, clipboard management, and other aspects:
+This section configures the behavior of the text editor, affecting the display and interaction with files.
 
-```lua
-vim.o.clipboard = "unnamedplus" -- sync with the Linux clipboard
-vim.o.mouse = "a" -- enable the use of the mouse - all modes
-vim.o.timeoutlen = 400 -- how long wait after each keystroke before aborting it
-vim.o.undofile = true -- automatically save undo history
-vim.o.cursorline = true -- highlight the current line
-vim.o.ignorecase = true -- to search case insensitively
-vim.o.smartcase = true -- when the search pattern is typed
-```
+: `vim.o.foldenable = true`  
 
-Next are the indentation options. These are all set to four spaces as required for markdown code formatting:
+: Enable code folding, allowing you to collapse and expand sections of code. This can help reduce the amount of visible code and focus on the most relevant parts.
 
-```lua
--- Indenting
-vim.o.expandtab = true -- Convert tabs to spaces
-vim.o.tabstop = 4 -- Number of spaces a tab represents
-vim.o.softtabstop = 4 -- how many spaces moves right when you press <Tab>
-vim.o.shiftwidth = 4 -- provide proper indentation to the code
-vim.o.smartindent = true -- increase/reduce the indent where appropriate
-```
+: `vim.o.foldmethod = "marker"`  
 
-### Interface options
+: Set the folding method to “marker,” which means that folding is determined by specific markers in the code. These markers can be inserted manually by the user to define the sections of code to be folded.
 
-These options affect the appearance of the editor interface, integrating the buffer with features unique to a code editor. They also hide some default behaviors not needed by a markdown editor:
+: `vim.o.foldmarker = "{{{,}}}"`
 
-```lua
--- UI options
-vim.o.termguicolors = true -- use true color
-vim.o.fillchars = "eob:*" -- hide tilde '~' for blank lines
-vim.o.showmode = false -- show the mode you are on the last line
-vim.o.laststatus = 3 -- to global display the status line
-vim.o.number = true -- enable line numbers
-vim.o.signcolumn = "yes" -- displaying the signs
-```
+: Defines the markers used to delimit the sections of code to be folded. In this case, `{{{` marks the beginning and `}}}` marks the end of a foldable section.
 
-!!! Note ""
+: `vim.o.clipboard = "unnamedplus"`
 
-    The *vim.o.laststatus = 3* option is used to display a single *statusline* that would otherwise be displayed per buffer and then multiplied by the number of open buffers, a behavior more suitable for programming code and not necessary in a markdown editor.
+: Configure integration with the system clipboard (Linux). The “unnamedplus” option allows you to copy and paste directly with the operating system clipboard, without the need to use specific Neovim commands.
 
-Window division behaviour options come next. These settings are primarily for consulting Neovim's help pages, so the ==:help== command places the buffer to the right making it convenient to consult while editing code:
+: `vim.o.fillchars = "eob: "`
 
-```lua
-vim.o.splitbelow = true -- create a vertical split and open
-vim.o.splitright = true -- new file in the right-hand side of the split
-```
+: Customize fill characters. In this case, it hides the ~ (tilde) character for empty lines at the end of the buffer, improving code readability.
 
-Finally the options file ends with the definition of the *vim.o.sessionoptions* option. This option tells Neovim what parts of the editor to save in the session on exit. The *persisted.nvim* plugin uses this information for session management.
+: `vim.o.timeoutlen = 400`
 
-```lua
--- require by persisted.nvim - enables saving and restoring
-vim.o.sessionoptions = "buffers,curdir,folds,globals,tabpages,winpos,winsize"
-```
+: Set the wait time (in milliseconds) after each key press before considering it part of a command sequence. This affects the speed of command execution and keyboard sensitivity.
+
+: `vim.o.undofile = true`
+
+: Enables automatic saving of undo history, allowing you to undo changes even after closing and reopening the file. This is particularly useful for recovering previous versions of the code.
+
+: `vim.o.cursorline = true`
+
+: Highlights the current line where the cursor is located, helping you stay focused on your current position within the code.
+
+: `vim.o.ignorecase = true`
+
+: Set the search to ignore case sensitivity, simplifying the search for keywords within the code.
+
+: `vim.o.smartcase = true`
+
+: Change the behavior of `ignorecase` so that the search becomes *case-sensitive* only if uppercase letters are used in the search pattern. This provides a balance between ease of searching and accuracy.
+
+### Indentation settings
+
+These options control how code is automatically indented.
+
+: `vim.o.expandtab = true`
+
+: Converts tab characters to spaces, helping to maintain consistent indentation and avoid compatibility issues between different text editors.
+
+: `vim.o.tabstop = 4`
+
+: Defines the number of spaces represented by a tab character (when *expandtab* is disabled). A tab width of 4 spaces is a common convention for Markdown code.
+
+: `vim.o.softtabstop = 4`
+
+: Set the number of spaces that are inserted when you press the ++tab++ key. This value should match the tab width to maintain consistency in indentation.
+
+: `vim.o.shiftwidth = 4`
+
+: Defines the width of the indentation used by automatic indentation commands. Again, a width of 4 spaces is a common choice to maintain code readability.
+
+: `vim.o.smartindent = true`
+
+: Enable smart indentation, which automatically adjusts indentation based on the context of the code. This can help reduce the amount of manual work required to maintain correct indentation.
+
+### User Interface options
+
+These options customize the appearance and behavior of Neovim's user interface.
+
+: `vim.o.termguicolors = true`
+
+: Enables the use of 24-bit colors (true color) in the terminal. Requires a terminal that supports true color to function properly.
+
+: `vim.o.mouse = "a"`
+
+: Enables mouse usage in all modes (normal, visual, insert, etc.). This can make Neovim more intuitive for users accustomed to graphical text editors.
+
+: `vim.o.showmode = false`
+
+: Hides the mode indicator (e.g., “INSERT,” “VISUAL”) from the status bar. This helps reduce the amount of information displayed and keeps your focus on the code.
+
+: `vim.o.laststatus = 3`
+
+: Set the status bar so that it is always visible globally. The status bar provides important information about the current state of Neovim, such as the active mode and cursor position.
+
+: `vim.o.number = true`
+
+: Show line numbers. Line numbers can be very useful for navigating through code and referring to specific lines during discussion or documentation.
+
+: `vim.o.signcolumn = "yes"`
+
+: Displays the marks column, which is used to display indicators such as debugger breakpoints or linting errors. The marks column can be customized to show different types of information.
+
+: `vim.o.splitbelow = true`  
+`vim.o.splitright = true`
+
+: Configure the behavior of vertical and horizontal splits. Splits allow you to view multiple files or parts of files simultaneously, improving productivity and code management.
+
+### Session options
+
+These options are specific to the *persisted.nvim* plugin, which allows you to save and restore Neovim sessions.
+
+: `vim.o.sessionoptions = "buffers,curdir,folds,globals,tabpages,winpos,winsize"`
+
+: Defines which elements of the session should be saved and restored. In this case, open buffers, the current directory, fold status, global variables, tab pages, window position, and window size are saved. This allows you to restore the exact previous working state when you restart Neovim.
 
 ## Conclusions
 
-The use of options allows the configuration of the editor in both appearance and behavior to suit specific needs. There are specific options for each aspect of Neovim that you can consult on the [related page](https://neovim.io/doc/user/options.html) of the Neovim documentation.
+In summary, the *options.lua* file provides a complete and customized configuration for *Neovim*, covering aspects ranging from basic editor options to advanced settings for indentation, user interface, and session management. This configuration is designed to improve productivity and the Neovim user experience, adapting it to the specific needs of  authors and the *Rockmarker* project.
+
+L'uso delle opzioni permette di configurare l'editor sia nell'aspetto che nel comportamento per adattarlo ad esigenze specifiche, esistono opzioni specifiche per ogni aspetto di Neovim che possono essere consultate sulla [pagina relativa](https://neovim.io/doc/user/options.html) della documentazione di Neovim.
+
+The use of options allows you to configure both the appearance and behavior of the editor to suit your specific needs. There are specific options for every aspect of Neovim, which can be found on the [relevant page](https://neovim.io/doc/user/options.html) of the Neovim documentation.

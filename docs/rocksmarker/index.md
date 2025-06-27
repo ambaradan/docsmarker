@@ -1,5 +1,5 @@
 ---
-title: Rocksmarker
+title: Introduction
 author: Franco Colussi
 contributors: Steve Spencer
 tags:
@@ -8,58 +8,123 @@ tags:
     - markdown
 ---
 
-# Rocksmarker - Neovim Markdown IDE
+## Rocksmarker project
 
-## Introduction
+Welcome to the introductory page for Rocksmarker, a custom configuration for Neovim that integrates all of its features and adds many more for file management, Git repositories, diagnostics, and much more. This configuration is designed to provide a powerful and intuitive markdown editing experience.
 
-The project aims to build a configuration of *Neovim* optimized for writing documentation in Markdown format with a *standard installation of Neovim* as a base. This project uses a young, but very promising project, *rocks.nvim*, for plugin management. The idea arose from the curiosity to develop a Neovim configuration that is not managed by *lazy.nvim*, the "de facto" manager of all the major configurations currently available (NvChad, LunarVim, LazyVim, and others).
+Rocksmarker is still under development, but it can already be used on a daily basis to write and edit markdown documentation. It can be safely installed as the default configuration in `~/.config/nvim` or as a secondary configuration for markdown, if you already have one installed for other purposes.
 
-### Reason for change of manager
+The Rocksmarker configuration includes the use of **rocks.nvim**, a plugin manager that simplifies the installation and management of other plugins. Rocksmarker includes a wide range of plugins that provide features such as buffer management, file navigation, autocompletion, code formatting, Git version management, and much more.
 
-*Lazy.nvim* is a good tool for managing Neovim plugins but introduces some limitations. To work properly, it requires the complete disabling of Neovim's built-in plugins making for example the integration of localization features (such as *spell*) very complicated. In contrast, *rocks.nvim* is much less intrusive and does not require any special settings of the basic Neovim configuration.
+To get started, if you meet the Lua requirements, simply clone the Rocksmarker repository into your Neovim configuration folder:
 
-*Rocks.nvim* uses a centralized file for plugin operations (install, remove, update), separating these operations from the configuration logic of the plugins themselves, and making their management easier. Also *lazy.nvim* includes a mechanism to exclude the plugin from the configuration, but it must be manually set in the corresponding configuration file, making management more complicated.
+```bash
+git clone https://github.com/ambaradan/rocksmarker.git ~/.config/nvim
+```
 
-## Main components
+Next, launch Neovim and the installation process will start automatically. This process will install **luarocks** and **rocks.nvim**, then synchronize all configured plugins. For detailed instructions, see the [dedicated page](./install.md).
 
-* **Neovim** - modern terminal text editor born from a fork of Vim that, while sharing its basic features, expands its extensibility, allowing you to further customize Neovim to suit your needs (plugins, appearance, and so on.)
-* **rocks.nvim** - plugin manager for Neovim that aims to revolutionize Neovim plugin management by simplifying the way users and developers manage plugins and dependencies, integrating directly with luarocks
+If you prefer to use Rocksmarker as a secondary configuration for markdown, you can clone the repository to a different folder, such as `~/.config/rocksmarker`, and start Neovim with the option **NVIM_APPNAME=rocksmarker nvim**.
 
-**Neovim** is a project that needs no introduction. It provides a stable, customizable high-performance editor, usable for the development of virtually any programming language. The language used to build it (*lua*) makes it portable to multiple architectures and extremely fast. The use of *lua* allows injecting blocks of code to change its properties such as appearance, functionality, and so on.
+![Basic UI](./assets/images/basic_ui.png)
 
-**Rocks.nvim** is a young but growing project. Its use has proved stable. Main features include:
+## Features offered by Rocksmarker
 
-* Minimal and non-intrusive user interface
-* Automatic handling of dependencies and build scripts
-* Completion of commands
-* Plugins provided in binary version, thus no need for compilation, taken from luarocks.org
-* Modularity
+Rocksmarker is an advanced configuration for Neovim that offers a wide range of features to enhance the editing experience, particularly for writing and editing documentation in markdown. Here are some of the main features it offers:
 
-!!! note "Plugins modularity"
+### Enhanced markdown editing
 
-    This last aspect is very interesting. It is possible, starting from the main plugin *rocks.nvim*, to extend its functionality through additional plugins that introduce new configuration and installation possibilities. Modularity also makes it possible to exclude unused code from the configuration that could create problems or conflicts.
+- Syntax Highlighting: Rocksmarker includes advanced syntax highlighting for Markdown, making it easier to read and write documents.
+- Folding: The folding feature allows you to hide or show sections of text, helping you stay organized and focused while editing.
+- Tag Embedding: Support for tag embedding and management, simplifying the insertion of elements such as images, links, and more.
 
-## Appearance and UI
+### Advanced completion system
 
-The editor provides a single interface based on the [bamboo.nvim](https://github.com/ribru17/bamboo.nvim) theme on dark green hues, written in Lua with Tree-sitter syntax highlighting and LSP semantic highlighting. The style was also applied to the additional plugins to conform to the interface.  
-The creation of a set of colors in `lua/plugins/bamboo.lua` facilitates marker recognition without being intrusive.
+- Auto-complete: An intelligent auto-complete system that suggests words and phrases as you type, speeding up the writing process.
+- Snippets: Support for customizable snippets, which allow you to quickly insert predefined blocks of text, such as titles, lists, and more.
 
-## Additional components
+### Powerful navigation tools
 
-The integration includes various plugins for workflow management. The workflow mainly consists of writing or editing Markdown documents, so there are tools for managing files, searching and replacing words or phrases, managing files in a *Git* repository, and other utilities.
+- File Navigation: Advanced features for navigating project files, including file search and project structure navigation.
+- Buffers and Windows: Advanced buffer and window management, allowing you to work on multiple files simultaneously in an efficient manner.
 
-## Markdown set
+### Diagnostic and debugging tools
 
-Included in the configuration for this project are all plugins available in Neovim for manipulating and displaying markdown documents. The plugins were thoroughly tested to work with *rocks.nvim*, and if not yet available in *luarocks* version, installation occurred with the additional utility, *rocks-git.nvim*.  
-An autocommand, triggered by the file type, was also created that sets the buffer characteristics for optimized writing of markdown code.
+- Linting and Formatting: Integration with linting and formatting tools to help keep code clean and compliant with standards.
+- Advanced Diagnostics: Support for advanced diagnostics, including error detection and warnings directly within the editor.
+
+### Integration with Git
+
+- Version Control: Integration with Git for version control, allowing you to perform operations such as commit, push, and pull directly from Neovim.
+- Diff and Compare: Features for comparing file versions and viewing differences, facilitating review and change management.
+
+### Customization and extensibility
+
+- Customizable Configuration: Rocksmarker offers a highly customizable configuration, allowing you to tailor your work environment to your specific needs.
+- Plugin Support: The ability to further extend functionality by installing additional plugins, thanks to the *rocks.nvim* plugin manager.
+
+### Intuitive user interface
+
+- Command Menu: An intuitive command menu that lists all available actions, facilitating access to Rocksmarker's features.
+- Keyboard Shortcuts: A set of predefined keyboard shortcuts for quickly performing common actions.
+
+Rocksmarker is a comprehensive solution for those looking for a powerful and flexible editing environment for writing and editing markdown documentation. Its wide range of features and customization options make it a valuable tool for authors and developers working with Neovim.  
+Happy editing with Rocksmarker!
+
+## Rocks.nvim as plugin manager
+
+Rocksmarker stands out for its use of **rocks.nvim** as a plugin manager, a choice that reflects its commitment to simplification and efficiency in managing Neovim extensions. *Rocks.nvim* is an innovative plugin manager inspired by the philosophy of *LuaRocks*, the package manager for Lua, adapting it to the needs of Neovim.
+
+### Why rocks.nvim?
+
+There are several reasons for choosing to use **rocks.nvim** as the plugin manager in Rocksmarker:
+
+- **Simplified configuration**: rocks.nvim takes an approach that places the responsibility for plugin configuration on developers rather than users. This means that Rocksmarker users can enjoy simplified initial configuration without having to manually manage plugin dependencies and configurations.
+- **Integration with LuaRocks**: Being based on LuaRocks, rocks.nvim can draw on a vast repository of already tested and maintained Lua packages. This ensures that plugins managed by rocks.nvim are stable and compatible with Neovim.
+- **Automatic dependency management**: rocks.nvim automatically manages plugin dependencies, ensuring that all necessary libraries and components are installed and configured correctly.
+
+### How does rocks.nvim work?
+
+In Rocksmarker, **rocks.nvim** is used to manage the installation and configuration of all plugins included in the distribution. When you start Neovim with the Rocksmarker configuration for the first time, *rocks.nvim* is automatically installed and configured to manage the plugins specified in the configuration.
+
+The plugin installation process consists of two main steps:
+
+- **Installing luarocks and rocks.nvim**: When first launched, Rocksmarker checks whether luarocks and rocks.nvim are already installed. If they are not, it installs them.
+
+- **Plugin synchronization**: Once rocks.nvim is installed, the plugin manager automatically synchronizes all plugins listed in the Rocksmarker configuration. This includes installing any necessary dependencies.
+
+### Benefits of using rocks.nvim
+
+Using *rocks.nvim* in Rocksmarker offers several advantages, including:
+
+- **Easy plugin installation and management**: Users don't have to worry about manually installing plugins or managing their dependencies.
+- **Stability and compatibility**: Plugins managed by *rocks.nvim* are guaranteed to be stable and compatible with Neovim, thanks to integration with LuaRocks.
+- **Simplified updates**: *rocks.nvim* simplifies plugin updates, ensuring that users always have access to the latest features and fixes.
+
+In summary, the use of **rocks.nvim** as the plugin manager in Rocksmarker is a design choice that emphasizes simplicity, stability, and efficiency, significantly improving the user experience in managing Neovim plugins.
+
+## Optimization for Markdown language
+
+Rocksmarker was designed with a particular focus on optimization for the Markdown language. The goal of Rocksmarker is to provide an editing environment that is not only powerful and versatile, but also highly specialized for the specific needs of authors working with Markdown.
+
+![Markdown UI](./assets/images/markdown_ui.png)
+
+### Optimizations
+
+- **Advanced syntax highlighting**: Rocksmarker includes syntax highlighting for Markdown that is designed to be clear and easy to read. This helps authors quickly identify markup elements and focus on writing.
+- **Support for Markdown extensions**: In addition to supporting standard Markdown syntax, Rocksmarker also supports several commonly used extensions, such as tables, task lists, and footnotes. This allows authors to take advantage of Markdown's advanced features without having to change their work environment.
+- **Formatting and linting tools**: To help maintain the quality and consistency of documentation, Rocksmarker includes formatting and linting tools specifically designed for Markdown. These tools can help identify and correct formatting errors and maintain a consistent style.
+- **Snippets and auto-complete for Markdown**: To speed up the writing process, Rocksmarker offers snippets and auto-complete features specifically designed for Markdown. These include common elements such as headings, links, images, and more, allowing authors to quickly insert frequently used blocks of text.
+- **Preview and rendering**: Although Markdown preview and rendering are advanced features that may require integration with external tools, Rocksmarker is designed to be compatible with various preview and rendering solutions. This allows authors to view their work in real time and make immediate changes.
+
+### Benefits of Markdown optimization
+
+Rocksmarker's optimization for Markdown offers several significant advantages to authors:
+
+- **Increased productivity**: Thanks to specialized Markdown features, authors can work faster and more efficiently.
+- **Better documentation quality**: Formatting and linting tools help maintain high-quality, consistent, and easy-to-read documentation.
+- **Enhanced Writing Experience**: The Markdown-optimized editing environment provides a smoother and more intuitive writing experience, allowing authors to focus on creating high-quality content.
 
 ## Acknowledgements
 
-A big thank you goes to the developers of NvChad for the excellent code produced that served as a study and inspiration for writing this configuration. Thanks also to the developers of *rocks.nvim*, who brought a breath of fresh air to the management of Neovim plugins, and to all the developers of the plugins used.
-
-## References
-
-[Neovim](https://neovim.io/) - built for users who want the best parts of Vim, and more  
-[Rocks.nvim](https://github.com/nvim-neorocks/rocks.nvim) - a modern approach to Neovim plugin management  
-[luarocks.org](https://luarocks.org/) - allows the creation and installation of Lua modules as stand-alone packages  
-[NvChad](https://nvchad.com/) - excellent editor for code development, mainly *Lua* but easily extensible
+A big thank you goes to the developers of NvChad for the excellent code produced that served as a study and inspiration for writing this configuration. Thanks also go to the developers of *rocks.nvim*, who brought a breath of fresh air to Neovim's plugin management, and to all the developers of the plugins used.
