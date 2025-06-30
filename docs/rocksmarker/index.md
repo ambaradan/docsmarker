@@ -10,9 +10,9 @@ tags:
 
 ## Rocksmarker project
 
-Welcome to the introductory page for Rocksmarker, a custom configuration for Neovim that integrates all of its features and adds many more for file management, Git repositories, diagnostics, and much more. This configuration is designed to provide a powerful and intuitive markdown editing experience.
+Welcome to the introductory page for Rocksmarker, a custom configuration for Neovim that integrates all of its features and adds many more for file management, Git repositories, diagnostics, and much more. The design of this configuration is to provide a powerful and intuitive markdown editing experience.
 
-Rocksmarker is still under development, but it can already be used on a daily basis to write and edit markdown documentation. It can be safely installed as the default configuration in `~/.config/nvim` or as a secondary configuration for markdown, if you already have one installed for other purposes.
+Rocksmarker is still under development, but you can already use it on a daily basis to write and edit markdown documentation. It can be safely installed as the default configuration in `~/.config/nvim` or as a secondary configuration for markdown, if you already have one installed for other purposes.
 
 The Rocksmarker configuration includes the use of **rocks.nvim**, a plugin manager that simplifies the installation and management of other plugins. Rocksmarker includes a wide range of plugins that provide features such as buffer management, file navigation, autocompletion, code formatting, Git version management, and much more.
 
@@ -41,7 +41,7 @@ Rocksmarker is an advanced configuration for Neovim that offers a wide range of 
 ### Advanced completion system
 
 - Auto-complete: An intelligent auto-complete system that suggests words and phrases as you type, speeding up the writing process.
-- Snippets: Support for customizable snippets, which allow you to quickly insert predefined blocks of text, such as titles, lists, and more.
+- Snippets: Support for customizable snippets, allowing you to quickly insert predefined blocks of text, such as titles, lists, and more.
 
 ### Powerful navigation tools
 
@@ -81,47 +81,47 @@ There are several reasons for choosing to use **rocks.nvim** as the plugin manag
 
 - **Simplified configuration**: rocks.nvim takes an approach that places the responsibility for plugin configuration on developers rather than users. This means that Rocksmarker users can enjoy simplified initial configuration without having to manually manage plugin dependencies and configurations.
 - **Integration with LuaRocks**: Being based on LuaRocks, rocks.nvim can draw on a vast repository of already tested and maintained Lua packages. This ensures that plugins managed by rocks.nvim are stable and compatible with Neovim.
-- **Automatic dependency management**: rocks.nvim automatically manages plugin dependencies, ensuring that all necessary libraries and components are installed and configured correctly.
+- **Automatic dependency management**: rocks.nvim automatically manages plugin dependencies, ensuring the correct installation and configuration of all necessary libraries and components.
 
 ### How does rocks.nvim work?
 
-In Rocksmarker, **rocks.nvim** is used to manage the installation and configuration of all plugins included in the distribution. When you start Neovim with the Rocksmarker configuration for the first time, *rocks.nvim* is automatically installed and configured to manage the plugins specified in the configuration.
+Rocksmarker uses **rocks.nvim** to manage the installation and configuration of all plugins included in the distribution. When you start Neovim with the Rocksmarker configuration for the first time, *rocks.nvim* is automatically installed and configured to manage the plugins specified in the configuration.
 
 The plugin installation process consists of two main steps:
 
 - **Installing luarocks and rocks.nvim**: When first launched, Rocksmarker checks whether luarocks and rocks.nvim are already installed. If they are not, it installs them.
 
-- **Plugin synchronization**: Once rocks.nvim is installed, the plugin manager automatically synchronizes all plugins listed in the Rocksmarker configuration. This includes installing any necessary dependencies.
+- **Plugin synchronization**: Once rocks.nvim installs, the plugin manager automatically synchronizes all plugins listed in the Rocksmarker configuration. This includes installing any necessary dependencies.
 
 ### Benefits of using rocks.nvim
 
 Using *rocks.nvim* in Rocksmarker offers several advantages, including:
 
-- **Easy plugin installation and management**: Users don't have to worry about manually installing plugins or managing their dependencies.
-- **Stability and compatibility**: Plugins managed by *rocks.nvim* are guaranteed to be stable and compatible with Neovim, thanks to integration with LuaRocks.
+- **Easy plugin installation and management**: Users do not have to worry about manually installing plugins or managing their dependencies.
+- **Stability and compatibility**: Thanks to integration with LuaRocks, plugins managed by *rocks.nvim* have a guaranty to be stable and compatible with Neovim.
 - **Simplified updates**: *rocks.nvim* simplifies plugin updates, ensuring that users always have access to the latest features and fixes.
 
 In summary, the use of **rocks.nvim** as the plugin manager in Rocksmarker is a design choice that emphasizes simplicity, stability, and efficiency, significantly improving the user experience in managing Neovim plugins.
 
 ## Optimization for Markdown language
 
-Rocksmarker was designed with a particular focus on optimization for the Markdown language. The goal of Rocksmarker is to provide an editing environment that is not only powerful and versatile, but also highly specialized for the specific needs of authors working with Markdown.
+The design of Rocksmarker is with a particular focus on optimization for the Markdown language. The goal of Rocksmarker is to offer an editing environment that is not only powerful and versatile, but also highly specialized for the specific needs of authors working with Markdown.
 
 ![Markdown UI](./assets/images/markdown_ui.png)
 
 ### Optimizations
 
-- **Advanced syntax highlighting**: Rocksmarker includes syntax highlighting for Markdown that is designed to be clear and easy to read. This helps authors quickly identify markup elements and focus on writing.
+- **Advanced syntax highlighting**: Rocksmarker includes syntax highlighting for Markdown with the goal of being clear and easy to read. This helps authors quickly identify markup elements and focus on writing.
 - **Support for Markdown extensions**: In addition to supporting standard Markdown syntax, Rocksmarker also supports several commonly used extensions, such as tables, task lists, and footnotes. This allows authors to take advantage of Markdown's advanced features without having to change their work environment.
 - **Formatting and linting tools**: To help maintain the quality and consistency of documentation, Rocksmarker includes formatting and linting tools specifically designed for Markdown. These tools can help identify and correct formatting errors and maintain a consistent style.
 - **Snippets and auto-complete for Markdown**: To speed up the writing process, Rocksmarker offers snippets and auto-complete features specifically designed for Markdown. These include common elements such as headings, links, images, and more, allowing authors to quickly insert frequently used blocks of text.
-- **Preview and rendering**: Although Markdown preview and rendering are advanced features that may require integration with external tools, Rocksmarker is designed to be compatible with various preview and rendering solutions. This allows authors to view their work in real time and make immediate changes.
+- **Preview and rendering**: These advanced features might require integration with external tools. The design of Rocksmarker includes compatibility with various preview and rendering solutions. This allows authors to view their work in real time and make immediate changes.
 
 ### Benefits of Markdown optimization
 
 Rocksmarker's optimization for Markdown offers several significant advantages to authors:
 
-- **Increased productivity**: Thanks to specialized Markdown features, authors can work faster and more efficiently.
+- **Increased productivity**: Thanks to special Markdown features, authors can work faster and more efficiently.
 - **Better documentation quality**: Formatting and linting tools help maintain high-quality, consistent, and easy-to-read documentation.
 - **Enhanced Writing Experience**: The Markdown-optimized editing environment provides a smoother and more intuitive writing experience, allowing authors to focus on creating high-quality content.
 
