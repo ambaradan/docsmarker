@@ -10,13 +10,13 @@ tags:
 
 ## Introduction
 
-The `lua/options.lua` file allows you to define and customize the editor's configuration options in an efficient and organized manner. The options defined in this file directly affect the user experience.
+The `lua/options.lua` file allows for the definition and customization of the editor's configuration options in an efficient and organized manner. The options defined in this file directly affect the user experience.
 
 Using the *options.lua* file allows for advanced customization of the editor without the need to modify the source code, keeping all configuration options in a single file to facilitate configuration management and maintenance.
 
 ## Options.lua in Rocksmarker
 
-The **options.lua** file in the Rocksmarker project is designed to provide a set of default settings that enhance the Neovim user experience, covering aspects such as file management, text formatting, navigation, and user interface customization.
+The **options.lua** file in the Rocksmarker project offers a set of default settings that enhance the Neovim user experience, covering aspects such as file management, text formatting, navigation, and user interface customization.
 
 ### Global configuration
 
@@ -28,14 +28,14 @@ This section defines global variables that affect the general behavior of Neovim
 
 : `vim.g.markdown_recommended_style = 0`
 
-: Disables the recommended style for Markdown. This is done to avoid conflicts with the preferred style of the Rocksmarker project.
+: Disables the recommended style for Markdown. This avoids conflicts with the preferred style of the Rocksmarker project.
 
 : `vim.g.loaded_python3_provider = 0`  
 `vim.g.loaded_ruby_provider = 0`  
 `vim.g.loaded_perl_provider = 0`  
 `vim.g.loaded_node_provider = 0`
 
-: Disable language providers for Python, Ruby, Perl, and Node.js. This is done to reduce the overhead of these languages that are not necessary for the project, and to avoid warnings produced by the `:checkhealth` command related to unmet dependencies for these providers.
+: Disable language providers for Python, Ruby, Perl, and Node.js. This reduces the overhead of these languages that are not necessary for the project, and avoids warnings produced by the `:checkhealth` command related to unmet dependencies for these providers.
 
 ### Editor options
 
@@ -47,11 +47,11 @@ This section configures the behavior of the text editor, affecting the display a
 
 : `vim.o.foldmethod = "marker"`  
 
-: Set the folding method to “marker,” which means that folding is determined by specific markers in the code. These markers can be inserted manually by the user to define the sections of code to be folded.
+: Set the folding method to “marker”. This means that the determination of how folding occurs is by specific markers in the code. These markers are manually inserted by the user to define the sections of code to fold.
 
 : `vim.o.foldmarker = "{{{,}}}"`
 
-: Defines the markers used to delimit the sections of code to be folded. In this case, `{{{` marks the beginning and `}}}` marks the end of a foldable section.
+: Defines the markers used to delimit the folded sections of code. In this case, `{{{` marks the beginning and `}}}` marks the end of a foldable section.
 
 : `vim.o.clipboard = "unnamedplus"`
 
