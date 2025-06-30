@@ -55,7 +55,7 @@ This section configures the behavior of the text editor, affecting the display a
 
 : `vim.o.clipboard = "unnamedplus"`
 
-: Configure integration with the system clipboard (Linux). The “unnamedplus” option allows you to copy and paste directly with the operating system clipboard, without the need to use specific Neovim commands.
+: Configure integration with the system clipboard (Linux). The “unnamedplus” option allows for copying and pasting directly within the operating system clipboard, without the need to use specific Neovim commands.
 
 : `vim.o.fillchars = "eob: "`
 
@@ -67,11 +67,11 @@ This section configures the behavior of the text editor, affecting the display a
 
 : `vim.o.undofile = true`
 
-: Enables automatic saving of undo history, allowing you to undo changes even after closing and reopening the file. This is particularly useful for recovering previous versions of the code.
+: Enables automatic saving of undo history, allowing you to undo changes even after closing and reopening the file. This is particularly useful for recovering earlier versions of the code.
 
 : `vim.o.cursorline = true`
 
-: Highlights the current line where the cursor is located, helping you stay focused on your current position within the code.
+: Highlights the current line (the cursor location), helping you stay focused on your current position within the code.
 
 : `vim.o.ignorecase = true`
 
@@ -79,7 +79,7 @@ This section configures the behavior of the text editor, affecting the display a
 
 : `vim.o.smartcase = true`
 
-: Change the behavior of `ignorecase` so that the search becomes *case-sensitive* only if uppercase letters are used in the search pattern. This provides a balance between ease of searching and accuracy.
+: Change the behavior of `ignorecase` so that the search becomes *case-sensitive* only if using uppercase letters in the search pattern. This provides a balance between ease of searching and accuracy.
 
 ### Indentation settings
 
@@ -91,21 +91,21 @@ These options control how code is automatically indented.
 
 : `vim.o.tabstop = 4`
 
-: Defines the number of spaces represented by a tab character (when *expandtab* is disabled). A tab width of 4 spaces is a common convention for Markdown code.
+: Defines the number of spaces represented by a tab character (when *expandtab* is not enabled). A tab width of 4 spaces is a common convention for Markdown code.
 
 : `vim.o.softtabstop = 4`
 
-: Set the number of spaces that are inserted when you press the ++tab++ key. This value should match the tab width to maintain consistency in indentation.
+: Set the number of spaces inserted when you press the ++tab++ key. This value should match the tab width to maintain consistency in indentation.
 
 : `vim.o.shiftwidth = 4`
 
-: Defines the width of the indentation used by automatic indentation commands. Again, a width of 4 spaces is a common choice to maintain code readability.
+: Defines the width of the indentation used by automatic indentation commands. Again, a width of 4 spaces is a common choice to support code readability.
 
 : `vim.o.smartindent = true`
 
 : Enable smart indentation, which automatically adjusts indentation based on the context of the code. This can help reduce the amount of manual work required to maintain correct indentation.
 
-### User Interface options
+### User interface options
 
 These options customize the appearance and behavior of Neovim's user interface.
 
@@ -131,25 +131,23 @@ These options customize the appearance and behavior of Neovim's user interface.
 
 : `vim.o.signcolumn = "yes"`
 
-: Displays the marks column, which is used to display indicators such as debugger breakpoints or linting errors. The marks column can be customized to show different types of information.
+: Displays the marks column, used to display indicators such as debugger breakpoints or linting errors. You can customize the marks column to show different types of information.
 
 : `vim.o.splitbelow = true`  
 `vim.o.splitright = true`
 
-: Configure the behavior of vertical and horizontal splits. Splits allow you to view multiple files or parts of files simultaneously, improving productivity and code management.
+: Configure the behavior of vertical and horizontal splits. Splits allow for the viewing of multiple files or parts of files simultaneously, improving productivity and code management.
 
 ### Session options
 
-These options are specific to the *persisted.nvim* plugin, which allows you to save and restore Neovim sessions.
+These options are specific to the *persisted.nvim* plugin, used for Neovim session saving and restoration.
 
 : `vim.o.sessionoptions = "buffers,curdir,folds,globals,tabpages,winpos,winsize"`
 
-: Defines which elements of the session should be saved and restored. In this case, open buffers, the current directory, fold status, global variables, tab pages, window position, and window size are saved. This allows you to restore the exact previous working state when you restart Neovim.
+: Defines what elements of the session to save or restore. In this case, open buffers, the current directory, fold status, global variables, tab pages, window position, and window size. With this you can restore the exact last working state when you restart Neovim.
 
 ## Conclusions
 
-In summary, the *options.lua* file provides a complete and customized configuration for *Neovim*, covering aspects ranging from basic editor options to advanced settings for indentation, user interface, and session management. This configuration is designed to improve productivity and the Neovim user experience, adapting it to the specific needs of  authors and the *Rockmarker* project.
+In summary, the *options.lua* file provides a complete and customized configuration for *Neovim*, covering aspects ranging from basic editor options to advanced settings for indentation, user interface, and session management. The design of this configuration is to improve productivity and the Neovim user experience, adapting it to the specific needs of authors and the *Rockmarker* project.
 
-L'uso delle opzioni permette di configurare l'editor sia nell'aspetto che nel comportamento per adattarlo ad esigenze specifiche, esistono opzioni specifiche per ogni aspetto di Neovim che possono essere consultate sulla [pagina relativa](https://neovim.io/doc/user/options.html) della documentazione di Neovim.
-
-The use of options allows you to configure both the appearance and behavior of the editor to suit your specific needs. There are specific options for every aspect of Neovim, which can be found on the [relevant page](https://neovim.io/doc/user/options.html) of the Neovim documentation.
+The use of options allows for the configuration of both the appearance and behavior of the editor to suit your specific needs. There are specific options for every aspect of Neovim, which you can find on the [relevant page](https://neovim.io/doc/user/options.html) of the Neovim documentation.
