@@ -190,11 +190,11 @@ Queste mappature aiutano a gestire i buffer in modo più rapido e intuitivo, rid
 
 : **Seleziona buffer**: `<leader>bp`
 
-: Permette la selezione dei buffer quando si preme ++space+"b"+"p"++ in modalità normale. Alla digitazione di questa chiave vengono evidenziate i primi caratteri del nome di ogni file nella bufferline e la digitazione della lettera corrispondente porta il focus sul buffer corrispondente.
+: Permette la selezione dei buffer quando si preme ++space+"b"+"p"++ in modalità normale. Alla digitazione di questa chiave il logo del tipo di buffer viene sostituito da un carattere evidenziato in rosso nella bufferline e la digitazione della lettera corrispondente porta il focus sul buffer corrispondente.
 
 : **Chiudi buffer selezionato**: `<leader>bc`
 
-: Chiude il buffer selezionato quando si preme ++space+"b"+"c"++ in modalità normale.
+: Consente di chiudere un buffer aperto quando si preme ++space+"b"+"c"++ in modalità normale. Come per la selezione viene sostituito il logo del buffer e alla digitazione del carattere corrispondente viene chiuso il buffer.
 
 : **Cicla al buffer successivo**: `<TAB>`
 
