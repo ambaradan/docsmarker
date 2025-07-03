@@ -1,5 +1,5 @@
 ---
-title: Vale in Rocksmarker
+title: Vale
 author: Steven Spencer
 contributors:
 tags: 
@@ -12,7 +12,7 @@ tags:
 
 [Vale](https://vale.sh/) is an open source utility with the goal of improving voice, tone, and style consistency. It works as a command-line utility in most editors. Rocksmarker integrates Vale by default. You can see this by running `:Mason` after the Rocksmarker installation:
 
-![Mason view](../assets/img/vale_integration.png)
+![Mason view](../assets/images/vale_integration.png)
 
 When you save a document in Rocksmarker, it will automatically show results where necessary if you are using Vale.
 
