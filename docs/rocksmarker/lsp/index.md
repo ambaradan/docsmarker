@@ -10,7 +10,7 @@ tags:
 
 ## Language Server Protocol
 
-The [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) (LSP) is a communication protocol between a text editor and a language server, designed to provide advanced editing features such as code completion, error diagnosis and refactoring. Neovim natively supports the Language Server Protocol, providing users with a richer and more powerful editing experience. The language server provides information about the structure and semantics of the code; the client uses this information to provide advanced editing capabilities to users.
+The [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) (LSP) is a communication protocol between a text editor and a language server, designed to provide advanced editing features such as code completion, error diagnosis and refactoring. Neovim natively supports the Language Server Protocol, providing users with a richer and more powerful editing experience. The language server provides information about the structure and semantics of the code. The client uses this information to offer advanced editing capabilities to users.
 
 ## LSP in Neovim
 
@@ -18,7 +18,7 @@ The Language Server Protocol in Neovim offers many advanced editing features, in
 
 : ### Code completion
 
-: Code completion is a feature that allows the user to automatically complete code based on context and available information. This can include:
+: Code completion is a feature that you can use to automatically complete code based on context and available information. This can include:
 
     - Completion of keywords and identifiers
     - Suggestions of methods and functions
@@ -29,7 +29,7 @@ The Language Server Protocol in Neovim offers many advanced editing features, in
 
 : ### Error diagnosis
 
-: Error diagnosis is a feature that allows the user to identify and correct syntax, semantic and logic errors in the code. This can include:
+: Error diagnosis is a feature that you can use to identify and correct syntax, semantic, and logic errors in the code. This can include:
 
     - Identification of syntax errors (e.g., typos, indentation errors)
     - Identification of semantic errors (e.g., type errors, scope errors)
@@ -39,7 +39,7 @@ The Language Server Protocol in Neovim offers many advanced editing features, in
 
 : ### Definition information
 
-: Function or variable definition information is a feature that allows the user to view information about the definition of a function or variable, such as:
+: Function or variable definition information is a feature used to view information about the definition of a function or variable, such as:
 
     - The location of the function or variable definition in the code
     - The function signature (e.g., name, parameters, return type)
@@ -55,7 +55,7 @@ The Language Server Protocol in Neovim offers many advanced editing features, in
 
 : ### Code refactoring
 
-: Code refactoring is a feature that allows the user to modify code so as to improve its structure, readability and maintainability, without altering its behavior. This can include:
+: Code refactoring is a feature that you can use to modify code so as to improve its structure, readability, and maintainability, without altering its behavior. This can include:
 
     - Renaming variables and functions
     - Move code to other parts of the program
@@ -80,7 +80,7 @@ The Language Server Protocol in Neovim offers many advantages, including:
 
 : **Improved productivity**
 
-: The advanced editing features offered by the Language Server Protocol help users work more efficiently and reduce errors.
+: The advanced editing features offered by the Language Server Protocol helps you work more efficiently and reduces errors.
 
 : **Support for many languages**
 
