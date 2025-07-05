@@ -8,15 +8,72 @@ tags:
     - markdown
 ---
 <!--vale off-->
-## Definizione di Linters e markdownlint
-
-Un linter è uno strumento che esamina il codice alla ricerca di errori, bug e problemi stilistici. Rocksmarker non è solo un editor per markdown, ma anche un linter. Utilizza una serie di strumenti come meccanismo di linting. Markdownlint è un progetto dedicato a fornire regole basate sulla corretta formattazione del markdown. Rocksmarker implementa Markdownlint attraverso il file `.markdownlint.yaml`, spiegato più avanti.
 
 ## Introduzione
 
-Neovim è un ottimo editor, ma la vera forza del progetto deriva dalla ricchezza di plugin e aggiunte che rendono possibile plasmare l'editor in base alle proprie esigenze. Questo è il motivo per cui Rocksmarker è un ottimo editor per markdown, perché l'autore del progetto si concentra su questo obiettivo. Le regole di markdownlint sono solo uno di questi strumenti. Per chi ha già un po' di esperienza con `vim` o Neovim, Rocksmarker permette di iniziare a creare o modificare codice markdown appena completata l'installazione. Anche senza questa esperienza, il tempo necessario per acquisire le nozioni di base è minimo. Con Markdownlint, l'utente è libero di eseguire il debug della formattazione del documento da solo.
+### Cos'è Markdownlint?
+
+Markdownlint è uno strumento di linting progettato per analizzare e validare file scritti in Markdown, assicurandosi che rispettino un insieme di regole di formattazione coerenti. Questo strumento è particolarmente utile per:
+
+- Migliorare la leggibilità dei documenti Markdown.
+- Mantenere uno stile uniforme tra più file o collaboratori.
+- Evitare errori comuni nella sintassi Markdown.
+
+### Perché usare Markdownlint?
+
+Scrivere documentazione o contenuti in Markdown è semplice, ma senza linee guida chiare, possono emergere inconsistenze come:
+
+- Spaziature incoerenti
+- Intestazioni mal formattate
+- Liste non allineate
+- Link o immagini con sintassi errata
+
+Markdownlint aiuta a identificare e correggere questi problemi automaticamente, risparmiando tempo e migliorando la qualità del codice.
+
+### Come funziona?
+
+Markdownlint funziona applicando un insieme di regole configurabili per garantire che i documenti siano leggibili, ben strutturati e conformi agli standard. I passaggi gestiti dal linter sono i seguenti:
+
+: **Analisi del codice markdown**
+
+: Markdownlint esamina il testo alla ricerca di pattern che corrispondono a:
+
+    - Sintassi non valida (es. intestazioni malformate, link rotti).
+    - Stile incoerente (es. uso misto di - e * per le liste).
+    - Errori comuni (es. spazi mancanti dopo i # nelle intestazioni).
+
+: **Applicazione delle regole**
+
+: Lo strumento utilizza un set di regole predefinite, ciascuna identificata da un codice (es. MD001, MD037).
+
+    - Alcune regole sono automaticamente correggibili (es. aggiunta di spazi mancanti).
+    - Altre richiedono intervento manuale (es. suddivisione di righe troppo lunghe).
+
+: **Output dei risultati**
+
+: Markdownlint genera report con:
+
+    - Posizione degli errori (file, riga, colonna).
+    - Descrizione del problema.
+    - Codice della regola violata (per riferimento rapido).
+
+: **Integrazione con workflow**
+
+: Può essere eseguito in:
+
+    - Editor (VS Code, Neovim) con highlight in tempo reale.
+    - CLI (tramite markdownlint-cli) per verifiche batch.
+    - Pipeline CI/CD (es. GitHub Actions) per bloccare merge con errori.
 
 ## Il file `.markdownlint.yaml`
+
+### Cos'è il file .markdownlint.yaml?
+
+Il file .markdownlint.yaml è un file di configurazione che permette di personalizzare il comportamento di Markdownlint, specificando quali regole applicare e con quali parametri. A differenza del formato JSON (.markdownlint.json), il formato YAML offre:
+
+- Una sintassi più leggibile e concisa
+- Supporto nativo ai commenti
+- Maggiore flessibilità nell'organizzazione delle regole
 
 Rocksmarker include il file delle regole per il linting, `.markdownlint.yaml`, nella radice del progetto. È possibile trovare questo file anche in altri progetti, anche se le regole in esso contenute potrebbero essere diverse. La documentazione di Rocky Linux include un file `.markdownlint.yaml` con contenuti molto simili a quelli di Rocksmarker. Le regole in uso al momento in cui scriviamo provengono dall'ultima versione (v0.37.4) di [David Anson's rule set](https://github.com/DavidAnson/markdownlint).
 
